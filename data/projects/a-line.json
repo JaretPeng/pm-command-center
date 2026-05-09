@@ -1,0 +1,440 @@
+{
+  "id": "proj-a-line",
+  "slug": "a-line",
+  "name": "A线产品制作项目",
+  "type": "战略级产品线",
+  "status": "进行中",
+  "phase": "体系化落地",
+  "progress": 62,
+  "riskLevel": "medium",
+  "owner": "张 PM",
+  "startDate": "2025-03-01",
+  "endDate": "2026-08-30",
+  "version": "Roadmap 2026",
+  "milestoneCount": 14,
+  "blockerCount": 2,
+  "tags": ["C++", "信奥", "OJ", "LTV", "跨部门"],
+  "health": "good",
+  "delayed": false,
+  "highPriority": true,
+  "collaborators": 48,
+  "executiveSummary": "围绕 C++ 赛道占位与信奥路径建设，联动课程、OJ、运营与供应链，构建长期竞争壁垒与品牌心智。",
+  "objectives": [
+    "抢占 C++ 核心赛道",
+    "建立教学与测评一体化的 OJ 护城河",
+    "提升用户 LTV 与续报结构",
+    "构建信奥赛考路径与专业品牌形象",
+    "沉淀跨部门协同机制与经营复盘体系"
+  ],
+  "background": [
+    "业务进入战略窗口期，需要以产品线视角统筹课程、平台与运营方案，形成可持续迭代的增长飞轮。",
+    "跨团队文档与里程碑分散，需要统一指挥塔视图支撑决策与执行对齐。"
+  ],
+  "valueProps": [
+    {
+      "title": "战略 ROI",
+      "description": "以赛道占位为先导，叠加课包组合与续报优化，目标形成可解释的经营模型。",
+      "metric": "LTV +18%（目标）"
+    },
+    {
+      "title": "竞争壁垒",
+      "description": "课程 + OJ + 运营三位一体的交付闭环，提升迁移成本与品牌信任。",
+      "metric": "关键路径覆盖率"
+    },
+    {
+      "title": "组织协同",
+      "description": "项目制拉动产品、教研、供应链与经营分析的节拍对齐。",
+      "metric": "跨部门里程碑准时率"
+    }
+  ],
+  "keyOutcomes": [
+    "完成阶段性课程体系与关键班型上线",
+    "OJ 平台核心能力与题库策略落地",
+    "运营打法与班主任链路闭环",
+    "供应链与履约效率指标达标"
+  ],
+  "structure": {
+    "nodes": [
+      { "id": "n1", "label": "战略布局", "sublabel": "经营分析" },
+      { "id": "n2", "label": "课程体系", "sublabel": "教研" },
+      { "id": "n3", "label": "OJ 平台", "sublabel": "产品/研发" },
+      { "id": "n4", "label": "运营方案", "sublabel": "增长/班主任" },
+      { "id": "n5", "label": "供应链", "sublabel": "履约" },
+      { "id": "n6", "label": "品牌与路径", "sublabel": "市场/赛事" }
+    ],
+    "edges": [
+      { "from": "n1", "to": "n2" },
+      { "from": "n1", "to": "n3" },
+      { "from": "n2", "to": "n4" },
+      { "from": "n3", "to": "n4" },
+      { "from": "n4", "to": "n5" },
+      { "from": "n2", "to": "n6" }
+    ]
+  },
+  "milestones": [
+    {
+      "id": "m1",
+      "name": "战略里程碑：赛道占位评审",
+      "owner": "经营分析",
+      "dueDate": "2025-04-15",
+      "status": "done",
+      "risk": "low",
+      "modules": ["战略", "经分"],
+      "description": "完成赛道机会评估与资源投入边界。"
+    },
+    {
+      "id": "m2",
+      "name": "课程体系 v1 冻结",
+      "owner": "教研负责人",
+      "dueDate": "2025-07-01",
+      "status": "done",
+      "risk": "medium",
+      "modules": ["课程"],
+      "description": "主线课纲、难度梯度与评价口径对齐。"
+    },
+    {
+      "id": "m3",
+      "name": "OJ Alpha 内测",
+      "owner": "产品负责人",
+      "dueDate": "2025-09-20",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["OJ", "产品"],
+      "description": "核心评测、题库策略与稳定性验证。"
+    },
+    {
+      "id": "m4",
+      "name": "运营方案 Q4 落地",
+      "owner": "运营负责人",
+      "dueDate": "2025-11-30",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["运营", "班主任"],
+      "description": "转化链路、活动矩阵与服务标准化。"
+    },
+    {
+      "id": "m5",
+      "name": "供应链峰值演练",
+      "owner": "供应链",
+      "dueDate": "2025-12-15",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["供应链"],
+      "description": "峰值履约、质检与风控演练。"
+    },
+    {
+      "id": "m6",
+      "name": "赛事路径共建",
+      "owner": "教研 + 市场",
+      "dueDate": "2026-02-28",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["品牌", "教研"],
+      "description": "赛考路径地图与外部合作节奏。"
+    }
+  ],
+  "timelineEmbed": {
+    "title": "飞书甘特（嵌入）",
+    "caption": "下方为飞书知识库嵌入。在飞书内更新后，刷新本页即可查看。已隐藏站点内 JSON 甘特以免重复；若需同时显示，将 hideBuiltInGantt 改为 false。",
+    "embedUrl": "https://my.feishu.cn/wiki/CUi4w4nn5itIrZkQ8wlccSDhnJB?from=from_copylink",
+    "heightPx": 640,
+    "hideBuiltInGantt": true
+  },
+  "gantt": [
+    {
+      "id": "g1",
+      "name": "课程体系设计",
+      "lane": "课程",
+      "start": "2025-03-01",
+      "end": "2025-08-30",
+      "progress": 78
+    },
+    {
+      "id": "g2",
+      "name": "OJ 核心功能",
+      "lane": "OJ平台",
+      "start": "2025-05-01",
+      "end": "2026-01-15",
+      "progress": 55,
+      "dependencies": [{ "from": "g1", "to": "g2" }]
+    },
+    {
+      "id": "g3",
+      "name": "运营打法迭代",
+      "lane": "运营",
+      "start": "2025-06-01",
+      "end": "2026-03-01",
+      "progress": 48,
+      "dependencies": [{ "from": "g1", "to": "g3" }]
+    },
+    {
+      "id": "g4",
+      "name": "供应链扩容",
+      "lane": "供应链",
+      "start": "2025-07-01",
+      "end": "2026-02-28",
+      "progress": 41,
+      "dependencies": [{ "from": "g3", "to": "g4" }]
+    },
+    {
+      "id": "g5",
+      "name": "产品功能闭环",
+      "lane": "产品功能",
+      "start": "2025-04-15",
+      "end": "2026-04-30",
+      "progress": 63,
+      "dependencies": [{ "from": "g2", "to": "g5" }]
+    }
+  ],
+  "team": [
+    {
+      "id": "t1",
+      "name": "李产品",
+      "role": "产品负责人",
+      "modules": ["路线图", "需求优先级", "OJ"],
+      "status": "busy",
+      "deliverables": ["PRD v3", "里程碑复盘模板"]
+    },
+    {
+      "id": "t2",
+      "name": "王教研",
+      "role": "教研负责人",
+      "modules": ["课纲", "题库策略"],
+      "status": "active",
+      "deliverables": ["课程体系 v1", "评价量表"]
+    },
+    {
+      "id": "t3",
+      "name": "赵运营",
+      "role": "运营负责人",
+      "modules": ["转化链路", "活动矩阵"],
+      "status": "active",
+      "deliverables": ["Q4 运营方案", "班主任 SOP"]
+    },
+    {
+      "id": "t4",
+      "name": "刘供应链",
+      "role": "供应链负责人",
+      "modules": ["履约", "质检"],
+      "status": "busy",
+      "deliverables": ["峰值演练报告"]
+    },
+    {
+      "id": "t5",
+      "name": "陈经分",
+      "role": "经营分析",
+      "modules": ["ROI", "LTV", "续报结构"],
+      "status": "active",
+      "deliverables": ["经营仪表板", "月度复盘"]
+    },
+    {
+      "id": "t6",
+      "name": "周班课",
+      "role": "班课负责人",
+      "modules": ["排课", "教学体验"],
+      "status": "active",
+      "deliverables": ["班课体验指标"]
+    },
+    {
+      "id": "t7",
+      "name": "吴素材",
+      "role": "素材制作",
+      "modules": ["课件", "视觉"],
+      "status": "blocked",
+      "deliverables": ["素材规范 v2"]
+    }
+  ],
+  "documents": [
+    {
+      "id": "d1",
+      "title": "A线战略一页纸",
+      "category": "project_doc",
+      "tags": ["战略", "高层"],
+      "updatedAt": "2025-10-02",
+      "owner": "张 PM",
+      "excerpt": "赛道机会、目标边界与关键胜负手。"
+    },
+    {
+      "id": "d2",
+      "title": "课程体系蓝图 v1",
+      "category": "syllabus",
+      "tags": ["教研", "课纲"],
+      "updatedAt": "2025-09-18",
+      "owner": "王教研",
+      "excerpt": "难度梯度、单元目标与评价对齐。"
+    },
+    {
+      "id": "d3",
+      "title": "OJ 平台需求清单",
+      "category": "product",
+      "tags": ["OJ", "PRD"],
+      "updatedAt": "2025-11-05",
+      "owner": "李产品",
+      "excerpt": "评测、题库、稳定性与运营配置。"
+    },
+    {
+      "id": "d4",
+      "title": "运营打法 Q4",
+      "category": "operations",
+      "tags": ["转化", "活动"],
+      "updatedAt": "2025-11-12",
+      "owner": "赵运营",
+      "excerpt": "漏斗结构、活动日历与班主任协同。"
+    },
+    {
+      "id": "d5",
+      "title": "甘特总览 2026",
+      "category": "gantt",
+      "tags": ["计划"],
+      "updatedAt": "2025-11-20",
+      "owner": "张 PM",
+      "excerpt": "关键路径与跨团队依赖。"
+    },
+    {
+      "id": "d6",
+      "title": "数据监控口径说明",
+      "category": "data",
+      "tags": ["指标", "DS"],
+      "updatedAt": "2025-10-30",
+      "owner": "陈经分",
+      "excerpt": "LTV、续报、活跃与转化定义。"
+    }
+  ],
+  "risks": [
+    {
+      "id": "r1",
+      "title": "OJ 性能瓶颈影响转化实验",
+      "severity": "high",
+      "status": "处理中",
+      "impact": "影响 Alpha 内测结论与运营节奏",
+      "owner": "李产品",
+      "mitigation": "拆分评测链路，引入排队与弹性扩容",
+      "progress": "已完成容量评估，正在灰度"
+    },
+    {
+      "id": "r2",
+      "title": "班主任链路与服务标准未完全对齐",
+      "severity": "medium",
+      "status": "观察",
+      "impact": "影响续报体验与口碑",
+      "owner": "赵运营",
+      "mitigation": "SOP 2.0 + 质检抽检机制",
+      "progress": "SOP 草稿评审中"
+    },
+    {
+      "id": "r3",
+      "title": "供应链峰值预案覆盖不足",
+      "severity": "medium",
+      "status": "处理中",
+      "impact": "高峰履约风险",
+      "owner": "刘供应链",
+      "mitigation": "双供应商策略与演练",
+      "progress": "演练排期已锁定"
+    }
+  ],
+  "metrics": {
+    "kpis": [
+      {
+        "id": "k1",
+        "label": "目标 ROI",
+        "value": "1.42",
+        "change": "+0.08",
+        "trend": "up"
+      },
+      {
+        "id": "k2",
+        "label": "LTV（测算）",
+        "value": "¥ 3,860",
+        "change": "+6.2%",
+        "trend": "up"
+      },
+      {
+        "id": "k3",
+        "label": "续报率",
+        "value": "82%",
+        "change": "+1.1pp",
+        "trend": "up"
+      },
+      {
+        "id": "k4",
+        "label": "活跃学员",
+        "value": "12.4k",
+        "change": "+3.4%",
+        "trend": "up"
+      }
+    ],
+    "series": [
+      {
+        "id": "s1",
+        "name": "LTV 走势",
+        "unit": "¥",
+        "data": [
+          { "period": "T1", "value": 3200 },
+          { "period": "T2", "value": 3360 },
+          { "period": "T3", "value": 3510 },
+          { "period": "T4", "value": 3640 },
+          { "period": "T5", "value": 3720 },
+          { "period": "T6", "value": 3860 }
+        ]
+      },
+      {
+        "id": "s2",
+        "name": "续报率 %",
+        "data": [
+          { "period": "T1", "value": 76 },
+          { "period": "T2", "value": 78 },
+          { "period": "T3", "value": 79 },
+          { "period": "T4", "value": 80 },
+          { "period": "T5", "value": 81 },
+          { "period": "T6", "value": 82 }
+        ]
+      },
+      {
+        "id": "s3",
+        "name": "赛考路径转化率",
+        "data": [
+          { "period": "T1", "value": 12 },
+          { "period": "T2", "value": 14 },
+          { "period": "T3", "value": 15 },
+          { "period": "T4", "value": 17 },
+          { "period": "T5", "value": 18 },
+          { "period": "T6", "value": 19 }
+        ]
+      }
+    ]
+  },
+  "operationScheme": {
+    "summary": "A线产品运营以「转化—履约—续报—口碑」为主轴，与课程节奏、OJ 内测与班主任链路对齐，按双周迭代表审视关键指标。",
+    "sections": [
+      {
+        "title": "目标与人群",
+        "content": "核心人群：C++ 入门与信奥路径学员；主目标为完课、练习达成与续报结构优化。"
+      },
+      {
+        "title": "转化与活动",
+        "content": "体验课 → 正价班的漏斗设计；大促/活动日历与渠道投放节奏需与排期表同步，避免与 OJ 内测抢资源。"
+      },
+      {
+        "title": "班主任与社群",
+        "content": "到课提醒、作业督促、续报节点话术分层；与供应链物料与高峰履约窗口对齐。"
+      },
+      {
+        "title": "数据看板与复盘",
+        "content": "周度看板：漏斗、到课、练习、投诉与续报；与经营分析指标口径一致，双周例会过结论。"
+      }
+    ]
+  },
+  "retrospectives": [
+    {
+      "id": "retro1",
+      "title": "跨部门里程碑对齐机制升级",
+      "date": "2025-09-30",
+      "context": "里程碑延期频发，信息不透明导致决策滞后。",
+      "rootCause": ["节奏颗粒度不一致", "依赖未显性化", "风险前置不足"],
+      "impact": "关键路径两周抖动，运营实验窗口压缩。",
+      "actions": ["双周指挥塔例会", "依赖登记模板", "红黄绿灯规则"],
+      "lessons": ["依赖必须资产化", "风险预警需要 Owner"],
+      "followUp": "模板纳入项目默认套件"
+    }
+  ]
+}

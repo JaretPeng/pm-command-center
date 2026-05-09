@@ -1,0 +1,44 @@
+{
+  "pm": {
+    "name": "项目管理驾驶舱",
+    "title": "高级项目经理 · 多项目并行"
+  },
+  "projects": [
+    {
+      "id": "proj-a-line",
+      "slug": "a-line",
+      "name": "A线产品制作项目",
+      "type": "战略级产品线",
+      "status": "进行中",
+      "phase": "体系化落地",
+      "progress": 62,
+      "riskLevel": "medium",
+      "owner": "张 PM",
+      "startDate": "2025-03-01",
+      "milestoneCount": 14,
+      "blockerCount": 2,
+      "tags": ["C++", "信奥", "OJ", "LTV", "跨部门"],
+      "health": "good",
+      "delayed": false,
+      "highPriority": true
+    },
+    {
+      "id": "proj-c3-v6",
+      "slug": "c3-v6",
+      "name": "C线产品",
+      "type": "版本迭代",
+      "status": "进行中",
+      "phase": "二期能力收敛",
+      "progress": 74,
+      "riskLevel": "low",
+      "owner": "张 PM",
+      "startDate": "2025-06-15",
+      "milestoneCount": 11,
+      "blockerCount": 1,
+      "tags": ["社区", "商城", "IDE", "自动化", "素材库"],
+      "health": "excellent",
+      "delayed": false,
+      "highPriority": false
+    }
+  ]
+}

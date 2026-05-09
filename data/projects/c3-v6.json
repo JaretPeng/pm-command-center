@@ -1,0 +1,437 @@
+{
+  "id": "proj-c3-v6",
+  "slug": "c3-v6",
+  "name": "C线产品",
+  "type": "版本迭代",
+  "status": "进行中",
+  "phase": "二期能力收敛",
+  "progress": 74,
+  "riskLevel": "low",
+  "owner": "张 PM",
+  "startDate": "2025-06-15",
+  "endDate": "2026-04-10",
+  "version": "v6.0",
+  "milestoneCount": 11,
+  "blockerCount": 1,
+  "tags": ["社区", "商城", "IDE", "自动化", "素材库"],
+  "health": "excellent",
+  "delayed": false,
+  "highPriority": false,
+  "collaborators": 32,
+  "executiveSummary": "通过一期功能打底与二期能力扩展，完善社区生态、商城履约与自动化闭环，提升创意空间与运营效率。",
+  "objectives": [
+    "增强游戏项目扩展性与创意空间",
+    "建设素材库与图像处理能力",
+    "完善社区生态与金币体系",
+    "强化商城兑换与 IDE 能力开放",
+    "提升自动化履约覆盖率"
+  ],
+  "background": [
+    "课程形态持续迭代，需要在版本节奏内平衡体验、商业化与工程效率。",
+    "社区与商城联动加深，需要系统化能力建设而非单点需求。"
+  ],
+  "overviewVideo": {
+    "mode": "file",
+    "src": "/videos/c3-v6-overview.mp4",
+    "title": "C3-v6.0 概览视频",
+    "caption": "本地开发可把 MP4 放在 public/videos/（该路径已加入 .gitignore，勿提交大文件到 GitHub）。上线站点请将视频上传到 YouTube/对象存储后改用 youtube 模式或外链。"
+  },
+  "timelineEmbed": {
+    "title": "石墨甘特（嵌入）",
+    "caption": "在石墨文档中复制「嵌入」或「发布」得到的 HTTPS 链接，填到 embedUrl。我不会也无法远程读取你的私密石墨；请自行粘贴链接或导出表格后维护下方 gantt JSON。",
+    "embedUrl": "",
+    "heightPx": 560,
+    "hideBuiltInGantt": false
+  },
+  "valueProps": [
+    {
+      "title": "生态活跃",
+      "description": "社区升级 + 金币体系带动创作与分享。",
+      "metric": "DAU/互动率"
+    },
+    {
+      "title": "商业转化",
+      "description": "商城与兑换链路带来可持续的交易闭环。",
+      "metric": "兑换成功率"
+    },
+    {
+      "title": "工程效率",
+      "description": "自动化履约降低运营成本与人工差错。",
+      "metric": "自动化覆盖率"
+    }
+  ],
+  "keyOutcomes": [
+    "一期功能线上稳定",
+    "二期社区与素材库能力上线",
+    "商城与履约链路跑通",
+    "复盘沉淀并纳入规范"
+  ],
+  "structure": {
+    "nodes": [
+      { "id": "c1", "label": "一期功能", "sublabel": "MVP" },
+      { "id": "c2", "label": "二期功能", "sublabel": "扩展" },
+      { "id": "c3", "label": "社区升级", "sublabel": "互动" },
+      { "id": "c4", "label": "商城能力", "sublabel": "交易" },
+      { "id": "c5", "label": "自动化履约", "sublabel": "效率" },
+      { "id": "c6", "label": "IDE 开放", "sublabel": "创作" }
+    ],
+    "edges": [
+      { "from": "c1", "to": "c2" },
+      { "from": "c2", "to": "c3" },
+      { "from": "c2", "to": "c4" },
+      { "from": "c4", "to": "c5" },
+      { "from": "c3", "to": "c6" }
+    ]
+  },
+  "milestones": [
+    {
+      "id": "cm1",
+      "name": "一期功能封版",
+      "owner": "产品",
+      "dueDate": "2025-08-30",
+      "status": "done",
+      "risk": "low",
+      "modules": ["一期"],
+      "description": "核心体验路径稳定。"
+    },
+    {
+      "id": "cm2",
+      "name": "社区升级 Beta",
+      "owner": "社区负责人",
+      "dueDate": "2025-10-30",
+      "status": "done",
+      "risk": "low",
+      "modules": ["社区"],
+      "description": "互动、金币与基础治理。"
+    },
+    {
+      "id": "cm3",
+      "name": "素材库 v1",
+      "owner": "产品",
+      "dueDate": "2025-12-15",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["素材库", "图像"],
+      "description": "素材上架、搜索与基础编辑。"
+    },
+    {
+      "id": "cm4",
+      "name": "商城能力 GA",
+      "owner": "商业化",
+      "dueDate": "2026-01-20",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["商城"],
+      "description": "兑换、库存与风控。"
+    },
+    {
+      "id": "cm5",
+      "name": "自动化履约 80% 目标",
+      "owner": "研发效能",
+      "dueDate": "2026-03-01",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["自动化"],
+      "description": "履约链路自动化覆盖。"
+    }
+  ],
+  "gantt": [
+    {
+      "id": "cg1",
+      "name": "一期功能交付",
+      "lane": "一期功能",
+      "start": "2025-06-15",
+      "end": "2025-09-10",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "cg2",
+      "name": "二期功能扩展",
+      "lane": "二期功能",
+      "start": "2025-09-01",
+      "end": "2026-03-30",
+      "progress": 58,
+      "phase": "phase2",
+      "dependencies": [{ "from": "cg1", "to": "cg2" }]
+    },
+    {
+      "id": "cg3",
+      "name": "社区互动升级",
+      "lane": "社区升级",
+      "start": "2025-08-01",
+      "end": "2026-02-15",
+      "progress": 66,
+      "dependencies": [{ "from": "cg1", "to": "cg3" }]
+    },
+    {
+      "id": "cg4",
+      "name": "商城与兑换",
+      "lane": "商城能力",
+      "start": "2025-09-20",
+      "end": "2026-03-01",
+      "progress": 52,
+      "dependencies": [{ "from": "cg2", "to": "cg4" }]
+    },
+    {
+      "id": "cg5",
+      "name": "履约自动化",
+      "lane": "自动化",
+      "start": "2025-10-01",
+      "end": "2026-04-10",
+      "progress": 44,
+      "dependencies": [{ "from": "cg4", "to": "cg5" }]
+    }
+  ],
+  "team": [
+    {
+      "id": "ct1",
+      "name": "孙产品",
+      "role": "产品负责人",
+      "modules": ["路线图", "素材库"],
+      "status": "active",
+      "deliverables": ["版本节奏表", "验收清单"]
+    },
+    {
+      "id": "ct2",
+      "name": "钱研发",
+      "role": "研发负责人",
+      "modules": ["IDE", "工程效能"],
+      "status": "busy",
+      "deliverables": ["自动化流水线", "灰度策略"]
+    },
+    {
+      "id": "ct3",
+      "name": "郑社区",
+      "role": "社区负责人",
+      "modules": ["互动", "金币"],
+      "status": "active",
+      "deliverables": ["社区规范 2.0"]
+    },
+    {
+      "id": "ct4",
+      "name": "冯商业化",
+      "role": "商业化负责人",
+      "modules": ["商城", "兑换"],
+      "status": "active",
+      "deliverables": ["兑换漏斗看板"]
+    }
+  ],
+  "documents": [
+    {
+      "id": "cd1",
+      "title": "C3-v6 背景与范围",
+      "category": "project_doc",
+      "tags": ["范围", "版本"],
+      "updatedAt": "2025-07-01",
+      "owner": "孙产品",
+      "excerpt": "一期/二期边界与关键假设。"
+    },
+    {
+      "id": "cd2",
+      "title": "社区升级 PRD",
+      "category": "product",
+      "tags": ["社区"],
+      "updatedAt": "2025-09-12",
+      "owner": "孙产品",
+      "excerpt": "互动、激励与治理。"
+    },
+    {
+      "id": "cd3",
+      "title": "素材库信息架构",
+      "category": "product",
+      "tags": ["素材", "IA"],
+      "updatedAt": "2025-10-08",
+      "owner": "孙产品",
+      "excerpt": "分类、标签与图像处理流程。"
+    },
+    {
+      "id": "cd4",
+      "title": "商城兑换运营手册",
+      "category": "operations",
+      "tags": ["商城"],
+      "updatedAt": "2025-11-01",
+      "owner": "冯商业化",
+      "excerpt": "活动机制与风控策略。"
+    },
+    {
+      "id": "cd5",
+      "title": "复盘：常规班与启航班并班",
+      "category": "retrospective",
+      "tags": ["复盘", "班级"],
+      "updatedAt": "2025-11-18",
+      "owner": "张 PM",
+      "excerpt": "跨班型合并引发的履约与体验问题。"
+    }
+  ],
+  "risks": [
+    {
+      "id": "cr1",
+      "title": "商城风控策略待细化",
+      "severity": "medium",
+      "status": "处理中",
+      "impact": "可能影响兑换体验与成本",
+      "owner": "冯商业化",
+      "mitigation": "分级风控 + 灰度发布",
+      "progress": "策略草案完成"
+    },
+    {
+      "id": "cr2",
+      "title": "素材版权审核链路压力",
+      "severity": "low",
+      "status": "观察",
+      "impact": "上架效率波动",
+      "owner": "郑社区",
+      "mitigation": "模板化审核与抽检",
+      "progress": "规则收敛中"
+    }
+  ],
+  "metrics": {
+    "kpis": [
+      {
+        "id": "ck1",
+        "label": "社区 DAU",
+        "value": "18.2k",
+        "change": "+4.1%",
+        "trend": "up"
+      },
+      {
+        "id": "ck2",
+        "label": "素材包使用率",
+        "value": "61%",
+        "change": "+2.4pp",
+        "trend": "up"
+      },
+      {
+        "id": "ck3",
+        "label": "商城兑换成功",
+        "value": "93.5%",
+        "change": "+0.6pp",
+        "trend": "up"
+      },
+      {
+        "id": "ck4",
+        "label": "自动化覆盖率",
+        "value": "71%",
+        "change": "+5pp",
+        "trend": "up"
+      }
+    ],
+    "series": [
+      {
+        "id": "cs1",
+        "name": "社区互动次数",
+        "data": [
+          { "period": "W1", "value": 120 },
+          { "period": "W2", "value": 132 },
+          { "period": "W3", "value": 141 },
+          { "period": "W4", "value": 156 },
+          { "period": "W5", "value": 168 },
+          { "period": "W6", "value": 175 }
+        ]
+      },
+      {
+        "id": "cs2",
+        "name": "商城兑换量",
+        "data": [
+          { "period": "W1", "value": 420 },
+          { "period": "W2", "value": 455 },
+          { "period": "W3", "value": 480 },
+          { "period": "W4", "value": 502 },
+          { "period": "W5", "value": 528 },
+          { "period": "W6", "value": 540 }
+        ]
+      },
+      {
+        "id": "cs3",
+        "name": "自动化覆盖 %",
+        "data": [
+          { "period": "W1", "value": 58 },
+          { "period": "W2", "value": 60 },
+          { "period": "W3", "value": 63 },
+          { "period": "W4", "value": 66 },
+          { "period": "W5", "value": 69 },
+          { "period": "W6", "value": 71 }
+        ]
+      }
+    ]
+  },
+  "operationScheme": {
+    "summary": "C线以版本迭代为节拍，运营侧重社区活跃、商城兑换与自动化履约，和研发封版、灰度与回滚策略绑定。",
+    "sections": [
+      {
+        "title": "版本与发布节奏",
+        "content": "跟随 C 线发版窗口；活动与素材上架避开封版前冻结期，重要运营项走变更登记。"
+      },
+      {
+        "title": "社区与激励",
+        "content": "金币、创作活动与社区治理规则；与产品侧能力开关（IDE/素材库）同步宣发。"
+      },
+      {
+        "title": "商城与履约",
+        "content": "兑换、库存、风控与客服话术；大促前与自动化履约覆盖范围对齐，减少人工异常单。"
+      },
+      {
+        "title": "观测指标",
+        "content": "DAU/互动、兑换成功率、履约自动化覆盖率；周报对齐产品与商业化。"
+      }
+    ]
+  },
+  "retrospectives": [
+    {
+      "id": "cretro1",
+      "title": "版本节奏与质量权衡",
+      "date": "2025-10-15",
+      "context": "二期需求并行导致缺陷抬头。",
+      "rootCause": ["范围蔓延", "测试窗口不足"],
+      "impact": "线上缺陷增多，回滚一次。",
+      "actions": ["硬闸门验收", "缺陷预算"],
+      "lessons": ["节奏需要缺陷预算而不是口头承诺"],
+      "followUp": "纳入版本模板"
+    }
+  ],
+  "deepDive": {
+    "id": "dd-merge-class",
+    "title": "常规班与启航班并班问题",
+    "problemBackground": "为提升班级利用率，将常规班与启航班合并排期，但履约链路、服务话术与课中节奏未完全对齐，导致体验波动与投诉上升。",
+    "timeline": [
+      { "date": "2025-09-05", "event": "并班方案评审通过" },
+      { "date": "2025-09-18", "event": "首周舆情与到课率异常" },
+      { "date": "2025-10-02", "event": "教学侧紧急节奏调整" },
+      { "date": "2025-10-12", "event": "形成补偿策略与服务升级包" }
+    ],
+    "rootCauseSummary": "班型差异被低估；协同机制薄弱；缺乏前置演练与数据预警。",
+    "fishbone": {
+      "problemStatement": "并班后体验与履约波动",
+      "branches": [
+        {
+          "category": "教学",
+          "causes": ["节奏不匹配", "练习梯度冲突", "师资配置"]
+        },
+        {
+          "category": "运营",
+          "causes": ["话术未分层", "期望管理不足"]
+        },
+        {
+          "category": "产品",
+          "causes": ["排班工具缺约束", "可视化不足"]
+        },
+        {
+          "category": "数据",
+          "causes": ["预警滞后", "分层指标缺失"]
+        },
+        {
+          "category": "流程",
+          "causes": ["缺少演练", "变更评审不充分"]
+        }
+      ]
+    },
+    "solution": [
+      "班型差异清单纳入强制评审项",
+      "排班工具增加冲突提示与模拟演练",
+      "班主任话术分层与补偿策略模板",
+      "关键指标看板：到课、练习完成、投诉率"
+    ],
+    "metrics": ["投诉率 -42%", "到课率 +6pp", "练习完成 +11pp"]
+  }
+}
