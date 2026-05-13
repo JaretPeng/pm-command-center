@@ -206,6 +206,16 @@ export interface RetrospectiveBoardLink {
   blurb?: string;
 }
 
+/** Retrospective Tab：同源 `public/` 下的静态 HTML 看板（可 iframe 完整保留 Chart.js 等交互） */
+export interface RetrospectiveLocalDashboard {
+  title: string;
+  /** 以 `/` 开头的站内路径，如 `/dashboards/foo.html` */
+  src: string;
+  blurb?: string;
+  /** iframe 最小高度（px），默认 920 */
+  minHeight?: number;
+}
+
 export interface FishboneBranch {
   category: string;
   causes: string[];
@@ -291,6 +301,8 @@ export interface ProjectDetail extends ProjectSummary {
   overviewHideStructureDiagram?: boolean;
   /** Retrospective Tab 顶部外链看板（如 Moxt） */
   retrospectiveBoard?: RetrospectiveBoardLink;
+  /** Retrospective Tab：站内静态 HTML 看板（iframe 嵌入） */
+  retrospectiveLocalDashboard?: RetrospectiveLocalDashboard;
 }
 
 export interface ProjectIndexFile {

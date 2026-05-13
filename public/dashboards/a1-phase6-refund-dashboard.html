@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大客直售渠道A1 第六期退费用户分析</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+  :root {
+    --bg-primary: #0a0e1a;
+    --bg-card: #111827;
+    --bg-card-hover: #1a2332;
+    --bg-elevated: #1e293b;
+    --border: rgba(255,255,255,0.06);
+    --border-accent: rgba(99,102,241,0.3);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-indigo: #818cf8;
+    --accent-violet: #a78bfa;
+    --accent-rose: #fb7185;
+    --accent-amber: #fbbf24;
+    --accent-emerald: #34d399;
+    --accent-sky: #38bdf8;
+    --accent-orange: #fb923c;
+    --danger: #ef4444;
+    --danger-soft: rgba(239,68,68,0.15);
+    --success: #22c55e;
+    --success-soft: rgba(34,197,94,0.12);
+    --warning-soft: rgba(251,191,36,0.12);
+    --gradient-brand: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+    --gradient-warm: linear-gradient(135deg, #f97316, #ef4444);
+    --gradient-cool: linear-gradient(135deg, #06b6d4, #3b82f6);
+    --gradient-green: linear-gradient(135deg, #10b981, #059669);
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+    --shadow-elevated: 0 10px 40px rgba(0,0,0,0.4);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-xs: 6px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', 'DM Sans', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Ambient BG */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px; left: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -300px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(168,85,247,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .app { position: relative; z-index: 1; max-width: 1440px; margin: 0 auto; padding: 24px 32px 60px; }
+
+  /* Header */
+  .header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 32px; padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header-left { display: flex; flex-direction: column; gap: 8px; }
+  .header-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--gradient-brand); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 100px;
+    width: fit-content;
+  }
+  .header-badge::before { content: ''; width: 6px; height: 6px; background: #fff; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .header h1 {
+    font-size: 32px; font-weight: 900; letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #f1f5f9, #94a3b8);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .header-subtitle { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+  .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .header-date { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-muted); }
+
+  /* Nav tabs */
+  .nav-tabs {
+    display: flex; gap: 4px; margin-bottom: 28px;
+    background: var(--bg-card); border-radius: 12px; padding: 4px;
+    border: 1px solid var(--border); width: fit-content;
+  }
+  .nav-tab {
+    padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 500;
+    color: var(--text-muted); cursor: pointer; transition: all 0.25s;
+    border: none; background: transparent; font-family: inherit;
+  }
+  .nav-tab:hover { color: var(--text-secondary); background: rgba(255,255,255,0.03); }
+  .nav-tab.active {
+    background: rgba(99,102,241,0.15); color: var(--accent-indigo);
+    box-shadow: 0 0 0 1px rgba(99,102,241,0.2);
+  }
+
+  /* Panels */
+  .panel { display: none; animation: fadeIn 0.4s ease; }
+  .panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* KPI Grid */
+  .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 28px; }
+  .kpi-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+    position: relative; overflow: hidden; transition: all 0.3s;
+  }
+  .kpi-card:hover { border-color: var(--border-accent); transform: translateY(-2px); box-shadow: var(--shadow-elevated); }
+  .kpi-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .kpi-card:nth-child(1)::before { background: var(--gradient-brand); }
+  .kpi-card:nth-child(2)::before { background: var(--gradient-warm); }
+  .kpi-card:nth-child(3)::before { background: var(--gradient-cool); }
+  .kpi-card:nth-child(4)::before { background: var(--gradient-green); }
+  .kpi-card:nth-child(5)::before { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  .kpi-label { font-size: 12px; color: var(--text-muted); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .kpi-value { font-family: 'DM Sans', sans-serif; font-size: 36px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+  .kpi-sub { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+  .kpi-tag {
+    display: inline-flex; padding: 2px 8px; border-radius: 100px;
+    font-size: 11px; font-weight: 600;
+  }
+  .kpi-tag.danger { background: var(--danger-soft); color: var(--accent-rose); }
+  .kpi-tag.success { background: var(--success-soft); color: var(--accent-emerald); }
+  .kpi-tag.warning { background: var(--warning-soft); color: var(--accent-amber); }
+
+  /* Section */
+  .section { margin-bottom: 28px; }
+  .section-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+  }
+  .section-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .section-title { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+  .section-desc { font-size: 12px; color: var(--text-muted); margin-left: auto; }
+
+  /* Chart containers */
+  .chart-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .chart-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .chart-box {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+    transition: border-color 0.3s;
+  }
+  .chart-box:hover { border-color: var(--border-accent); }
+  .chart-box-title {
+    font-size: 14px; font-weight: 600; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .chart-box-subtitle { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+  .chart-wrap { position: relative; width: 100%; }
+
+  /* Funnel */
+  .funnel { display: flex; flex-direction: column; gap: 8px; padding: 10px 0; }
+  .funnel-step {
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px 16px; border-radius: var(--radius-sm);
+    background: var(--bg-elevated);
+    position: relative; overflow: hidden;
+  }
+  .funnel-step::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    border-radius: var(--radius-sm);
+    opacity: 0.12;
+  }
+  .funnel-bar { position: absolute; left: 0; top: 0; bottom: 0; border-radius: var(--radius-sm); opacity: 0.12; }
+  .funnel-label { font-size: 13px; font-weight: 500; z-index: 1; min-width: 100px; }
+  .funnel-count { font-family: 'DM Sans'; font-size: 22px; font-weight: 700; z-index: 1; min-width: 50px; }
+  .funnel-pct { font-family: 'JetBrains Mono'; font-size: 12px; color: var(--text-muted); z-index: 1; margin-left: auto; }
+
+  /* Table */
+  .data-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+  .data-table th {
+    font-size: 11px; font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    padding: 10px 14px; text-align: left;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+  .data-table td {
+    font-size: 13px; padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .data-table .num { font-family: 'DM Sans'; font-weight: 600; }
+  .data-table .pct { font-family: 'JetBrains Mono'; font-size: 12px; color: var(--text-muted); }
+
+  /* Progress bar in table */
+  .bar-cell { position: relative; }
+  .mini-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.06); overflow: hidden; margin-top: 4px; }
+  .mini-bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+
+  /* Tier analysis cards */
+  .tier-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .tier-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px; text-align: center;
+    transition: all 0.3s;
+  }
+  .tier-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-elevated); border-color: var(--border-accent); }
+  .tier-card-label { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-bottom: 6px; }
+  .tier-card-value { font-family: 'DM Sans'; font-size: 28px; font-weight: 700; margin-bottom: 2px; }
+  .tier-card-pct { font-family: 'JetBrains Mono'; font-size: 12px; margin-bottom: 10px; }
+  .tier-card-nature { font-size: 11px; color: var(--text-secondary); line-height: 1.5; padding-top: 10px; border-top: 1px solid var(--border); text-align: left; }
+  .tier-card-nature b { color: var(--text-primary); }
+
+  /* Solution cards */
+  .solution-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .solution-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+    transition: all 0.3s;
+  }
+  .solution-card:hover { border-color: var(--border-accent); }
+  .solution-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .solution-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .solution-card-title { font-size: 15px; font-weight: 700; }
+  .solution-card-tag {
+    font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 100px;
+    letter-spacing: 0.5px;
+  }
+  .solution-card-body { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+  .solution-card-body li { margin-bottom: 6px; list-style: none; position: relative; padding-left: 18px; }
+  .solution-card-body li::before {
+    content: ''; position: absolute; left: 0; top: 7px;
+    width: 6px; height: 6px; border-radius: 50%;
+  }
+  .solution-card-body .metric {
+    margin-top: 12px; padding: 10px 14px; border-radius: var(--radius-sm);
+    background: var(--bg-elevated); font-size: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .solution-card-body .metric-label { color: var(--text-muted); }
+  .solution-card-body .metric-value { font-family: 'DM Sans'; font-weight: 700; font-size: 16px; }
+
+  /* Insight callout */
+  .insight-box {
+    background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(168,85,247,0.06));
+    border: 1px solid rgba(99,102,241,0.2);
+    border-radius: var(--radius); padding: 20px 24px;
+    margin-bottom: 28px; display: flex; gap: 16px; align-items: flex-start;
+  }
+  .insight-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .insight-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--accent-indigo); }
+  .insight-text { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+
+  /* Room comparison */
+  .room-compare { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+  .room-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .room-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .room-card.room-a::before { background: var(--accent-sky); }
+  .room-card.room-b::before { background: var(--accent-rose); }
+  .room-card.room-v::before { background: var(--accent-amber); }
+  .room-name { font-size: 16px; font-weight: 700; margin-bottom: 14px; }
+  .room-stats { display: flex; justify-content: center; gap: 20px; margin-bottom: 14px; }
+  .room-stat-item { text-align: center; }
+  .room-stat-val { font-family: 'DM Sans'; font-size: 24px; font-weight: 700; }
+  .room-stat-label { font-size: 11px; color: var(--text-muted); }
+  .room-refund-rate {
+    font-family: 'JetBrains Mono'; font-size: 28px; font-weight: 700;
+    margin: 8px 0; line-height: 1;
+  }
+  .room-rate-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+    .tier-cards { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .app { padding: 16px; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .chart-grid-2, .solution-grid, .room-compare { grid-template-columns: 1fr; }
+    .tier-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .full-width { grid-column: 1 / -1; }
+
+  /* Animated entrance */
+  .animate-in {
+    opacity: 0; transform: translateY(16px);
+    animation: slideUp 0.5s ease forwards;
+  }
+  @keyframes slideUp { to { opacity: 1; transform: none; } }
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.1s; }
+  .delay-3 { animation-delay: 0.15s; }
+  .delay-4 { animation-delay: 0.2s; }
+  .delay-5 { animation-delay: 0.25s; }
+  .delay-6 { animation-delay: 0.3s; }
+
+  /* Heatmap styles */
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: 60px repeat(24, 1fr);
+    gap: 2px;
+    font-size: 10px;
+  }
+  .heatmap-cell {
+    aspect-ratio: 1;
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono';
+    font-size: 9px;
+    color: rgba(255,255,255,0.6);
+    transition: transform 0.2s;
+  }
+  .heatmap-cell:hover { transform: scale(1.3); z-index: 2; }
+  .heatmap-label {
+    display: flex; align-items: center;
+    font-size: 11px; color: var(--text-muted); font-weight: 500;
+  }
+  .heatmap-header {
+    font-family: 'JetBrains Mono';
+    font-size: 9px; color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Behavior path analysis */
+  .path-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .path-timeline::before {
+    content: '';
+    position: absolute;
+    left: 23px;
+    top: 40px;
+    bottom: 40px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent-rose), var(--accent-orange), var(--accent-amber), var(--accent-sky), var(--accent-violet));
+    border-radius: 2px;
+    z-index: 0;
+  }
+  .path-card {
+    display: flex;
+    gap: 20px;
+    padding: 0 0 8px 0;
+    position: relative;
+    z-index: 1;
+  }
+  .path-node {
+    width: 48px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 24px;
+  }
+  .path-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 3px solid var(--bg-primary);
+    box-shadow: 0 0 0 2px currentColor;
+    background: currentColor;
+    position: relative;
+    z-index: 2;
+  }
+  .path-content {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    transition: all 0.3s;
+  }
+  .path-content:hover {
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-elevated);
+  }
+  .path-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .path-tier-label {
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .path-tier-badge {
+    font-family: 'DM Sans';
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .path-tier-pct {
+    font-family: 'JetBrains Mono';
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+  .path-tier-nature {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.3px;
+  }
+  .path-causes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .path-cause-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .path-cause-tag .cause-count {
+    font-family: 'DM Sans';
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .path-journey {
+    background: var(--bg-elevated);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .path-journey .journey-step {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+  .path-journey .journey-arrow {
+    color: var(--text-muted);
+    font-size: 10px;
+    margin: 0 2px;
+  }
+  .path-scenarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .path-scenario {
+    background: var(--bg-elevated);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    border-left: 3px solid;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+  .path-scenario-title {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .path-scenario-title .scenario-count {
+    font-family: 'JetBrains Mono';
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.06);
+    color: var(--text-muted);
+  }
+  .path-insight {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px dashed rgba(255,255,255,0.08);
+    background: rgba(99,102,241,0.04);
+  }
+  .path-insight b {
+    color: var(--text-primary);
+  }
+  .path-summary-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 4px;
+  }
+  .path-summary-table th {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+  .path-summary-table td {
+    font-size: 12px;
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .path-summary-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+  .recoverability-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.06);
+    overflow: hidden;
+    width: 80px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+  .recoverability-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+  }
+
+  @media (max-width: 900px) {
+    .path-timeline::before { left: 19px; }
+    .path-node { width: 40px; }
+    .path-scenarios { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Header -->
+  <div class="header animate-in">
+    <div class="header-left">
+      <div class="header-badge">LIVE · 退费分析看板</div>
+      <h1>大客直售渠道A1 第六期退费用户分析</h1>
+      <div class="header-subtitle">退费深度归因与解决方案</div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">数据周期：2026-02-22 → 2026-04-10</div>
+      <div class="header-date">生成时间：2026-04-13</div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav-tabs animate-in delay-1">
+    <button class="nav-tab active" data-tab="overview">总览</button>
+    <button class="nav-tab" data-tab="reasons">退费归因</button>
+    <button class="nav-tab" data-tab="rooms">直播间对比</button>
+    <button class="nav-tab" data-tab="timeline">时间维度</button>
+    <button class="nav-tab" data-tab="solutions">解决方案</button>
+  </div>
+
+  <!-- ===== Panel: 总览 ===== -->
+  <div class="panel active" id="panel-overview">
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi-card animate-in delay-1">
+        <div class="kpi-label">总订单数</div>
+        <div class="kpi-value" style="color:#f1f5f9">256</div>
+        <div class="kpi-sub">有效订单（排除28条空数据）</div>
+      </div>
+      <div class="kpi-card animate-in delay-2">
+        <div class="kpi-label">退款订单</div>
+        <div class="kpi-value" style="color:#fb7185">161</div>
+        <div class="kpi-sub"><span class="kpi-tag danger">退费率 62.9%</span></div>
+      </div>
+      <div class="kpi-card animate-in delay-3">
+        <div class="kpi-label">在班用户</div>
+        <div class="kpi-value" style="color:#38bdf8">95</div>
+        <div class="kpi-sub"><span class="kpi-tag success">留存率 37.1%</span></div>
+      </div>
+      <div class="kpi-card animate-in delay-4">
+        <div class="kpi-label">有效退费</div>
+        <div class="kpi-value" style="color:#a78bfa">86</div>
+        <div class="kpi-sub"><span class="kpi-tag warning">占退款 53.4%</span></div>
+      </div>
+      <div class="kpi-card animate-in delay-5">
+        <div class="kpi-label">无效订单</div>
+        <div class="kpi-value" style="color:#fbbf24">75</div>
+        <div class="kpi-sub">异常34 · 虚拟号19 · 内测10</div>
+      </div>
+    </div>
+
+    <!-- Insight -->
+    <div class="insight-box animate-in delay-3">
+      <div class="insight-icon">⚡</div>
+      <div>
+        <div class="insight-title">关键发现</div>
+        <div class="insight-text">
+          整体退费率高达 <b style="color:#fb7185">62.9%</b>，其中有效退费 86 单是核心优化目标。<b style="color:#a78bfa">「孩子不想学」</b>（19单/22.1%）和<b style="color:#a78bfa">「失联」</b>（12单/14.0%）是最大退费原因。<b style="color:#fb7185">B直播间</b>退费率最高达71.0%，远超A间(56.8%)和视频号(58.5%)。退费时间集中在 <b style="color:#fbbf24">24h~7天</b> 区间（41单/47.7%），说明多数家长经过理性考虑后仍选择退费，产品价值传递和首次沟通质量是关键。
+        </div>
+      </div>
+    </div>
+
+    <!-- 订单漏斗 + 无效订单 -->
+    <div class="chart-grid-2">
+      <div class="chart-box animate-in delay-4">
+        <div class="chart-box-title">📊 订单转化漏斗</div>
+        <div class="chart-box-subtitle">从下单到留存的用户流失路径</div>
+        <div class="funnel">
+          <div class="funnel-step">
+            <div class="funnel-bar" style="width:100%; background:var(--accent-indigo)"></div>
+            <div class="funnel-label">总下单</div>
+            <div class="funnel-count" style="color:var(--accent-indigo)">256</div>
+            <div class="funnel-pct">100%</div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-bar" style="width:62.9%; background:var(--accent-rose)"></div>
+            <div class="funnel-label">退款</div>
+            <div class="funnel-count" style="color:var(--accent-rose)">161</div>
+            <div class="funnel-pct">62.9% ↓</div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-bar" style="width:33.6%; background:var(--accent-violet)"></div>
+            <div class="funnel-label">↳ 有效退费</div>
+            <div class="funnel-count" style="color:var(--accent-violet)">86</div>
+            <div class="funnel-pct">53.4% of 退款</div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-bar" style="width:29.3%; background:var(--accent-amber)"></div>
+            <div class="funnel-label">↳ 无效订单</div>
+            <div class="funnel-count" style="color:var(--accent-amber)">75</div>
+            <div class="funnel-pct">46.6% of 退款</div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-bar" style="width:37.1%; background:var(--accent-emerald)"></div>
+            <div class="funnel-label">✅ 在班</div>
+            <div class="funnel-count" style="color:var(--accent-emerald)">95</div>
+            <div class="funnel-pct">37.1%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-box animate-in delay-5">
+        <div class="chart-box-title">🚫 无效订单构成</div>
+        <div class="chart-box-subtitle">75单无效退费的分类明细</div>
+        <div class="chart-wrap" style="height:280px">
+          <canvas id="chart-invalid"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- 有效订单构成分析 -->
+    <div class="section" style="margin-top:28px">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(52,211,153,0.15)">✅</div>
+        <div class="section-title">有效订单构成分析</div>
+        <div class="section-desc">有效订单 181 单 = 在班 95 + 有效退费 86（排除 75 单无效订单）</div>
+      </div>
+      <div class="chart-grid-2">
+        <div class="chart-box animate-in delay-4">
+          <div class="chart-box-title">📊 有效订单整体构成</div>
+          <div class="chart-box-subtitle">在班 vs 有效退费 — 真实用户的留存情况</div>
+          <div class="chart-wrap" style="height:280px">
+            <canvas id="chart-valid-compose"></canvas>
+          </div>
+        </div>
+        <div class="chart-box animate-in delay-5">
+          <div class="chart-box-title">📡 各直播间有效订单结构</div>
+          <div class="chart-box-subtitle">对比各渠道的真实留存能力</div>
+          <div class="chart-wrap" style="height:280px">
+            <canvas id="chart-valid-room"></canvas>
+          </div>
+        </div>
+      </div>
+      <!-- 有效订单明细表 -->
+      <div class="chart-box" style="margin-top:16px">
+        <div class="chart-box-title">📋 有效订单关键指标明细</div>
+        <div class="chart-box-subtitle">按直播间拆解有效订单的在班率与退费构成</div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>直播间</th>
+                <th>有效订单</th>
+                <th>在班</th>
+                <th>有效退费</th>
+                <th>真实留存率</th>
+                <th>留存率对比</th>
+                <th>退费 TOP 原因</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600">🅰️ A 直播间</td>
+                <td class="num">67</td>
+                <td class="num" style="color:var(--accent-emerald)">41</td>
+                <td class="num" style="color:var(--accent-violet)">26</td>
+                <td>
+                  <span class="num" style="color:var(--accent-emerald);font-size:18px">61.2%</span>
+                  <div class="mini-bar"><div class="mini-bar-fill" style="width:61.2%;background:var(--accent-emerald)"></div></div>
+                </td>
+                <td><span class="kpi-tag success">最佳</span></td>
+                <td style="font-size:11px;color:var(--text-secondary)">学习压力大(4)、孩子不想学(4)、拒绝沟通(3)</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600">🅱️ B 直播间</td>
+                <td class="num">71</td>
+                <td class="num" style="color:var(--accent-emerald)">31</td>
+                <td class="num" style="color:var(--accent-violet)">40</td>
+                <td>
+                  <span class="num" style="color:var(--accent-amber);font-size:18px">43.7%</span>
+                  <div class="mini-bar"><div class="mini-bar-fill" style="width:43.7%;background:var(--accent-amber)"></div></div>
+                </td>
+                <td><span class="kpi-tag danger">最低 ⚠️</span></td>
+                <td style="font-size:11px;color:var(--text-secondary)">孩子不想学(9)、失联(7)、学习压力大(6)</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600">📱 视频号</td>
+                <td class="num">42</td>
+                <td class="num" style="color:var(--accent-emerald)">22</td>
+                <td class="num" style="color:var(--accent-violet)">20</td>
+                <td>
+                  <span class="num" style="color:var(--accent-sky);font-size:18px">52.4%</span>
+                  <div class="mini-bar"><div class="mini-bar-fill" style="width:52.4%;background:var(--accent-sky)"></div></div>
+                </td>
+                <td><span class="kpi-tag warning">中等</span></td>
+                <td style="font-size:11px;color:var(--text-secondary)">孩子不想学(6)、秒拍秒退(2)、失联(2)</td>
+              </tr>
+              <tr style="background:rgba(255,255,255,0.02)">
+                <td style="font-weight:700">合计</td>
+                <td class="num" style="font-weight:700">181</td>
+                <td class="num" style="font-weight:700;color:var(--accent-emerald)">95</td>
+                <td class="num" style="font-weight:700;color:var(--accent-violet)">86</td>
+                <td><span class="num" style="color:var(--text-primary);font-size:18px;font-weight:700">52.5%</span></td>
+                <td></td>
+                <td style="font-size:11px;color:var(--text-muted)">整体真实留存率</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 退费档位总览 -->
+    <div class="section" style="margin-top:28px">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(168,85,247,0.15)">⏱</div>
+        <div class="section-title">退费时长档位分布</div>
+        <div class="section-desc">有效退费 86 单按退费时长分布 — 越靠后越属于理性退费</div>
+      </div>
+      <div class="tier-cards">
+        <div class="tier-card animate-in delay-1">
+          <div class="tier-card-label">0~5 分钟</div>
+          <div class="tier-card-value" style="color:var(--accent-rose)">5</div>
+          <div class="tier-card-pct" style="color:var(--accent-rose)">5.8%</div>
+          <div class="tier-card-nature"><b>冲动退费</b><br>纯直播氛围刺激，下单即后悔，秒拍秒退为主</div>
+        </div>
+        <div class="tier-card animate-in delay-2">
+          <div class="tier-card-label">5分钟~1小时</div>
+          <div class="tier-card-value" style="color:var(--accent-orange)">5</div>
+          <div class="tier-card-pct" style="color:var(--accent-orange)">5.8%</div>
+          <div class="tier-card-nature"><b>浅层冷静</b><br>仍在直播情绪场，短暂犹豫后反悔，失联为主因</div>
+        </div>
+        <div class="tier-card animate-in delay-3">
+          <div class="tier-card-label">1小时~24小时</div>
+          <div class="tier-card-value" style="color:var(--accent-amber)">16</div>
+          <div class="tier-card-pct" style="color:var(--accent-amber)">18.6%</div>
+          <div class="tier-card-nature"><b>理性判断</b><br>脱离直播氛围后的理性决策，原因分散多样</div>
+        </div>
+        <div class="tier-card animate-in delay-4">
+          <div class="tier-card-label">24小时~7天</div>
+          <div class="tier-card-value" style="color:var(--accent-sky)">41</div>
+          <div class="tier-card-pct" style="color:var(--accent-sky)">47.7%</div>
+          <div class="tier-card-nature"><b>⚠️ 核心区间</b><br>充分考虑后退费，孩子不想学+等班期久是主因</div>
+        </div>
+        <div class="tier-card animate-in delay-5">
+          <div class="tier-card-label">7天以上</div>
+          <div class="tier-card-value" style="color:var(--accent-violet)">19</div>
+          <div class="tier-card-pct" style="color:var(--accent-violet)">22.1%</div>
+          <div class="tier-card-nature"><b>体验退费</b><br>使用后体验问题，孩子不想学+服务体验是主因</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Panel: 退费归因 ===== -->
+  <div class="panel" id="panel-reasons">
+    <div class="insight-box">
+      <div class="insight-icon">🔍</div>
+      <div>
+        <div class="insight-title">退费原因深度洞察</div>
+        <div class="insight-text">
+          有效退费 86 单中，<b style="color:#fb7185">TOP 4 原因占比 58.1%</b>：孩子不想学(22.1%)、失联(14.0%)、学习压力大(11.6%)、等班期久(10.5%)。其中「孩子不想学」和「学习压力大」本质上都指向<b style="color:#a78bfa">家长对课程价值的认知不足</b>——家长购买时没有充分了解课程内容，回去跟孩子沟通后发现孩子抵触，就选择退费。「失联」则反映<b style="color:#fbbf24">首次触达效率低下</b>的问题。
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid-2">
+      <div class="chart-box">
+        <div class="chart-box-title">📊 有效退费原因 TOP 10</div>
+        <div class="chart-box-subtitle">86 单有效退费的退费类别分布</div>
+        <div class="chart-wrap" style="height:360px">
+          <canvas id="chart-reasons"></canvas>
+        </div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-box-title">🎯 退费原因归类</div>
+        <div class="chart-box-subtitle">按本质原因重新归类 — 指导解决策略</div>
+        <div class="chart-wrap" style="height:360px">
+          <canvas id="chart-reason-group"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- 各档位原因明细表 -->
+    <div class="section" style="margin-top:28px">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(56,189,248,0.15)">📋</div>
+        <div class="section-title">退费原因 × 时长档位 交叉分析</div>
+        <div class="section-desc">看清每个原因在哪个阶段发生 — 精准制定干预节点</div>
+      </div>
+      <div class="chart-box">
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>退费类别</th>
+                <th>0~5min</th>
+                <th>5min~1h</th>
+                <th>1h~24h</th>
+                <th>24h~7d</th>
+                <th>7d+</th>
+                <th>合计</th>
+                <th>占比</th>
+                <th>分布</th>
+              </tr>
+            </thead>
+            <tbody id="reason-tier-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 具体原因采样 -->
+    <div class="section" style="margin-top:28px">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(251,113,133,0.15)">💬</div>
+        <div class="section-title">典型退费案例</div>
+        <div class="section-desc">来自客服沟通记录的真实退费原因</div>
+      </div>
+      <div class="chart-grid-2">
+        <div class="chart-box" style="border-left: 3px solid var(--accent-rose);">
+          <div class="chart-box-title" style="color:var(--accent-rose)">🔴 孩子不想学（19单 · 占比22.1%）</div>
+          <div class="chart-box-subtitle">本质：家长冲动下单后回家跟孩子沟通，孩子抵触</div>
+          <div style="font-size:12px;color:var(--text-secondary);line-height:1.9">
+            <p style="margin-bottom:10px;padding:10px;background:var(--bg-elevated);border-radius:8px">
+              「家长先在直播间拍的，拍完之后问了孩子，<b style="color:var(--text-primary)">孩子不想学就退了</b>。家长表示孩子目前叛逆，他说报了也不学。」
+            </p>
+            <p style="margin-bottom:10px;padding:10px;background:var(--bg-elevated);border-radius:8px">
+              「家长表示孩子对于学习编程课有<b style="color:var(--text-primary)">很强的抵触心理</b>，跟孩子沟通了一晚上孩子也不想学，告诉家长可以试课，家长说临近开学孩子抵触心理特别强。」
+            </p>
+            <p style="padding:10px;background:var(--bg-elevated);border-radius:8px">
+              「家长说<b style="color:var(--text-primary)">孩子不太想学</b>，这边说离开课还有一段时间可以先试听再退，家长还是说不用了不感兴趣。」
+            </p>
+          </div>
+        </div>
+        <div class="chart-box" style="border-left: 3px solid var(--accent-amber);">
+          <div class="chart-box-title" style="color:var(--accent-amber)">🟡 等班期久（9单 · 占比10.5%）</div>
+          <div class="chart-box-subtitle">本质：开课时间过长，用户信心衰减</div>
+          <div style="font-size:12px;color:var(--text-secondary);line-height:1.9">
+            <p style="margin-bottom:10px;padding:10px;background:var(--bg-elevated);border-radius:8px">
+              「家长表示A1<b style="color:var(--text-primary)">开课时间要等太久</b>，没有耐心等下去，要求退课。」
+            </p>
+            <p style="margin-bottom:10px;padding:10px;background:var(--bg-elevated);border-radius:8px">
+              「家长报名A1课程，<b style="color:var(--text-primary)">试听课要等到下个月实在等不了了</b>，跟家长说已经涨价了可以帮她升级福利，家长还是等不了。」
+            </p>
+            <p style="padding:10px;background:var(--bg-elevated);border-radius:8px">
+              「家长说<b style="color:var(--text-primary)">时间太久了</b>，持续挽单中但家长态度坚决。」
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Panel: 直播间对比 ===== -->
+  <div class="panel" id="panel-rooms">
+    <div class="insight-box">
+      <div class="insight-icon">📡</div>
+      <div>
+        <div class="insight-title">直播间表现差异</div>
+        <div class="insight-text">
+          <b style="color:#fb7185">B直播间退费率71.0%</b>，远高于A间(56.8%)和视频号(58.5%)。B间的问题集中在「孩子不想学」(9单)和「失联」(7单)，合计占B间有效退费的40%。A间则在「学习压力大」和「拒绝沟通」上表现突出。视频号渠道的「秒拍秒退」和「报其他机构」比例相对较高，说明视频号用户决策更冲动、竞品分流更明显。
+        </div>
+      </div>
+    </div>
+
+    <!-- Room cards -->
+    <div class="room-compare">
+      <div class="room-card room-a">
+        <div class="room-name">🅰️ A 直播间</div>
+        <div class="room-stats">
+          <div class="room-stat-item"><div class="room-stat-val">95</div><div class="room-stat-label">总订单</div></div>
+          <div class="room-stat-item"><div class="room-stat-val">54</div><div class="room-stat-label">退款</div></div>
+          <div class="room-stat-item"><div class="room-stat-val">41</div><div class="room-stat-label">在班</div></div>
+        </div>
+        <div class="room-refund-rate" style="color:var(--accent-sky)">56.8%</div>
+        <div class="room-rate-label">退费率</div>
+      </div>
+      <div class="room-card room-b">
+        <div class="room-name">🅱️ B 直播间</div>
+        <div class="room-stats">
+          <div class="room-stat-item"><div class="room-stat-val">107</div><div class="room-stat-label">总订单</div></div>
+          <div class="room-stat-item"><div class="room-stat-val">76</div><div class="room-stat-label">退款</div></div>
+          <div class="room-stat-item"><div class="room-stat-val">31</div><div class="room-stat-label">在班</div></div>
+        </div>
+        <div class="room-refund-rate" style="color:var(--accent-rose)">71.0%</div>
+        <div class="room-rate-label">退费率 · ⚠️ 最高</div>
+      </div>
+      <div class="room-card room-v">
+        <div class="room-name">📱 视频号</div>
+        <div class="room-stats">
+          <div class="room-stat-item"><div class="room-stat-val">53</div><div class="room-stat-label">总订单</div></div>
+          <div class="room-stat-item"><div class="room-stat-val">31</div><div class="room-stat-label">退款</div></div>
+          <div class="room-stat-item"><div class="room-stat-val">22</div><div class="room-stat-label">在班</div></div>
+        </div>
+        <div class="room-refund-rate" style="color:var(--accent-amber)">58.5%</div>
+        <div class="room-rate-label">退费率</div>
+      </div>
+    </div>
+
+    <div class="chart-grid-2">
+      <div class="chart-box">
+        <div class="chart-box-title">📊 各直播间有效退费原因 TOP 5</div>
+        <div class="chart-box-subtitle">看清不同渠道的用户特征差异</div>
+        <div class="chart-wrap" style="height:360px">
+          <canvas id="chart-room-reasons"></canvas>
+        </div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-box-title">📈 各直播间订单结构</div>
+        <div class="chart-box-subtitle">在班 vs 有效退费 vs 无效退费</div>
+        <div class="chart-wrap" style="height:360px">
+          <canvas id="chart-room-structure"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="margin-top:28px">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(251,113,133,0.15)">🔬</div>
+        <div class="section-title">B直播间问题诊断</div>
+        <div class="section-desc">退费率最高的直播间需要重点优化</div>
+      </div>
+      <div class="chart-box" style="border-left: 3px solid var(--accent-rose);">
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr><th>问题维度</th><th>数据表现</th><th>对比</th><th>诊断</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600">总退费率</td>
+                <td><span class="num" style="color:var(--accent-rose)">71.0%</span></td>
+                <td class="pct">A间 56.8% · 视频号 58.5%</td>
+                <td style="color:var(--text-secondary);font-size:12px">高出 A 间 14.2pp，需针对性优化</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600">孩子不想学</td>
+                <td><span class="num">9 单</span></td>
+                <td class="pct">A间 4 · 视频号 6</td>
+                <td style="color:var(--text-secondary);font-size:12px">B间最多，直播间引导可能过于冲动化</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600">失联率</td>
+                <td><span class="num">7 单</span></td>
+                <td class="pct">A间 3 · 视频号 2</td>
+                <td style="color:var(--text-secondary);font-size:12px">首联失败率高，需优化响应时效</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600">在班转化</td>
+                <td><span class="num">31 / 107</span></td>
+                <td class="pct">A间 41/95 · 视频号 22/53</td>
+                <td style="color:var(--text-secondary);font-size:12px">在班率 29.0%，最低</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Panel: 时间维度 ===== -->
+  <div class="panel" id="panel-timeline">
+    <div class="insight-box">
+      <div class="insight-icon">🕐</div>
+      <div>
+        <div class="insight-title">时间模式发现</div>
+        <div class="insight-text">
+          下单高峰在 <b style="color:#38bdf8">8:00~15:00</b> 和 <b style="color:#38bdf8">20:00~22:00</b>（对应直播时段）。退费申请则集中在 <b style="color:#fb7185">9:00~16:00</b> 和 <b style="color:#fb7185">20:00~23:00</b>，说明家长在工作时段和晚间思考后申请退费。<b style="color:#fbbf24">3月前两周</b>是下单高峰期，但退费也在同期密集发生，说明早期用户流失严重。
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid-2">
+      <div class="chart-box">
+        <div class="chart-box-title">🕐 下单时段分布</div>
+        <div class="chart-box-subtitle">24小时下单量分布 — 识别直播下单高峰</div>
+        <div class="chart-wrap" style="height:300px">
+          <canvas id="chart-pay-hours"></canvas>
+        </div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-box-title">🕐 退费申请时段分布</div>
+        <div class="chart-box-subtitle">24小时退费量分布 — 识别干预黄金时段</div>
+        <div class="chart-wrap" style="height:300px">
+          <canvas id="chart-refund-hours"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-box" style="margin-top:16px">
+      <div class="chart-box-title">📅 每日下单 vs 退费趋势</div>
+      <div class="chart-box-subtitle">查看时间序列上的下单-退费节奏</div>
+      <div class="chart-wrap" style="height:300px">
+        <canvas id="chart-daily-trend"></canvas>
+      </div>
+    </div>
+
+    <!-- 退费行为路径分析 -->
+    <div class="section" style="margin-top:28px">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(168,85,247,0.15)">🔬</div>
+        <div class="section-title">退费时长档位 × 行为路径深度分析</div>
+        <div class="section-desc">86 单有效退费 — 按时间窗口还原用户决策心理与退费场景</div>
+      </div>
+
+      <div class="insight-box" style="margin-bottom:20px">
+        <div class="insight-icon">💡</div>
+        <div>
+          <div class="insight-title">阅读指引</div>
+          <div class="insight-text">
+            从下单到退费的时间越长，用户的决策越理性、退费原因越深层。<b style="color:#fb7185">0~1小时</b>是冲动/信息冲击退费，<b style="color:#fbbf24">1小时~7天</b>是现实因素消磨（核心战场，占66.3%），<b style="color:#a78bfa">7天以上</b>是真正的产品体验反馈。<b>可挽回性呈"先升后降"曲线</b>——资源应优先投入 1小时~7天 区间。
+          </div>
+        </div>
+      </div>
+
+      <div class="path-timeline">
+
+        <!-- 档位1: 0~5分钟 -->
+        <div class="path-card animate-in delay-1">
+          <div class="path-node">
+            <div class="path-dot" style="color:var(--accent-rose)"></div>
+          </div>
+          <div class="path-content" style="border-top: 3px solid var(--accent-rose);">
+            <div class="path-header">
+              <div class="path-tier-label">
+                <span class="path-tier-badge" style="color:var(--accent-rose)">5</span>
+                <span>单</span>
+              </div>
+              <span class="path-tier-pct" style="background:var(--danger-soft);color:var(--accent-rose)">5.8%</span>
+              <span class="path-tier-nature" style="background:rgba(251,113,133,0.12);color:var(--accent-rose)">0~5 分钟 · 冲动退费</span>
+            </div>
+            <div class="path-causes">
+              <span class="path-cause-tag">秒拍秒退 <span class="cause-count">4</span></span>
+              <span class="path-cause-tag">拒绝沟通 <span class="cause-count">1</span></span>
+            </div>
+            <div class="path-journey">
+              <span class="journey-step">📺 直播间观看</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">⚡ 限时话术刺激</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">💳 冲动下单</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">😳 瞬间清醒</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step" style="color:var(--accent-rose);font-weight:600">🔙 立刻退费</span>
+            </div>
+            <div class="path-scenarios">
+              <div class="path-scenario" style="border-color:var(--accent-rose)">
+                <div class="path-scenario-title">「手滑误拍型」<span class="scenario-count">~2单</span></div>
+                边看直播边刷手机，主播喊"最后3个名额"，手指点了付款。付完一看金额或内容不对，立刻退。<b style="color:var(--text-primary)">纯粹是直播购物惯性</b>，根本没看清课程内容。
+              </div>
+              <div class="path-scenario" style="border-color:var(--accent-rose)">
+                <div class="path-scenario-title">「瞬间后悔型」<span class="scenario-count">~2单</span></div>
+                确实有购买意愿，但付完看到订单详情（价格、课程周期、开课时间）与预期不符。比如<b style="color:var(--text-primary)">以为是体验课结果是正价课</b>，秒退。
+              </div>
+              <div class="path-scenario" style="border-color:var(--accent-rose)">
+                <div class="path-scenario-title">「家庭否决型」<span class="scenario-count">1单</span></div>
+                刚下完单，身边配偶/老人问"你又买什么了"，一番讨论后觉得没必要退掉。因尴尬/不想被说服，<b style="color:var(--text-primary)">拒绝接听客服电话</b>。
+              </div>
+            </div>
+            <div class="path-insight">
+              <b>干预判断：</b>这批用户的购买决策几乎没有经过思考，退费是"止损反射"。<b>干预价值最低</b>，但可通过下单前增加课程信息确认弹窗来减少无效订单量。
+            </div>
+          </div>
+        </div>
+
+        <!-- 档位2: 5分钟~1小时 -->
+        <div class="path-card animate-in delay-2">
+          <div class="path-node">
+            <div class="path-dot" style="color:var(--accent-orange)"></div>
+          </div>
+          <div class="path-content" style="border-top: 3px solid var(--accent-orange);">
+            <div class="path-header">
+              <div class="path-tier-label">
+                <span class="path-tier-badge" style="color:var(--accent-orange)">5</span>
+                <span>单</span>
+              </div>
+              <span class="path-tier-pct" style="background:rgba(251,146,60,0.12);color:var(--accent-orange)">5.8%</span>
+              <span class="path-tier-nature" style="background:rgba(251,146,60,0.12);color:var(--accent-orange)">5分钟~1小时 · 浅层冷静退费</span>
+            </div>
+            <div class="path-causes">
+              <span class="path-cause-tag">失联 <span class="cause-count">3</span></span>
+              <span class="path-cause-tag">孩子不想学 <span class="cause-count">1</span></span>
+              <span class="path-cause-tag">报其他机构 <span class="cause-count">1</span></span>
+            </div>
+            <div class="path-journey">
+              <span class="journey-step">💳 冲动下单</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">📱 打开社交平台搜评价</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">😟 看到负面信息/问孩子</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">📵 不接客服电话</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step" style="color:var(--accent-orange);font-weight:600">🔙 申请退费/失联</span>
+            </div>
+            <div class="path-scenarios">
+              <div class="path-scenario" style="border-color:var(--accent-orange)">
+                <div class="path-scenario-title">「搜完就跑型」· 失联<span class="scenario-count">3单</span></div>
+                下单后打开小红书/知乎搜课程评价，看到负面评价或竞品对比帖，心里动摇。客服来电看到陌生号码选择不接，后续触达也不回应。<b style="color:var(--text-primary)">下单后5~60分钟是"信息验证窗口"</b>——家长在主动验证决策，接触到负面信息就会直接失联。
+              </div>
+              <div class="path-scenario" style="border-color:var(--accent-orange)">
+                <div class="path-scenario-title">「随口一问型」· 孩子不想学<span class="scenario-count">1单</span></div>
+                下完单顺口跟身边孩子说"妈给你报了个编程课"，孩子立刻说"我不要"。比24h~7d档更快，因为<b style="color:var(--text-primary)">孩子就在身边，沟通链极短</b>。
+              </div>
+              <div class="path-scenario" style="border-color:var(--accent-orange)">
+                <div class="path-scenario-title">「货比三家型」· 报其他机构<span class="scenario-count">1单</span></div>
+                可能同时在看多个直播间或课程，先拍一个"占坑"。半小时后发现<b style="color:var(--text-primary)">另一家更便宜/口碑更好</b>，果断退掉这边。
+              </div>
+            </div>
+            <div class="path-insight">
+              <b>干预判断：</b>仍在"直播情绪余温"中，但已引入外部信息。<b>干预窗口极短但存在</b>——如果下单后5分钟内推送正面课程价值信息（学员案例视频、课程亮点），可以抢在家长"信息验证"之前建立正面认知。
+            </div>
+          </div>
+        </div>
+
+        <!-- 档位3: 1小时~24小时 -->
+        <div class="path-card animate-in delay-3">
+          <div class="path-node">
+            <div class="path-dot" style="color:var(--accent-amber)"></div>
+          </div>
+          <div class="path-content" style="border-top: 3px solid var(--accent-amber);">
+            <div class="path-header">
+              <div class="path-tier-label">
+                <span class="path-tier-badge" style="color:var(--accent-amber)">16</span>
+                <span>单</span>
+              </div>
+              <span class="path-tier-pct" style="background:var(--warning-soft);color:var(--accent-amber)">18.6%</span>
+              <span class="path-tier-nature" style="background:var(--warning-soft);color:var(--accent-amber)">1小时~24小时 · 理性判断退费</span>
+            </div>
+            <div class="path-causes">
+              <span class="path-cause-tag">课程难度大 <span class="cause-count">2</span></span>
+              <span class="path-cause-tag">孩子不想学 <span class="cause-count">1</span></span>
+              <span class="path-cause-tag">失联 <span class="cause-count">1</span></span>
+              <span class="path-cause-tag">学习压力大 <span class="cause-count">1</span></span>
+              <span class="path-cause-tag">等班期久 <span class="cause-count">1</span></span>
+              <span class="path-cause-tag">报其他机构 <span class="cause-count">1</span></span>
+              <span class="path-cause-tag">没时间上课 <span class="cause-count">1</span></span>
+              <span class="path-cause-tag" style="color:var(--text-muted)">其他 <span class="cause-count">8</span></span>
+            </div>
+            <div class="path-journey">
+              <span class="journey-step">🌙 晚间直播下单</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">😴 睡一觉</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">☀️ 第二天白天理性评估</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">👨‍👩‍👧 跟孩子/配偶详细沟通</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step" style="color:var(--accent-amber);font-weight:600">🔙 发现多种问题，退费</span>
+            </div>
+            <div class="path-scenarios">
+              <div class="path-scenario" style="border-color:var(--accent-amber)">
+                <div class="path-scenario-title">「睡醒后悔型」<span class="scenario-count">最典型</span></div>
+                晚上8~10点冲动下单，当晚觉得还不错。第二天早上脱离直播氛围，冷静算账——"一年花这么多？孩子能抽出时间吗？"越想越不对，上午就申请退费。<b style="color:var(--text-primary)">这解释了退费申请在9:00~16:00的高峰。</b>
+              </div>
+              <div class="path-scenario" style="border-color:var(--accent-amber)">
+                <div class="path-scenario-title">「家庭会议型」</div>
+                晚上下单后，第二天白天跟配偶/父母讨论。另一半说<b style="color:var(--text-primary)">"孩子功课都做不完还学编程？"</b>或者"价格太贵了"，家庭合议后决定退。
+              </div>
+              <div class="path-scenario" style="border-color:var(--accent-amber)">
+                <div class="path-scenario-title">「详细了解后退缩型」<span class="scenario-count">2单</span></div>
+                下单后收到课程材料，仔细看了大纲和课时安排，发现内容比想象的复杂、孩子年龄不合适、或时间投入超预期。<b style="color:var(--text-primary)">认真看了材料反而被"劝退"</b>。
+              </div>
+            </div>
+            <div class="path-insight">
+              <b>干预判断：</b>退费原因<b>最分散</b>，说明经过一夜思考后退费原因高度个性化。这是<b>"首次客服沟通"的黄金窗口</b>——如果班主任在下单后2~4小时内完成高质量首联（了解需求、建立信任而非推销），可在家长"理性评估"时提供正面信息支撑。
+            </div>
+          </div>
+        </div>
+
+        <!-- 档位4: 24小时~7天 -->
+        <div class="path-card animate-in delay-4">
+          <div class="path-node">
+            <div class="path-dot" style="color:var(--accent-sky)"></div>
+          </div>
+          <div class="path-content" style="border-top: 3px solid var(--accent-sky);">
+            <div class="path-header">
+              <div class="path-tier-label">
+                <span class="path-tier-badge" style="color:var(--accent-sky)">41</span>
+                <span>单</span>
+              </div>
+              <span class="path-tier-pct" style="background:rgba(56,189,248,0.12);color:var(--accent-sky)">47.7%</span>
+              <span class="path-tier-nature" style="background:rgba(56,189,248,0.12);color:var(--accent-sky)">24小时~7天 · 核心退费区间 ⚠️</span>
+            </div>
+            <div class="path-causes">
+              <span class="path-cause-tag" style="background:rgba(251,113,133,0.1)">孩子不想学 <span class="cause-count" style="color:var(--accent-rose)">8</span></span>
+              <span class="path-cause-tag" style="background:rgba(56,189,248,0.1)">等班期久 <span class="cause-count" style="color:var(--accent-sky)">7</span></span>
+              <span class="path-cause-tag">没时间上课 <span class="cause-count">3</span></span>
+              <span class="path-cause-tag">拒绝沟通 <span class="cause-count">3</span></span>
+              <span class="path-cause-tag">学习压力大 <span class="cause-count">2</span></span>
+              <span class="path-cause-tag">报其他机构 <span class="cause-count">2</span></span>
+              <span class="path-cause-tag">失联 <span class="cause-count">1</span></span>
+              <span class="path-cause-tag">课程难度大 <span class="cause-count">1</span></span>
+              <span class="path-cause-tag">服务体验差 <span class="cause-count">1</span></span>
+            </div>
+            <div class="path-journey">
+              <span class="journey-step">💳 下单</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">📞 首联完成/等待开课</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">🔄 2~7天内持续犹豫</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">😔 现实因素逐渐浮出</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step" style="color:var(--accent-sky);font-weight:600">🔙 理性退费</span>
+            </div>
+            <div class="path-scenarios">
+              <div class="path-scenario" style="border-color:var(--accent-rose)">
+                <div class="path-scenario-title">「孩子抵触拉锯战」<span class="scenario-count">8单 · TOP1</span></div>
+                家长告诉孩子后孩子说不想学 → 花2~3天试图说服 → 孩子态度坚决/产生矛盾 → 家长妥协退费。案例："跟孩子沟通了一晚上也不想学"。这批家长<b style="color:var(--text-primary)">已经"努力过了"</b>，是真正的需求不匹配——购买者和使用者分离导致。
+              </div>
+              <div class="path-scenario" style="border-color:var(--accent-sky)">
+                <div class="path-scenario-title">「等到焦虑型」<span class="scenario-count">7单 · TOP2</span></div>
+                下单后被告知等2~4周开课，前几天还能接受，到第4~5天"我都付了钱了怎么还没动静"的焦虑放大。期间没有收到任何课程内容，信任度逐渐下降。<b style="color:var(--text-primary)">耐心临界点约在3~7天。</b>
+              </div>
+              <div class="path-scenario" style="border-color:var(--accent-amber)">
+                <div class="path-scenario-title">「现实算账型」<span class="scenario-count">5单</span></div>
+                认真盘算孩子周课表——周一到周五学校功课、周六数学、周日英语+钢琴……发现排不进编程课。或期中临近成绩下滑，"还是先保主科"。<b style="color:var(--text-primary)">核心不是不认可课程，而是时间精力的零和博弈。</b>
+              </div>
+              <div class="path-scenario" style="border-color:var(--accent-violet)">
+                <div class="path-scenario-title">「消极抵抗型」<span class="scenario-count">3单</span></div>
+                客服联系上了但家长态度敷衍说"我再考虑"，内心已决定退费但不好意思直说。拖几天后直接在系统操作退费。也可能是<b style="color:var(--text-primary)">对"挽单话术"产生反感</b>。
+              </div>
+            </div>
+            <div class="path-insight">
+              <b>干预判断：</b>41单经过<b>充分考虑后的理性退费</b>，简单优惠挽留效果有限（退费原因不是价格）。需要在下单后24小时内就通过高质量内容和沟通解决核心顾虑。<b>等班期管理是低悬果实</b>——7单纯粹因为等太久，做好等待期内容填充和社群运营就能显著降低。
+            </div>
+          </div>
+        </div>
+
+        <!-- 档位5: 7天以上 -->
+        <div class="path-card animate-in delay-5">
+          <div class="path-node">
+            <div class="path-dot" style="color:var(--accent-violet)"></div>
+          </div>
+          <div class="path-content" style="border-top: 3px solid var(--accent-violet);">
+            <div class="path-header">
+              <div class="path-tier-label">
+                <span class="path-tier-badge" style="color:var(--accent-violet)">19</span>
+                <span>单</span>
+              </div>
+              <span class="path-tier-pct" style="background:rgba(167,139,250,0.12);color:var(--accent-violet)">22.1%</span>
+              <span class="path-tier-nature" style="background:rgba(167,139,250,0.12);color:var(--accent-violet)">7天以上 · 体验后退费</span>
+            </div>
+            <div class="path-causes">
+              <span class="path-cause-tag" style="background:rgba(251,113,133,0.1)">孩子不想学 <span class="cause-count" style="color:var(--accent-rose)">9</span></span>
+              <span class="path-cause-tag">学习压力大 <span class="cause-count">3</span></span>
+              <span class="path-cause-tag">没时间上课 <span class="cause-count">3</span></span>
+              <span class="path-cause-tag" style="background:rgba(244,114,182,0.1)">服务体验差 <span class="cause-count" style="color:#f472b6">2</span></span>
+              <span class="path-cause-tag">等班期久 <span class="cause-count">1</span></span>
+              <span class="path-cause-tag">拒绝沟通 <span class="cause-count">1</span></span>
+            </div>
+            <div class="path-journey">
+              <span class="journey-step">💳 下单</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">📞 完成首联</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">📖 进入试课/等班期</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step">😐 实际体验与预期有差距</span>
+              <span class="journey-arrow">→</span>
+              <span class="journey-step" style="color:var(--accent-violet);font-weight:600">🔙 坚定退费</span>
+            </div>
+            <div class="path-scenarios">
+              <div class="path-scenario" style="border-color:var(--accent-violet)">
+                <div class="path-scenario-title">「试了还是不行」<span class="scenario-count">9单 · TOP1</span></div>
+                孩子实际试听1~2节课后依然没兴趣或不适应（听不懂、坐不住、跟不上）。家长给了机会但结果不理想，退费决定<b style="color:var(--text-primary)">最为坚定</b>。跟24h~7d档不同：那个是"没试就拒绝"，这个是"试了还是拒绝"。
+              </div>
+              <div class="path-scenario" style="border-color:var(--accent-violet)">
+                <div class="path-scenario-title">「累加效应型」<span class="scenario-count">6单</span></div>
+                开课后实际体验1~2周上课节奏，发现真的安排不过来。最初觉得"应该可以挤出时间"，实际操作才知道<b style="color:var(--text-primary)">周末赶作业、平时太累，编程课成了"最后一根稻草"</b>。
+              </div>
+              <div class="path-scenario" style="border-color:#f472b6">
+                <div class="path-scenario-title">「服务落差型」<span class="scenario-count">2单</span></div>
+                唯一跟<b style="color:var(--text-primary)">产品交付质量直接相关</b>的原因：班主任回复慢、上课软件卡顿、排课变动未通知、教学水平不达预期。直播间吹得天花乱坠，实际体验后感到落差。
+              </div>
+              <div class="path-scenario" style="border-color:var(--accent-violet)">
+                <div class="path-scenario-title">「被挽留后仍退」</div>
+                有些家长第3~5天就想退了，被客服挽留住（"再试试"、"加福利"）。拖到7天以上发现问题依然存在，最终还是退了。<b style="color:var(--text-primary)">这类"被挽留后再退"的体验其实更差</b>——感觉被耽误了时间。
+              </div>
+            </div>
+            <div class="path-insight">
+              <b>干预判断：</b>这19单是<b>真正的产品/服务问题反馈</b>，信号价值最高。孩子不想学9单 = 课程对特定年龄段的吸引力不足，需优化课程设计（趣味性、难度梯度）。服务体验差2单虽少，但每1单背后可能代表<b>5~10个不满意但没退费的沉默用户</b>。这批用户的退费原因对产品迭代指导价值最大。
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /path-timeline -->
+    </div><!-- /section -->
+
+    <!-- 五档位总结对比表 -->
+    <div class="section" style="margin-top:24px">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(52,211,153,0.15)">📊</div>
+        <div class="section-title">五档位行为本质总结</div>
+        <div class="section-desc">可挽回性呈"先升后降"曲线 — 资源应集中在 1小时~7天 区间（57单 / 66.3%）</div>
+      </div>
+      <div class="chart-box">
+        <div style="overflow-x:auto">
+          <table class="path-summary-table">
+            <thead>
+              <tr>
+                <th>退费档位</th>
+                <th>单量</th>
+                <th>行为本质</th>
+                <th>核心干预点</th>
+                <th>可挽回性</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--accent-rose);margin-right:6px"></span><b style="color:var(--accent-rose)">0~5 分钟</b></td>
+                <td style="font-family:'DM Sans';font-weight:700">5 <span style="font-family:'JetBrains Mono';font-size:11px;color:var(--text-muted);font-weight:400">5.8%</span></td>
+                <td style="color:var(--text-secondary)">购买行为本身就是错误的</td>
+                <td style="color:var(--text-secondary)">下单前增加信息确认机制</td>
+                <td>
+                  <span style="color:var(--accent-rose);font-weight:600;font-size:11px">极低</span>
+                  <div class="recoverability-bar"><div class="recoverability-bar-fill" style="width:10%;background:var(--accent-rose)"></div></div>
+                </td>
+              </tr>
+              <tr>
+                <td><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--accent-orange);margin-right:6px"></span><b style="color:var(--accent-orange)">5分钟~1小时</b></td>
+                <td style="font-family:'DM Sans';font-weight:700">5 <span style="font-family:'JetBrains Mono';font-size:11px;color:var(--text-muted);font-weight:400">5.8%</span></td>
+                <td style="color:var(--text-secondary)">外部信息冲击了购买决策</td>
+                <td style="color:var(--text-secondary)">下单5分钟内推送正面内容</td>
+                <td>
+                  <span style="color:var(--accent-orange);font-weight:600;font-size:11px">较低</span>
+                  <div class="recoverability-bar"><div class="recoverability-bar-fill" style="width:30%;background:var(--accent-orange)"></div></div>
+                </td>
+              </tr>
+              <tr>
+                <td><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--accent-amber);margin-right:6px"></span><b style="color:var(--accent-amber)">1~24 小时</b></td>
+                <td style="font-family:'DM Sans';font-weight:700">16 <span style="font-family:'JetBrains Mono';font-size:11px;color:var(--text-muted);font-weight:400">18.6%</span></td>
+                <td style="color:var(--text-secondary)">"睡一觉"后的理性重新评估</td>
+                <td style="color:var(--text-secondary)">黄金2~4小时高质量首联</td>
+                <td>
+                  <span style="color:var(--accent-emerald);font-weight:600;font-size:11px">较高 ★</span>
+                  <div class="recoverability-bar"><div class="recoverability-bar-fill" style="width:70%;background:var(--accent-emerald)"></div></div>
+                </td>
+              </tr>
+              <tr style="background:rgba(56,189,248,0.04)">
+                <td><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--accent-sky);margin-right:6px"></span><b style="color:var(--accent-sky)">24小时~7天</b></td>
+                <td style="font-family:'DM Sans';font-weight:700;font-size:16px">41 <span style="font-family:'JetBrains Mono';font-size:11px;color:var(--text-muted);font-weight:400">47.7%</span></td>
+                <td style="color:var(--text-secondary)">现实因素持续消磨购买意愿</td>
+                <td style="color:var(--text-secondary)">等班期运营 + 亲子沟通支持</td>
+                <td>
+                  <span style="color:var(--accent-emerald);font-weight:600;font-size:11px">中等 ★</span>
+                  <div class="recoverability-bar"><div class="recoverability-bar-fill" style="width:50%;background:var(--accent-sky)"></div></div>
+                </td>
+              </tr>
+              <tr>
+                <td><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--accent-violet);margin-right:6px"></span><b style="color:var(--accent-violet)">7天以上</b></td>
+                <td style="font-family:'DM Sans';font-weight:700">19 <span style="font-family:'JetBrains Mono';font-size:11px;color:var(--text-muted);font-weight:400">22.1%</span></td>
+                <td style="color:var(--text-secondary)">实际体验后的价值判断</td>
+                <td style="color:var(--text-secondary)">课程产品力 + 服务质量提升</td>
+                <td>
+                  <span style="color:var(--accent-violet);font-weight:600;font-size:11px">低（但信号价值最高）</span>
+                  <div class="recoverability-bar"><div class="recoverability-bar-fill" style="width:20%;background:var(--accent-violet)"></div></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== Panel: 解决方案 ===== -->
+  <div class="panel" id="panel-solutions">
+    <div class="insight-box">
+      <div class="insight-icon">🎯</div>
+      <div>
+        <div class="insight-title">策略总览</div>
+        <div class="insight-text">
+          基于数据分析，将 86 单有效退费归为 <b>5 大问题域</b>，每个域给出针对性解决方案。优先级按影响单量排序，预计综合可挽回 <b style="color:var(--accent-emerald)">23~37 单/期</b>（挽回率提升 9~14pp）。
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-grid">
+      <!-- Solution 1 -->
+      <div class="solution-card">
+        <div class="solution-card-header">
+          <div class="solution-icon" style="background:rgba(251,113,133,0.15)">🧒</div>
+          <div>
+            <div class="solution-card-title">问题1：孩子不想学 / 抵触</div>
+            <span class="solution-card-tag" style="background:var(--danger-soft);color:var(--accent-rose)">影响 19单 · 优先级 P0</span>
+          </div>
+        </div>
+        <div class="solution-card-body">
+          <b style="color:var(--text-primary)">根因：</b>家长冲动下单后回去与孩子沟通，孩子对编程无感或抵触。核心矛盾是<em>购买决策者(家长)</em>和<em>使用者(孩子)</em>分离。
+          <ul style="margin-top:10px">
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">用户试听课：</b>提供正式开课前的试听课机会，让孩子实际体验课堂内容和教学方式，由「家长替孩子决策」转变为「孩子自己感受后再决定」，降低决策盲区</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">家长课堂：</b>开设家长同步课堂，帮助家长理解编程学习的价值和阶段性特点，学会如何引导孩子度过初期抵触期，建立合理预期</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">黄金24h触达：</b>下单后1小时内发送「给孩子看的趣味编程视频」，让孩子先对编程产生好奇心</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">客服话术升级：</b>当家长说「孩子不想学」时，不要直接劝阻，而是引导家长带孩子先试听一节课，用实际体验替代口头说服</li>
+          </ul>
+          <div class="metric">
+            <span class="metric-label">预期可挽回</span>
+            <span class="metric-value" style="color:var(--accent-emerald)">~10 单/期</span>
+            <span class="metric-label" style="margin-left:4px">（约50%挽回率）</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solution 2 -->
+      <div class="solution-card">
+        <div class="solution-card-header">
+          <div class="solution-icon" style="background:rgba(251,191,36,0.15)">📵</div>
+          <div>
+            <div class="solution-card-title">问题2：失联 / 拒绝沟通</div>
+            <span class="solution-card-tag" style="background:var(--warning-soft);color:var(--accent-amber)">影响 19单 · 优先级 P0</span>
+          </div>
+        </div>
+        <div class="solution-card-body">
+          <b style="color:var(--text-primary)">根因：</b>失联12单+拒绝沟通5单+用户拒绝沟通2单=19单。用户下单后首联失败或拒接电话，挽单3次未接通是常见描述。
+          <ul style="margin-top:10px">
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">极速首联(≤5min)：</b>下单后5分钟内必须完成首次触达，用企微而非电话，降低用户拒接心理</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">多渠道触达矩阵：</b>企微消息(即时) → 短信(10min) → 电话(30min)，三管齐下</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">自动化预热消息：</b>下单成功后自动发送企微消息：课程预热资料+班主任自我介绍+学习规划，建立信任感</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">错峰联系策略：</b>首联未接通后，根据下单时间推算活跃时段，错峰二次联系</li>
+          </ul>
+          <div class="metric">
+            <span class="metric-label">预期可挽回</span>
+            <span class="metric-value" style="color:var(--accent-emerald)">6~10 单/期</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solution 3 -->
+      <div class="solution-card">
+        <div class="solution-card-header">
+          <div class="solution-icon" style="background:rgba(56,189,248,0.15)">⏰</div>
+          <div>
+            <div class="solution-card-title">问题3：等班期久 / 开课时间晚</div>
+            <span class="solution-card-tag" style="background:rgba(56,189,248,0.12);color:var(--accent-sky)">影响 9单 · 优先级 P1</span>
+          </div>
+        </div>
+        <div class="solution-card-body">
+          <b style="color:var(--text-primary)">根因：</b>下单后发现要等很久才开课，热情冷却，用户耐心临界点约在 3~7 天，超过两周基本守不住。
+          <ul style="margin-top:10px">
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">硬性控制等班期 ≤ 2周：</b>这是最直接的治本方案。数据显示等班期退费集中在 24h~7d 档位（7单），说明家长的耐心窗口极短，等班期超过两周用户信心衰减严重</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">弹性开班机制：</b>当报名人数达到开班门槛的 80% 时即可提前开班，不必等满额；同时预留多个平行班次，缩短排队等待</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">班期提前透明化：</b>直播间下单前明确告知预计开课时间，设定合理预期，避免下单后才发现要等很久</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">等待期保温动作：</b>在等班期内每3天推送一次课程预热内容（编程趣味视频、学员案例），防止用户在等待中完全失去联系</li>
+          </ul>
+          <div class="metric">
+            <span class="metric-label">预期可挽回</span>
+            <span class="metric-value" style="color:var(--accent-emerald)">5~7 单/期</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solution 4 -->
+      <div class="solution-card">
+        <div class="solution-card-header">
+          <div class="solution-icon" style="background:rgba(167,139,250,0.15)">📚</div>
+          <div>
+            <div class="solution-card-title">问题4：学习压力大 / 没时间</div>
+            <span class="solution-card-tag" style="background:rgba(167,139,250,0.12);color:var(--accent-violet)">影响 17单 · 优先级 P1</span>
+          </div>
+        </div>
+        <div class="solution-card-body">
+          <b style="color:var(--text-primary)">根因：</b>学习压力大10单+没时间上课7单=17单。家长核心顾虑是孩子课业负担已重，编程课成为「额外压力」。
+          <ul style="margin-top:10px">
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">弹性学习方案：</b>提供「轻负担」学习计划，强调每周只需2小时+可调节进度</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">场景化价值传递：</b>不说「学编程」，说「培养逻辑思维能力，帮助数学提分」，将编程和学科关联</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">延期/暂停机制：</b>提供课程延期选项（如暂停1个月再续），将「退费」转为「暂停」</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">假期加速班：</b>为时间紧张的用户提供寒暑假集中学习方案</li>
+          </ul>
+          <div class="metric">
+            <span class="metric-label">预期可挽回</span>
+            <span class="metric-value" style="color:var(--accent-emerald)">4~6 单/期</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solution 5 -->
+      <div class="solution-card full-width">
+        <div class="solution-card-header">
+          <div class="solution-icon" style="background:rgba(251,146,60,0.15)">⚡</div>
+          <div>
+            <div class="solution-card-title">问题5：秒拍秒退 + 冲动消费（0~1h退费）</div>
+            <span class="solution-card-tag" style="background:rgba(251,146,60,0.12);color:var(--accent-orange)">影响 10单 · 优先级 P2</span>
+          </div>
+        </div>
+        <div class="solution-card-body">
+          <b style="color:var(--text-primary)">根因：</b>0~5分钟(5单)+5分钟~1小时(5单)=10单。纯直播氛围驱动的冲动消费，下单即后悔。
+          <ul style="margin-top:10px">
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">直播间下单确认机制：</b>下单页增加「课程核心信息确认」弹窗（开课时间、课程内容、适合年龄），减少误拍</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">秒拍自动触发快速客服：</b>下单后30秒内自动推送企微消息：「恭喜报名成功！我是您的专属班主任XX，有任何疑问随时问我」</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">直播话术优化：</b>在催单话术中加入更多课程实际内容展示，让用户基于价值而非焦虑下单</li>
+          </ul>
+          <div class="metric">
+            <span class="metric-label">预期可挽回</span>
+            <span class="metric-value" style="color:var(--accent-emerald)">2~4 单/期</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 总结行动计划 -->
+    <div class="section" style="margin-top:28px">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(34,197,94,0.15)">✅</div>
+        <div class="section-title">落地优先级 & 预期收益</div>
+      </div>
+      <div class="chart-box">
+        <table class="data-table">
+          <thead>
+            <tr><th>优先级</th><th>策略</th><th>针对问题</th><th>影响单量</th><th>预计挽回</th><th>实施难度</th><th>建议时间线</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="kpi-tag danger">P0</span></td>
+              <td style="font-weight:600">极速首联 + 多渠道触达</td>
+              <td>失联 / 拒绝沟通</td>
+              <td class="num">19</td>
+              <td class="num" style="color:var(--accent-emerald)">6~10</td>
+              <td><span class="kpi-tag success">低</span></td>
+              <td class="pct">1~2 周</td>
+            </tr>
+            <tr>
+              <td><span class="kpi-tag danger">P0</span></td>
+              <td style="font-weight:600">用户试听课 + 家长课堂</td>
+              <td>孩子不想学</td>
+              <td class="num">19</td>
+              <td class="num" style="color:var(--accent-emerald)">~10</td>
+              <td><span class="kpi-tag warning">中</span></td>
+              <td class="pct">2~4 周</td>
+            </tr>
+            <tr>
+              <td><span class="kpi-tag warning">P1</span></td>
+              <td style="font-weight:600">等班期控制在两周</td>
+              <td>等班期久</td>
+              <td class="num">9</td>
+              <td class="num" style="color:var(--accent-emerald)">5~7</td>
+              <td><span class="kpi-tag warning">中</span></td>
+              <td class="pct">2~3 周</td>
+            </tr>
+            <tr>
+              <td><span class="kpi-tag warning">P1</span></td>
+              <td style="font-weight:600">弹性学习方案 + 延期机制</td>
+              <td>学习压力 / 没时间</td>
+              <td class="num">17</td>
+              <td class="num" style="color:var(--accent-emerald)">4~6</td>
+              <td><span class="kpi-tag danger">高</span></td>
+              <td class="pct">3~4 周</td>
+            </tr>
+            <tr>
+              <td><span class="kpi-tag" style="background:rgba(251,146,60,0.12);color:var(--accent-orange)">P2</span></td>
+              <td style="font-weight:600">下单确认机制 + 直播话术优化</td>
+              <td>秒拍秒退</td>
+              <td class="num">10</td>
+              <td class="num" style="color:var(--accent-emerald)">2~4</td>
+              <td><span class="kpi-tag success">低</span></td>
+              <td class="pct">1 周</td>
+            </tr>
+            <tr style="background:rgba(34,197,94,0.05)">
+              <td colspan="3" style="font-weight:700;text-align:right">合计</td>
+              <td class="num">74</td>
+              <td class="num" style="color:var(--accent-emerald);font-size:16px">23~37</td>
+              <td colspan="2" style="color:var(--text-muted);font-size:12px">退费率可降至 48%~54%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- B直播间专项 -->
+    <div class="section" style="margin-top:28px">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(251,113,133,0.15)">🅱️</div>
+        <div class="section-title">B直播间专项改善方案</div>
+        <div class="section-desc">退费率 71.0% — 需重点治理</div>
+      </div>
+      <div class="chart-box" style="border-left: 3px solid var(--accent-rose);">
+        <div class="solution-card-body">
+          <ul>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">主播话术复盘：</b>对比A间话术，B间可能过于强调限时优惠而忽视课程价值传递，建议引入A间效果较好的内容讲解环节</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">客服响应提速：</b>B间失联率最高(7单)，建议为B间配置专属快响应客服团队，目标首联时间≤5分钟</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">用户画像筛选：</b>分析B间高质量用户特征，优化投放人群定向，减少低意向流量进入</li>
+            <li style="color:var(--text-secondary)"><b style="color:var(--text-primary)">AB对照实验：</b>下一期在B间试行上述优化措施，与A间做对照，量化改善效果</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== Tab switching =====
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// ===== Chart defaults =====
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+Chart.defaults.font.family = "'DM Sans', 'Noto Sans SC', sans-serif";
+Chart.defaults.font.size = 12;
+Chart.register(ChartDataLabels);
+
+const noLabel = { plugins: { datalabels: { display: false } } };
+
+// ===== Valid order composition donut =====
+new Chart(document.getElementById('chart-valid-compose'), {
+  type: 'doughnut',
+  data: {
+    labels: ['在班用户', '有效退费'],
+    datasets: [{
+      data: [95, 86],
+      backgroundColor: ['#34d399', '#a78bfa'],
+      borderWidth: 0,
+      hoverOffset: 10,
+    }]
+  },
+  options: {
+    cutout: '62%',
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { size: 13 } } },
+      datalabels: {
+        color: '#f1f5f9',
+        font: { weight: 'bold', size: 16 },
+        formatter: (v, ctx) => {
+          const total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+          return v + '\n' + (v/total*100).toFixed(1) + '%';
+        },
+        textAlign: 'center',
+      }
+    }
+  }
+});
+
+// ===== Valid order by room =====
+new Chart(document.getElementById('chart-valid-room'), {
+  type: 'bar',
+  data: {
+    labels: ['A 直播间', 'B 直播间', '视频号'],
+    datasets: [
+      { label: '在班', data: [41, 31, 22], backgroundColor: '#34d399', borderRadius: 6, barPercentage: 0.6 },
+      { label: '有效退费', data: [26, 40, 20], backgroundColor: '#a78bfa', borderRadius: 6, barPercentage: 0.6 },
+    ]
+  },
+  options: {
+    plugins: {
+      legend: { labels: { usePointStyle: true, pointStyle: 'circle' } },
+      datalabels: {
+        color: '#f1f5f9',
+        font: { weight: 'bold', size: 12 },
+        formatter: v => v,
+      }
+    },
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, beginAtZero: true, grid: { color: 'rgba(255,255,255,0.04)' },
+        ticks: {
+          callback: function(v) { return v; }
+        }
+      }
+    }
+  }
+});
+
+// ===== Invalid orders donut =====
+new Chart(document.getElementById('chart-invalid'), {
+  type: 'doughnut',
+  data: {
+    labels: ['异常', '虚拟号', '内测', '在读用户', '跳级退费', '重新下单'],
+    datasets: [{
+      data: [34, 19, 10, 7, 4, 1],
+      backgroundColor: ['#fb7185','#fbbf24','#38bdf8','#a78bfa','#34d399','#64748b'],
+      borderWidth: 0,
+      hoverOffset: 8,
+    }]
+  },
+  options: {
+    cutout: '62%',
+    plugins: {
+      legend: { position: 'right', labels: { padding: 12, usePointStyle: true, pointStyle: 'circle' } },
+      datalabels: {
+        color: '#f1f5f9',
+        font: { weight: 'bold', size: 13 },
+        formatter: (v, ctx) => v >= 5 ? v : '',
+      }
+    }
+  }
+});
+
+// ===== Refund reasons bar =====
+new Chart(document.getElementById('chart-reasons'), {
+  type: 'bar',
+  data: {
+    labels: ['孩子不想学','失联','学习压力大','等班期久','拒绝沟通','报其他机构','秒拍秒退','未知','课程难度大','用户服务体验差'],
+    datasets: [{
+      data: [19,12,10,9,5,5,4,4,3,3],
+      backgroundColor: ctx => {
+        const colors = ['#fb7185','#fbbf24','#a78bfa','#38bdf8','#818cf8','#fb923c','#f87171','#64748b','#34d399','#e879f9'];
+        return colors[ctx.dataIndex] || '#64748b';
+      },
+      borderRadius: 6,
+      barThickness: 28,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        color: '#f1f5f9', font: { weight: 'bold' },
+      }
+    },
+    scales: {
+      x: { display: false, max: 24 },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// ===== Reason groups pie =====
+new Chart(document.getElementById('chart-reason-group'), {
+  type: 'doughnut',
+  data: {
+    labels: [
+      '课程价值认知不足\n(孩子不想学+压力大+难度+不匹配)',
+      '触达失败\n(失联+拒绝沟通)',
+      '运营问题\n(等班期久+没时间)',
+      '冲动消费\n(秒拍秒退)',
+      '竞品分流\n(报其他机构)',
+      '其他'
+    ],
+    datasets: [{
+      data: [28, 19, 16, 4, 5, 14],
+      backgroundColor: ['#fb7185','#fbbf24','#38bdf8','#fb923c','#a78bfa','#475569'],
+      borderWidth: 0,
+      hoverOffset: 8,
+    }]
+  },
+  options: {
+    cutout: '55%',
+    plugins: {
+      legend: { position: 'right', labels: { padding: 10, usePointStyle: true, pointStyle: 'circle', font: { size: 11 } } },
+      datalabels: {
+        color: '#f1f5f9',
+        font: { weight: 'bold', size: 13 },
+        formatter: (v) => v >= 5 ? v : '',
+      }
+    }
+  }
+});
+
+// ===== Reason x Tier Table =====
+const reasonTierData = [
+  { name: '孩子不想学', tiers: [0,1,1,8,9], color: '#fb7185' },
+  { name: '失联', tiers: [0,3,1,1,0], color: '#fbbf24' },
+  { name: '学习压力大', tiers: [0,0,1,2,3], color: '#a78bfa' },
+  { name: '等班期久', tiers: [0,0,1,7,1], color: '#38bdf8' },
+  { name: '拒绝沟通', tiers: [1,0,0,3,1], color: '#818cf8' },
+  { name: '报其他机构', tiers: [0,1,1,2,1], color: '#fb923c' },
+  { name: '秒拍秒退', tiers: [4,0,0,0,0], color: '#f87171' },
+  { name: '没时间上课', tiers: [0,0,1,3,3], color: '#34d399' },
+  { name: '课程难度大', tiers: [0,0,2,1,0], color: '#e879f9' },
+  { name: '用户服务体验差', tiers: [0,0,0,1,2], color: '#f472b6' },
+];
+const tbody = document.getElementById('reason-tier-table');
+reasonTierData.forEach(r => {
+  const total = r.tiers.reduce((a,b)=>a+b,0);
+  const pct = (total/86*100).toFixed(1);
+  const maxTier = Math.max(...r.tiers);
+  const barHtml = r.tiers.map((v,i) => {
+    const w = maxTier > 0 ? (v/maxTier*100) : 0;
+    return `<span style="display:inline-block;width:${Math.max(w,4)}%;height:6px;border-radius:3px;background:${r.color};opacity:${v>0?0.3+v/maxTier*0.7:0.1};margin-right:2px" title="${v}"></span>`;
+  }).join('');
+  tbody.innerHTML += `<tr>
+    <td style="font-weight:600;white-space:nowrap"><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:${r.color};margin-right:8px"></span>${r.name}</td>
+    <td class="num">${r.tiers[0]||'-'}</td>
+    <td class="num">${r.tiers[1]||'-'}</td>
+    <td class="num">${r.tiers[2]||'-'}</td>
+    <td class="num">${r.tiers[3]||'-'}</td>
+    <td class="num">${r.tiers[4]||'-'}</td>
+    <td class="num" style="font-size:15px">${total}</td>
+    <td class="pct">${pct}%</td>
+    <td style="min-width:120px">${barHtml}</td>
+  </tr>`;
+});
+
+// ===== Room reasons grouped bar =====
+new Chart(document.getElementById('chart-room-reasons'), {
+  type: 'bar',
+  data: {
+    labels: ['孩子不想学','失联','学习压力大','等班期久','拒绝沟通'],
+    datasets: [
+      { label: 'A 直播间', data: [4,3,4,3,3], backgroundColor: '#38bdf8', borderRadius: 4, barPercentage: 0.7 },
+      { label: 'B 直播间', data: [9,7,6,4,1], backgroundColor: '#fb7185', borderRadius: 4, barPercentage: 0.7 },
+      { label: '视频号', data: [6,2,0,2,1], backgroundColor: '#fbbf24', borderRadius: 4, barPercentage: 0.7 },
+    ]
+  },
+  options: {
+    plugins: {
+      legend: { labels: { usePointStyle: true, pointStyle: 'circle' } },
+      datalabels: { display: false }
+    },
+    scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.04)' } }, x: { grid: { display: false } } }
+  }
+});
+
+// ===== Room structure stacked bar =====
+new Chart(document.getElementById('chart-room-structure'), {
+  type: 'bar',
+  data: {
+    labels: ['A 直播间', 'B 直播间', '视频号'],
+    datasets: [
+      { label: '在班', data: [41,31,22], backgroundColor: '#34d399', borderRadius: 4 },
+      { label: '有效退费', data: [26,40,20], backgroundColor: '#a78bfa', borderRadius: 4 },
+      { label: '无效退费', data: [28,36,11], backgroundColor: '#64748b', borderRadius: 4 },
+    ]
+  },
+  options: {
+    plugins: {
+      legend: { labels: { usePointStyle: true, pointStyle: 'circle' } },
+      datalabels: {
+        color: '#f1f5f9', font: { weight: 'bold', size: 11 },
+        formatter: v => v > 5 ? v : ''
+      }
+    },
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' } }
+    }
+  }
+});
+
+// ===== Pay hours =====
+const payHourData = [2,1,0,0,0,0,4,8,20,27,19,22,18,18,12,19,9,4,7,9,19,16,11,11];
+new Chart(document.getElementById('chart-pay-hours'), {
+  type: 'bar',
+  data: {
+    labels: Array.from({length:24}, (_,i) => i + ':00'),
+    datasets: [{
+      data: payHourData,
+      backgroundColor: ctx => payHourData[ctx.dataIndex] >= 15 ? '#38bdf8' : 'rgba(56,189,248,0.3)',
+      borderRadius: 4,
+      barThickness: 16,
+    }]
+  },
+  options: {
+    ...noLabel,
+    plugins: { ...noLabel.plugins, legend: { display: false } },
+    scales: {
+      y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.04)' } },
+      x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 0 } }
+    }
+  }
+});
+
+// ===== Refund hours =====
+const refHourData = [3,0,0,0,1,0,1,3,6,15,10,10,12,8,8,15,8,8,8,6,12,11,13,3];
+new Chart(document.getElementById('chart-refund-hours'), {
+  type: 'bar',
+  data: {
+    labels: Array.from({length:24}, (_,i) => i + ':00'),
+    datasets: [{
+      data: refHourData,
+      backgroundColor: ctx => refHourData[ctx.dataIndex] >= 10 ? '#fb7185' : 'rgba(251,113,133,0.3)',
+      borderRadius: 4,
+      barThickness: 16,
+    }]
+  },
+  options: {
+    ...noLabel,
+    plugins: { ...noLabel.plugins, legend: { display: false } },
+    scales: {
+      y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.04)' } },
+      x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 0 } }
+    }
+  }
+});
+
+// ===== Daily trend =====
+const dates = ['02-26','02-27','02-28','03-01','03-02','03-03','03-04','03-05','03-06','03-07','03-08','03-09','03-10','03-11','03-12','03-13','03-14','03-15','03-16','03-17','03-18','03-19','03-20','03-21','03-22','03-23','03-24','03-26','03-27','03-28','03-29','03-30','03-31','04-01','04-02','04-03','04-04','04-05','04-06','04-07','04-08','04-09','04-10'];
+const payDaily = [7,13,8,6,9,9,11,13,11,3,15,8,9,4,4,9,7,10,5,2,5,8,3,5,5,3,3,4,3,6,3,8,4,2,2,4,3,5,4,8,4,0,0];
+const refDaily = [3,4,4,1,4,3,5,5,4,4,8,4,3,7,4,5,6,1,6,3,2,4,3,2,4,4,5,3,4,1,3,4,6,6,0,2,3,1,3,5,0,4,5];
+
+new Chart(document.getElementById('chart-daily-trend'), {
+  type: 'line',
+  data: {
+    labels: dates,
+    datasets: [
+      {
+        label: '下单量',
+        data: payDaily,
+        borderColor: '#38bdf8',
+        backgroundColor: 'rgba(56,189,248,0.08)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 2,
+        pointHoverRadius: 5,
+        borderWidth: 2,
+      },
+      {
+        label: '退费量',
+        data: refDaily,
+        borderColor: '#fb7185',
+        backgroundColor: 'rgba(251,113,133,0.06)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 2,
+        pointHoverRadius: 5,
+        borderWidth: 2,
+      }
+    ]
+  },
+  options: {
+    ...noLabel,
+    plugins: { ...noLabel.plugins, legend: { labels: { usePointStyle: true, pointStyle: 'circle' } } },
+    scales: {
+      y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.04)' } },
+      x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 45 } }
+    },
+    interaction: { mode: 'index', intersect: false },
+  }
+});
+</script>
+</body>
+</html>
