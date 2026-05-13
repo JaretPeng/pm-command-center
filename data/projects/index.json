@@ -15,9 +15,15 @@
       "riskLevel": "medium",
       "owner": "张 PM",
       "startDate": "2025-03-01",
-      "milestoneCount": 6,
+      "milestoneCount": 8,
       "blockerCount": 2,
-      "tags": ["C++", "信奥", "OJ", "LTV", "跨部门"],
+      "tags": [
+        "C++",
+        "信奥",
+        "OJ",
+        "LTV",
+        "跨部门"
+      ],
       "health": "good",
       "delayed": false,
       "highPriority": true
@@ -35,7 +41,13 @@
       "startDate": "2025-06-15",
       "milestoneCount": 11,
       "blockerCount": 1,
-      "tags": ["社区", "商城", "IDE", "自动化", "素材库"],
+      "tags": [
+        "社区",
+        "商城",
+        "IDE",
+        "自动化",
+        "素材库"
+      ],
       "health": "excellent",
       "delayed": false,
       "highPriority": false

@@ -2,7 +2,14 @@ import "server-only";
 
 import { promises as fs } from "fs";
 import path from "path";
-import type { ProjectDetail, ProjectIndexFile, ProjectSummary } from "@/types/domain";
+import type {
+  MetricSeries,
+  Milestone,
+  ProjectDetail,
+  ProjectIndexFile,
+  ProjectSummary,
+  TeamMember,
+} from "@/types/domain";
 
 const DATA_DIR = path.join(process.cwd(), "data", "projects");
 
@@ -28,18 +35,108 @@ function isProjectDetailRecord(
   return typeof slug === "string" && slug === expectedSlug;
 }
 
-/** 开发模式下禁用缓存，避免改 JSON / 媒体后仍读到旧数据 */
-const isDev = process.env.NODE_ENV === "development";
+function asArray<T>(v: unknown): T[] {
+  return Array.isArray(v) ? (v as T[]) : [];
+}
 
-let indexCache: ProjectIndexFile | null = null;
-const projectCache = new Map<string, ProjectDetail>();
+function asStringArray(v: unknown): string[] {
+  return Array.isArray(v)
+    ? (v.filter((x) => typeof x === "string") as string[])
+    : [];
+}
+
+/** 归一化 JSON：任意列表字段为 null/缺失时，避免 Tab SSR 上 `.map` / `.reduce` 抛错 → Internal Server Error */
+function normalizeProjectDetail(raw: ProjectDetail): ProjectDetail {
+  const p: ProjectDetail = { ...raw };
+  p.tags = asStringArray(p.tags);
+  p.retrospectives = asArray(p.retrospectives);
+  p.background = asStringArray(p.background);
+  p.objectives = asStringArray(p.objectives);
+  p.keyOutcomes = asStringArray(p.keyOutcomes);
+  p.documents = asArray(p.documents);
+  p.risks = asArray(p.risks);
+  p.milestones = asArray<Milestone>(p.milestones).map((m) => ({
+    ...m,
+    modules: asStringArray(m.modules),
+  }));
+  p.gantt = asArray(p.gantt);
+  p.team = asArray<TeamMember>(p.team).map((m) => ({
+    ...m,
+    modules: asStringArray(m.modules),
+    deliverables: asStringArray(m.deliverables),
+  }));
+  p.valueProps = asArray(p.valueProps);
+  if (p.heroNarrative != null && !Array.isArray(p.heroNarrative)) {
+    delete (p as { heroNarrative?: unknown }).heroNarrative;
+  }
+  if (p.heroCurriculumStrip && typeof p.heroCurriculumStrip === "object") {
+    p.heroCurriculumStrip = {
+      ...p.heroCurriculumStrip,
+      modules: asArray(p.heroCurriculumStrip.modules),
+    };
+  }
+  const m = p.metrics;
+  if (m && typeof m === "object" && !Array.isArray(m)) {
+    p.metrics = {
+      kpis: asArray(m.kpis),
+      series: asArray<MetricSeries>(m.series).map((s) => ({
+        ...s,
+        data: asArray(s.data),
+      })),
+    };
+  } else {
+    p.metrics = { kpis: [], series: [] };
+  }
+  const st = p.structure;
+  if (st && typeof st === "object" && !Array.isArray(st)) {
+    p.structure = {
+      nodes: asArray(st.nodes),
+      edges: asArray(st.edges),
+    };
+  } else {
+    p.structure = { nodes: [], edges: [] };
+  }
+  if (p.deepDive && typeof p.deepDive === "object") {
+    const d = p.deepDive;
+    p.deepDive = {
+      ...d,
+      timeline: asArray(d.timeline),
+      solution: asStringArray(d.solution),
+      metrics:
+        d.metrics != null && Array.isArray(d.metrics)
+          ? asStringArray(d.metrics)
+          : undefined,
+      fishbone:
+        d.fishbone && typeof d.fishbone === "object"
+          ? {
+              ...d.fishbone,
+              branches: asArray(d.fishbone.branches),
+            }
+          : { problemStatement: "", branches: [] },
+    };
+  }
+  if (p.operationScheme != null && typeof p.operationScheme === "object") {
+    p.operationScheme = {
+      ...p.operationScheme,
+      sections: asArray(p.operationScheme.sections),
+    };
+  }
+  return p;
+}
+
+function normalizeProjectIndexFile(raw: ProjectIndexFile): ProjectIndexFile {
+  return {
+    ...raw,
+    projects: raw.projects.map((s) => ({
+      ...s,
+      tags: asStringArray(s.tags),
+    })),
+  };
+}
 
 export async function loadProjectIndex(): Promise<ProjectIndexFile> {
-  if (!isDev && indexCache) return indexCache;
   const raw = await fs.readFile(path.join(DATA_DIR, "index.json"), "utf-8");
-  const parsed = JSON.parse(raw) as ProjectIndexFile;
-  if (!isDev) indexCache = parsed;
-  return parsed;
+  return normalizeProjectIndexFile(JSON.parse(raw) as ProjectIndexFile);
 }
 
 export async function loadProjectSummaries(): Promise<ProjectSummary[]> {
@@ -51,9 +148,6 @@ export async function loadProjectBySlug(
   slug: string,
 ): Promise<ProjectDetail | null> {
   if (!isSafeProjectSlug(slug)) return null;
-  if (!isDev && projectCache.has(slug)) {
-    return projectCache.get(slug)!;
-  }
   try {
     const raw = await fs.readFile(
       path.join(DATA_DIR, `${slug}.json`),
@@ -61,8 +155,7 @@ export async function loadProjectBySlug(
     );
     const parsed: unknown = JSON.parse(raw);
     if (!isProjectDetailRecord(parsed, slug)) return null;
-    if (!isDev) projectCache.set(slug, parsed);
-    return parsed;
+    return normalizeProjectDetail(parsed as ProjectDetail);
   } catch {
     return null;
   }

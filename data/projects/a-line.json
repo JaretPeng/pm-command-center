@@ -11,9 +11,15 @@
   "startDate": "2025-03-01",
   "endDate": "2026-08-30",
   "version": "Roadmap 2026",
-  "milestoneCount": 6,
+  "milestoneCount": 8,
   "blockerCount": 2,
-  "tags": ["C++", "信奥", "OJ", "LTV", "跨部门"],
+  "tags": [
+    "C++",
+    "信奥",
+    "OJ",
+    "LTV",
+    "跨部门"
+  ],
   "health": "good",
   "delayed": false,
   "highPriority": true,
@@ -27,36 +33,74 @@
     "risk": 0
   },
   "heroNarrative": [
-    "A线是面向小学高年级到初中的 C++ 赛考课程线，核心服务强升学需求学员。项目在 2024–2026 年间逐步完成从老 A+ 线试水、A 零基础线直售，到 C 线转 A、加入硬件课和 A+ 非零基础线等关键里程碑搭建。",
-    "目前已形成 A1–A8 及 A+1 的完整产品体系，配套纸质/电子手册、硬件和多套算法思维录播课。同时在搭建 OJ 平台和升学/赛考配套服务，强化「专业信奥培训」品牌与长期竞赛升学能力储备。",
+    "A线是面向小学高年级到初中的 C++ 赛考课程线，核心服务强升学需求学员。项目在 2024–2026 年间逐步完成从老 A+ 线试水、A 零基础线直售，到 C 线转 A、加入硬件课和 A+ 非零基础线等关键里程碑搭建。目前已形成 A1–A8 及 A+1 的完整产品体系，配套纸质/电子手册、硬件和多套算法思维录播课。同时在搭建 OJ 平台和升学/赛考配套服务，强化「专业信奥培训」品牌与长期竞赛升学能力储备。",
     "在大课直售、C 线扩科/转线、带新等渠道基础上，A0 上线后，需验证 A 线的 ROI 可行性和生源稳定性。"
   ],
   "heroCurriculumStrip": {
     "title": "高级算法",
     "moreLabel": "MORE",
     "modules": [
-      { "code": "A1", "line1": "语法入门", "line2": "与程序结构", "icon": "terminal" },
-      { "code": "A2", "line1": "语法进阶", "line2": "与基础算法", "icon": "code" },
-      { "code": "A3", "line1": "数据结构", "line2": "与高级算法", "icon": "trendingUp" },
-      { "code": "A4", "line1": "算法设计", "line2": "与程序优化", "icon": "box" },
-      { "code": "A5", "line1": "算法应用强化", "icon": "box" },
-      { "code": "A6", "line1": "高级算法进阶", "icon": "trendingUp" },
-      { "code": "A7", "line1": "图论算法", "line2": "与数据结构优化", "icon": "fileText" },
-      { "code": "A8", "line1": "问题建模", "line2": "与求解策略", "icon": "helpCircle" }
+      {
+        "code": "A1",
+        "line1": "语法入门",
+        "line2": "与程序结构",
+        "icon": "terminal"
+      },
+      {
+        "code": "A2",
+        "line1": "语法进阶",
+        "line2": "与基础算法",
+        "icon": "code"
+      },
+      {
+        "code": "A3",
+        "line1": "数据结构",
+        "line2": "与高级算法",
+        "icon": "trendingUp"
+      },
+      {
+        "code": "A4",
+        "line1": "算法设计",
+        "line2": "与程序优化",
+        "icon": "box"
+      },
+      {
+        "code": "A5",
+        "line1": "算法应用强化",
+        "icon": "box"
+      },
+      {
+        "code": "A6",
+        "line1": "高级算法进阶",
+        "icon": "trendingUp"
+      },
+      {
+        "code": "A7",
+        "line1": "图论算法",
+        "line2": "与数据结构优化",
+        "icon": "fileText"
+      },
+      {
+        "code": "A8",
+        "line1": "问题建模",
+        "line2": "与求解策略",
+        "icon": "helpCircle"
+      }
     ]
   },
   "executiveSummary": "围绕 C++ 赛道占位与信奥路径建设，联动课程、OJ、运营与供应链，构建长期竞争壁垒与品牌心智。",
   "objectives": [
-    "抢占 C++ 核心赛道",
-    "建立教学与测评一体化的 OJ 护城河",
-    "提升用户 LTV 与续报结构",
-    "构建信奥赛考路径与专业品牌形象",
-    "沉淀跨部门协同机制与经营复盘体系"
+    "1. 抢占 C++ 赛道市场\n\n扩大高年级及初中用户规模，建立市场防御壁垒。",
+    "2. 打通赛考升学路径\n\n构建 GESP → CSP-J → CSP-S → NOI 的完整成长体系。",
+    "3. 提升经营收益\n\n提高用户 LTV 和整体 ROI，实现持续盈利。",
+    "4. 打造专业信奥品牌\n\n通过课程、赛事、OJ 平台和升学服务，建立专业化口碑。"
   ],
   "background": [
-    "A 线定位为小学高年级至初中的 C++ 赛考课程线，承接强升学与竞赛路径诉求；项目处于体系化落地阶段，需要以产品线视角统筹课程、OJ、运营与供应链，形成可持续迭代的增长飞轮。",
-    "产品侧已形成 A1–A8 与 A+ 等班型矩阵，配套纸质/电子手册、硬件与录播课；同步建设 OJ 平台与赛考配套服务，强化「专业信奥培训」品牌与长期竞赛升学能力储备。",
-    "本总览用于对齐跨团队里程碑与经营指标：背景与目标对应 Hero 叙事与执行摘要，成果与结构图（可隐藏）支撑指挥塔决策；若需替换为 PDF/石墨原文，可直接改写本字段。"
+    "A线项目的启动，源于市场、竞争、用户需求和商业价值的多重驱动。项目围绕 C++课程研发、教学资料制作、运营策略设计、OJ平台建设、供应链交付及商业模型验证 等多个模块展开，是公司在高年级用户市场的重要战略布局。",
+    "1. 行业机会\n近两年，GESP、CSP-J/S 等信息学赛事热度快速上升，家长对「编程助力升学」的认知显著增强，推动 C++ 培训需求快速增长。",
+    "2. 竞争压力\n主要竞品核桃编程已形成成熟的 C++ 与信奥体系，在读学员规模达 2.5–3 万人，并通过 OJ 平台、赛事运营、升学服务构建强竞争壁垒。",
+    "3. 内部基础成熟\n公司已有约 6000 名 C++ 在读学员，并具备课程研发、教学教研和高年级用户需求基础。",
+    "4. 经营测算可行\n• A1→A2 及后续阶段 ROI 可实现正向；\n• 用户生命周期价值（LTV）可提升；\n• 项目具备明确盈利能力。"
   ],
   "valueProps": [
     {
@@ -76,89 +120,177 @@
     }
   ],
   "keyOutcomes": [
-    "完成阶段性课程体系与关键班型上线",
-    "OJ 平台核心能力与题库策略落地",
-    "运营打法与班主任链路闭环",
-    "供应链与履约效率指标达标"
+    "1. 完整课程产品成功落地\n\n从课程设计、定价、资料到排课实现全链路搭建。",
+    "2. OJ平台建设启动\n\n打造学员练习、周赛、模拟赛及留存运营的重要基础设施。",
+    "3. 多部门协同机制建立\n\n整合产研、教研、运营、供应链、直销及经营分析等十余个团队。",
+    "4. 信奥品牌能力升级\n\n构建从课程到赛事再到升学规划的完整服务体系。"
   ],
   "structure": {
     "nodes": [
-      { "id": "n1", "label": "战略布局", "sublabel": "经营分析" },
-      { "id": "n2", "label": "课程体系", "sublabel": "教研" },
-      { "id": "n3", "label": "OJ 平台", "sublabel": "产品/研发" },
-      { "id": "n4", "label": "运营方案", "sublabel": "增长/班主任" },
-      { "id": "n5", "label": "供应链", "sublabel": "履约" },
-      { "id": "n6", "label": "品牌与路径", "sublabel": "市场/赛事" }
+      {
+        "id": "n1",
+        "label": "战略布局",
+        "sublabel": "经营分析"
+      },
+      {
+        "id": "n2",
+        "label": "课程体系",
+        "sublabel": "教研"
+      },
+      {
+        "id": "n3",
+        "label": "OJ 平台",
+        "sublabel": "产品/研发"
+      },
+      {
+        "id": "n4",
+        "label": "运营方案",
+        "sublabel": "增长/班主任"
+      },
+      {
+        "id": "n5",
+        "label": "供应链",
+        "sublabel": "履约"
+      },
+      {
+        "id": "n6",
+        "label": "品牌与路径",
+        "sublabel": "市场/赛事"
+      }
     ],
     "edges": [
-      { "from": "n1", "to": "n2" },
-      { "from": "n1", "to": "n3" },
-      { "from": "n2", "to": "n4" },
-      { "from": "n3", "to": "n4" },
-      { "from": "n4", "to": "n5" },
-      { "from": "n2", "to": "n6" }
+      {
+        "from": "n1",
+        "to": "n2"
+      },
+      {
+        "from": "n1",
+        "to": "n3"
+      },
+      {
+        "from": "n2",
+        "to": "n4"
+      },
+      {
+        "from": "n3",
+        "to": "n4"
+      },
+      {
+        "from": "n4",
+        "to": "n5"
+      },
+      {
+        "from": "n2",
+        "to": "n6"
+      }
     ]
   },
   "milestones": [
     {
-      "id": "m1",
-      "name": "战略里程碑：赛道占位评审",
-      "owner": "经营分析",
-      "dueDate": "2025-04-15",
+      "id": "m-al-01",
+      "name": "老A+线开课",
+      "owner": "A线产品",
+      "dueDate": "2024-05-01",
       "status": "done",
       "risk": "low",
-      "modules": ["战略", "经分"],
-      "description": "完成赛道机会评估与资源投入边界。"
+      "modules": [
+        "A+",
+        "课程"
+      ],
+      "description": "时间线：2024.05。老 A+ 线正式开课，启动高年级 C++ 信奥方向试水。"
     },
     {
-      "id": "m2",
-      "name": "课程体系 v1 冻结",
-      "owner": "教研负责人",
-      "dueDate": "2025-07-01",
+      "id": "m-al-02",
+      "name": "A+非零基础线开课",
+      "owner": "A线产品",
+      "dueDate": "2025-08-01",
       "status": "done",
-      "risk": "medium",
-      "modules": ["课程"],
-      "description": "主线课纲、难度梯度与评价口径对齐。"
+      "risk": "low",
+      "modules": [
+        "A+",
+        "课程"
+      ],
+      "description": "时间线：2025.08。面向具备基础的学员开设 A+ 非零基础线。"
     },
     {
-      "id": "m3",
-      "name": "OJ Alpha 内测",
-      "owner": "产品负责人",
-      "dueDate": "2025-09-20",
-      "status": "in_progress",
-      "risk": "medium",
-      "modules": ["OJ", "产品"],
-      "description": "核心评测、题库策略与稳定性验证。"
+      "id": "m-al-03",
+      "name": "A零基础线开课（直营）",
+      "owner": "A线产品",
+      "dueDate": "2025-09-01",
+      "status": "done",
+      "risk": "low",
+      "modules": [
+        "A线",
+        "直营"
+      ],
+      "description": "时间线：2025.09。A 零基础线直营班型开课。"
     },
     {
-      "id": "m4",
-      "name": "运营方案 Q4 落地",
-      "owner": "运营负责人",
-      "dueDate": "2025-11-30",
-      "status": "in_progress",
-      "risk": "high",
-      "modules": ["运营", "班主任"],
-      "description": "转化链路、活动矩阵与服务标准化。"
+      "id": "m-al-04",
+      "name": "C转A测试启动（C6/C7）",
+      "owner": "A线产品",
+      "dueDate": "2025-11-01",
+      "status": "done",
+      "risk": "low",
+      "modules": [
+        "C转A",
+        "测试"
+      ],
+      "description": "时间线：2025.11。在 C6/C7 等班型启动 C 线向 A 线转化测试。"
     },
     {
-      "id": "m5",
-      "name": "供应链峰值演练",
-      "owner": "供应链",
-      "dueDate": "2025-12-15",
-      "status": "planned",
-      "risk": "medium",
-      "modules": ["供应链"],
-      "description": "峰值履约、质检与风控演练。"
+      "id": "m-al-05",
+      "name": "C转A测试停止",
+      "owner": "A线产品",
+      "dueDate": "2026-01-01",
+      "status": "done",
+      "risk": "low",
+      "modules": [
+        "C转A",
+        "测试"
+      ],
+      "description": "时间线：2026.01。C 转 A 测试阶段结束，收敛结论与策略。"
     },
     {
-      "id": "m6",
-      "name": "赛事路径共建",
-      "owner": "教研 + 市场",
-      "dueDate": "2026-02-28",
+      "id": "m-al-06",
+      "name": "C入转A1启动售卖",
+      "owner": "A线产品",
+      "dueDate": "2026-03-01",
+      "status": "done",
+      "risk": "low",
+      "modules": [
+        "C转A",
+        "A1",
+        "售卖"
+      ],
+      "description": "时间线：2026.03。C 入口转 A1 路径正式对外开售。"
+    },
+    {
+      "id": "m-al-07",
+      "name": "A1 YBC硬件课上线",
+      "owner": "A线产品",
+      "dueDate": "2026-04-01",
+      "status": "done",
+      "risk": "low",
+      "modules": [
+        "A1",
+        "硬件",
+        "YBC"
+      ],
+      "description": "时间线：2026.04。A1 YBC 硬件课上线，与课程内容联动交付。"
+    },
+    {
+      "id": "m-al-08",
+      "name": "A0上线",
+      "owner": "A线产品",
+      "dueDate": "2026-07-01",
       "status": "planned",
       "risk": "low",
-      "modules": ["品牌", "教研"],
-      "description": "赛考路径地图与外部合作节奏。"
+      "modules": [
+        "A0",
+        "上线"
+      ],
+      "description": "时间线：2026.07。A0 产品/班型上线（规划中）。"
     }
   ],
   "timelineEmbed": {
@@ -184,7 +316,12 @@
       "start": "2025-05-01",
       "end": "2026-01-15",
       "progress": 55,
-      "dependencies": [{ "from": "g1", "to": "g2" }]
+      "dependencies": [
+        {
+          "from": "g1",
+          "to": "g2"
+        }
+      ]
     },
     {
       "id": "g3",
@@ -193,7 +330,12 @@
       "start": "2025-06-01",
       "end": "2026-03-01",
       "progress": 48,
-      "dependencies": [{ "from": "g1", "to": "g3" }]
+      "dependencies": [
+        {
+          "from": "g1",
+          "to": "g3"
+        }
+      ]
     },
     {
       "id": "g4",
@@ -202,7 +344,12 @@
       "start": "2025-07-01",
       "end": "2026-02-28",
       "progress": 41,
-      "dependencies": [{ "from": "g3", "to": "g4" }]
+      "dependencies": [
+        {
+          "from": "g3",
+          "to": "g4"
+        }
+      ]
     },
     {
       "id": "g5",
@@ -211,65 +358,134 @@
       "start": "2025-04-15",
       "end": "2026-04-30",
       "progress": 63,
-      "dependencies": [{ "from": "g2", "to": "g5" }]
+      "dependencies": [
+        {
+          "from": "g2",
+          "to": "g5"
+        }
+      ]
     }
   ],
   "team": [
     {
-      "id": "t1",
-      "name": "李产品",
-      "role": "产品负责人",
-      "modules": ["路线图", "需求优先级", "OJ"],
-      "status": "busy",
-      "deliverables": ["PRD v3", "里程碑复盘模板"]
-    },
-    {
-      "id": "t2",
-      "name": "王教研",
-      "role": "教研负责人",
-      "modules": ["课纲", "题库策略"],
+      "id": "t-al-01",
+      "name": "文芳",
+      "role": "产研",
+      "modules": [],
       "status": "active",
-      "deliverables": ["课程体系 v1", "评价量表"]
+      "deliverables": [
+        "产品功能开发"
+      ]
     },
     {
-      "id": "t3",
-      "name": "赵运营",
-      "role": "运营负责人",
-      "modules": ["转化链路", "活动矩阵"],
+      "id": "t-al-02",
+      "name": "张畅",
+      "role": "教研",
+      "modules": [],
       "status": "active",
-      "deliverables": ["Q4 运营方案", "班主任 SOP"]
+      "deliverables": [
+        "课程相关，手册相关，培训等"
+      ]
     },
     {
-      "id": "t4",
-      "name": "刘供应链",
-      "role": "供应链负责人",
-      "modules": ["履约", "质检"],
-      "status": "busy",
-      "deliverables": ["峰值演练报告"]
-    },
-    {
-      "id": "t5",
-      "name": "陈经分",
-      "role": "经营分析",
-      "modules": ["ROI", "LTV", "续报结构"],
+      "id": "t-al-03",
+      "name": "杨景飞",
+      "role": "系统班策略",
+      "modules": [],
       "status": "active",
-      "deliverables": ["经营仪表板", "月度复盘"]
+      "deliverables": [
+        "产品运营方案，课前退费率、续报率把控等"
+      ]
     },
     {
-      "id": "t6",
-      "name": "周班课",
-      "role": "班课负责人",
-      "modules": ["排课", "教学体验"],
+      "id": "t-al-04",
+      "name": "杜鹏霄",
+      "role": "入门班策略",
+      "modules": [],
       "status": "active",
-      "deliverables": ["班课体验指标"]
+      "deliverables": [
+        "售卖策略制定"
+      ]
     },
     {
-      "id": "t7",
-      "name": "吴素材",
+      "id": "t-al-05",
+      "name": "才钰涵",
+      "role": "管理策略",
+      "modules": [],
+      "status": "active",
+      "deliverables": [
+        "班主任绩效制定"
+      ]
+    },
+    {
+      "id": "t-al-06",
+      "name": "王薏",
+      "role": "系统班班课",
+      "modules": [],
+      "status": "active",
+      "deliverables": [
+        "课程宣传物料和Q&A梳理等"
+      ]
+    },
+    {
+      "id": "t-al-07",
+      "name": "李湘悦",
+      "role": "入门班班课",
+      "modules": [],
+      "status": "active",
+      "deliverables": [
+        "课程宣传物料和Q&A梳理等"
+      ]
+    },
+    {
+      "id": "t-al-08",
+      "name": "张瑞阳",
+      "role": "研究",
+      "modules": [],
+      "status": "active",
+      "deliverables": [
+        "A线运营方案，OJ平台运营等"
+      ]
+    },
+    {
+      "id": "t-al-09",
+      "name": "唐晓宇",
       "role": "素材制作",
-      "modules": ["课件", "视觉"],
-      "status": "blocked",
-      "deliverables": ["素材规范 v2"]
+      "modules": [],
+      "status": "active",
+      "deliverables": [
+        "课件/互动题 素材制作"
+      ]
+    },
+    {
+      "id": "t-al-10",
+      "name": "段宇洋",
+      "role": "随材设计",
+      "modules": [],
+      "status": "active",
+      "deliverables": [
+        "手册设计"
+      ]
+    },
+    {
+      "id": "t-al-11",
+      "name": "李飞燕",
+      "role": "供应链",
+      "modules": [],
+      "status": "active",
+      "deliverables": [
+        "打样，生产，入库和发货等"
+      ]
+    },
+    {
+      "id": "t-al-12",
+      "name": "褚一鹏",
+      "role": "大课直售",
+      "modules": [],
+      "status": "active",
+      "deliverables": [
+        "直播间获客"
+      ]
     }
   ],
   "documents": [
@@ -421,36 +637,90 @@
         "name": "LTV 走势",
         "unit": "¥",
         "data": [
-          { "period": "T1", "value": 3200 },
-          { "period": "T2", "value": 3360 },
-          { "period": "T3", "value": 3510 },
-          { "period": "T4", "value": 3640 },
-          { "period": "T5", "value": 3720 },
-          { "period": "T6", "value": 3860 }
+          {
+            "period": "T1",
+            "value": 3200
+          },
+          {
+            "period": "T2",
+            "value": 3360
+          },
+          {
+            "period": "T3",
+            "value": 3510
+          },
+          {
+            "period": "T4",
+            "value": 3640
+          },
+          {
+            "period": "T5",
+            "value": 3720
+          },
+          {
+            "period": "T6",
+            "value": 3860
+          }
         ]
       },
       {
         "id": "s2",
         "name": "续报率 %",
         "data": [
-          { "period": "T1", "value": 76 },
-          { "period": "T2", "value": 78 },
-          { "period": "T3", "value": 79 },
-          { "period": "T4", "value": 80 },
-          { "period": "T5", "value": 81 },
-          { "period": "T6", "value": 82 }
+          {
+            "period": "T1",
+            "value": 76
+          },
+          {
+            "period": "T2",
+            "value": 78
+          },
+          {
+            "period": "T3",
+            "value": 79
+          },
+          {
+            "period": "T4",
+            "value": 80
+          },
+          {
+            "period": "T5",
+            "value": 81
+          },
+          {
+            "period": "T6",
+            "value": 82
+          }
         ]
       },
       {
         "id": "s3",
         "name": "赛考路径转化率",
         "data": [
-          { "period": "T1", "value": 12 },
-          { "period": "T2", "value": 14 },
-          { "period": "T3", "value": 15 },
-          { "period": "T4", "value": 17 },
-          { "period": "T5", "value": 18 },
-          { "period": "T6", "value": 19 }
+          {
+            "period": "T1",
+            "value": 12
+          },
+          {
+            "period": "T2",
+            "value": 14
+          },
+          {
+            "period": "T3",
+            "value": 15
+          },
+          {
+            "period": "T4",
+            "value": 17
+          },
+          {
+            "period": "T5",
+            "value": 18
+          },
+          {
+            "period": "T6",
+            "value": 19
+          }
         ]
       }
     ]
@@ -462,6 +732,16 @@
         "title": "课程体系规划",
         "content": "",
         "diagram": "courseSystem"
+      },
+      {
+        "title": "课程大纲",
+        "content": "",
+        "links": [
+          {
+            "label": "《A线大纲》",
+            "href": "https://shimo.zhenguanyu.com/sheets/qnvK1x6Bn1gbUlR7/MODOC/"
+          }
+        ]
       },
       {
         "title": "目标与人群",
@@ -481,28 +761,11 @@
       }
     ]
   },
-  "retrospectives": [
-    {
-      "id": "retro1",
-      "title": "跨部门里程碑对齐机制升级",
-      "date": "2025-09-30",
-      "context": "里程碑延期频发，信息不透明导致决策滞后。",
-      "rootCause": ["节奏颗粒度不一致", "依赖未显性化", "风险前置不足"],
-      "impact": "关键路径两周抖动，运营实验窗口压缩。",
-      "actions": ["双周指挥塔例会", "依赖登记模板", "红黄绿灯规则"],
-      "lessons": ["依赖必须资产化", "风险预警需要 Owner"],
-      "followUp": "模板纳入项目默认套件"
-    }
-  ],
+  "retrospectives": [],
   "retrospectiveLocalDashboard": {
     "title": "大客直售渠道 A1 第六期退费深度分析看板",
     "src": "/dashboards/a1-phase6-refund-dashboard.html",
     "blurb": "数据周期 2026-02-22 → 2026-04-10。内含总览、退费归因、直播间对比、时间维度与解决方案等子页签；图表使用 Chart.js（jsDelivr CDN），首次打开需联网加载脚本。",
     "minHeight": 960
-  },
-  "retrospectiveBoard": {
-    "title": "大课直售渠道 A1 第6期退费分析看板",
-    "href": "https://moxt.ai/w/1shmgbhl/5f2c447f-ab0a-46cf-9c5f-a27db6bbc98f",
-    "blurb": "Moxt 返回 X-Frame-Options: SAMEORIGIN，无法在 PM 门户内嵌 iframe；请点击按钮在 Moxt 全屏查看与编辑。"
   }
 }

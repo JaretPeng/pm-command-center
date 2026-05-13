@@ -198,14 +198,6 @@ export interface RetrospectiveItem {
   followUp?: string;
 }
 
-/** Retrospective Tab 顶部：外链数据看板（如 Moxt）；多数站点禁止 iframe 嵌入，仅提供新窗口打开 */
-export interface RetrospectiveBoardLink {
-  title: string;
-  href: string;
-  /** 副文案，如嵌入限制说明 */
-  blurb?: string;
-}
-
 /** Retrospective Tab：同源 `public/` 下的静态 HTML 看板（可 iframe 完整保留 Chart.js 等交互） */
 export interface RetrospectiveLocalDashboard {
   title: string;
@@ -299,8 +291,6 @@ export interface ProjectDetail extends ProjectSummary {
   operationScheme?: OperationSchemeBlock;
   /** 为 true 时 Overview 不展示「项目结构图」（如 A 线以文档化背景/目标/成果为主） */
   overviewHideStructureDiagram?: boolean;
-  /** Retrospective Tab 顶部外链看板（如 Moxt） */
-  retrospectiveBoard?: RetrospectiveBoardLink;
   /** Retrospective Tab：站内静态 HTML 看板（iframe 嵌入） */
   retrospectiveLocalDashboard?: RetrospectiveLocalDashboard;
 }
