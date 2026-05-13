@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
@@ -10,10 +10,14 @@ import type { ProjectDetail } from "@/types/domain";
 import { getALineNavLabel } from "@/config/a-line-sidebar";
 import { getCLineNavLabel } from "@/config/c-line-sidebar";
 import {
-  PROJECT_TAB_LIST,
-  resolveProjectTabParam,
+  projectTabsForSlug,
+  resolveProjectTabForSlug,
   type ProjectTabId,
 } from "@/config/project-tabs";
+import {
+  PM_SEARCH_SYNC_EVENT,
+  readLocationSearchQuery,
+} from "@/lib/url-search";
 import { ProjectHero } from "@/components/project/project-hero";
 import { OverviewTab } from "@/components/project/tabs/overview-tab";
 import { MilestonesTab } from "@/components/project/tabs/milestones-tab";
@@ -23,32 +27,87 @@ import { DocumentsTab } from "@/components/project/tabs/documents-tab";
 import { OperationSchemeTab } from "@/components/project/tabs/operation-scheme-tab";
 import { RetrospectiveTab } from "@/components/project/tabs/retrospective-tab";
 
-export function ProjectDetailClient({ project }: { project: ProjectDetail }) {
-  const router = useRouter();
+export function ProjectDetailClient({
+  project,
+  initialSearchQuery,
+}: {
+  project: ProjectDetail;
+  /** 与 `window.location.search` 一致，不含前导 `?` */
+  initialSearchQuery: string;
+}) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
-  const tab = useMemo(
-    () => resolveProjectTabParam(searchParams.get("tab")),
-    [searchParams],
+  const [urlQuery, setUrlQuery] = useState(initialSearchQuery);
+
+  const parseNavTab = useCallback(
+    (q: string) => {
+      const sp = new URLSearchParams(q);
+      return {
+        nav: sp.get("nav"),
+        tab: sp.get("tab"),
+      };
+    },
+    [],
   );
 
+  /** Tab 仅用本地 state + history.replaceState，避免 router.replace 触发 RSC 重拉取（部分环境下会 500） */
+  const [tab, setTab] = useState<ProjectTabId>(() => {
+    const { nav, tab: t } = parseNavTab(initialSearchQuery);
+    return resolveProjectTabForSlug(project.slug, nav, t);
+  });
+
+  /** 侧栏 Link 软导航后，服务端会带上新的 initialSearchQuery */
+  useEffect(() => {
+    setUrlQuery(initialSearchQuery);
+    const { nav, tab: t } = parseNavTab(initialSearchQuery);
+    setTab(resolveProjectTabForSlug(project.slug, nav, t));
+  }, [initialSearchQuery, project.slug, parseNavTab]);
+
+  /** 浏览器前进/后退，或本页 replaceState 后触发的同步 */
+  useEffect(() => {
+    const syncFromWindow = () => {
+      const q = readLocationSearchQuery();
+      setUrlQuery(q);
+      const { nav, tab: t } = parseNavTab(q);
+      setTab(resolveProjectTabForSlug(project.slug, nav, t));
+    };
+    window.addEventListener("popstate", syncFromWindow);
+    window.addEventListener(PM_SEARCH_SYNC_EVENT, syncFromWindow);
+    return () => {
+      window.removeEventListener("popstate", syncFromWindow);
+      window.removeEventListener(PM_SEARCH_SYNC_EVENT, syncFromWindow);
+    };
+  }, [project.slug, parseNavTab]);
+
   const sideNavSubLabel = useMemo(() => {
-    const nav = searchParams.get("nav");
+    const nav = new URLSearchParams(urlQuery).get("nav");
     if (project.slug === "a-line") return getALineNavLabel(nav);
     if (project.slug === "c3-v6") return getCLineNavLabel(nav);
     return undefined;
-  }, [project.slug, searchParams]);
+  }, [project.slug, urlQuery]);
+
+  const lineNav = useMemo(
+    () => new URLSearchParams(urlQuery).get("nav"),
+    [urlQuery],
+  );
 
   function onTab(next: ProjectTabId) {
-    const p = new URLSearchParams(searchParams.toString());
+    setTab(next);
+    const p = new URLSearchParams(
+      window.location.search.startsWith("?")
+        ? window.location.search.slice(1)
+        : "",
+    );
     if (next === "overview") {
       p.delete("tab");
     } else {
       p.set("tab", next);
     }
     const qs = p.toString();
-    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+    const url = qs ? `${pathname}?${qs}` : pathname;
+    window.history.replaceState(window.history.state, "", url);
+    setUrlQuery(readLocationSearchQuery());
+    window.dispatchEvent(new Event(PM_SEARCH_SYNC_EVENT));
   }
 
   return (
@@ -74,7 +133,7 @@ export function ProjectDetailClient({ project }: { project: ProjectDetail }) {
         className="flex w-full flex-wrap gap-1 rounded-lg border border-border/60 bg-muted/30 p-2"
         role="tablist"
       >
-        {PROJECT_TAB_LIST.map((t) => (
+        {projectTabsForSlug(project.slug, lineNav).map((t) => (
           <Button
             key={t.id}
             type="button"
@@ -103,7 +162,7 @@ export function ProjectDetailClient({ project }: { project: ProjectDetail }) {
           {tab === "timeline" ? <TimelineTab project={project} /> : null}
           {tab === "team" ? <TeamTab project={project} /> : null}
           {tab === "operation-scheme" ? (
-            <OperationSchemeTab project={project} />
+            <OperationSchemeTab project={project} lineNav={lineNav} />
           ) : null}
           {tab === "documents" ? <DocumentsTab project={project} /> : null}
           {tab === "retrospective" ? (

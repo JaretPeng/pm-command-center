@@ -11,13 +11,40 @@
   "startDate": "2025-03-01",
   "endDate": "2026-08-30",
   "version": "Roadmap 2026",
-  "milestoneCount": 14,
+  "milestoneCount": 6,
   "blockerCount": 2,
   "tags": ["C++", "信奥", "OJ", "LTV", "跨部门"],
   "health": "good",
   "delayed": false,
   "highPriority": true,
-  "collaborators": 48,
+  "collaborators": 12,
+  "overviewHideStructureDiagram": true,
+  "heroDateCaption": "2024年5月-至今",
+  "heroDynamics": {
+    "inProgress": 6,
+    "completed": 3,
+    "pending": 2,
+    "risk": 0
+  },
+  "heroNarrative": [
+    "A线是面向小学高年级到初中的 C++ 赛考课程线，核心服务强升学需求学员。项目在 2024–2026 年间逐步完成从老 A+ 线试水、A 零基础线直售，到 C 线转 A、加入硬件课和 A+ 非零基础线等关键里程碑搭建。",
+    "目前已形成 A1–A8 及 A+1 的完整产品体系，配套纸质/电子手册、硬件和多套算法思维录播课。同时在搭建 OJ 平台和升学/赛考配套服务，强化「专业信奥培训」品牌与长期竞赛升学能力储备。",
+    "在大课直售、C 线扩科/转线、带新等渠道基础上，A0 上线后，需验证 A 线的 ROI 可行性和生源稳定性。"
+  ],
+  "heroCurriculumStrip": {
+    "title": "高级算法",
+    "moreLabel": "MORE",
+    "modules": [
+      { "code": "A1", "line1": "语法入门", "line2": "与程序结构", "icon": "terminal" },
+      { "code": "A2", "line1": "语法进阶", "line2": "与基础算法", "icon": "code" },
+      { "code": "A3", "line1": "数据结构", "line2": "与高级算法", "icon": "trendingUp" },
+      { "code": "A4", "line1": "算法设计", "line2": "与程序优化", "icon": "box" },
+      { "code": "A5", "line1": "算法应用强化", "icon": "box" },
+      { "code": "A6", "line1": "高级算法进阶", "icon": "trendingUp" },
+      { "code": "A7", "line1": "图论算法", "line2": "与数据结构优化", "icon": "fileText" },
+      { "code": "A8", "line1": "问题建模", "line2": "与求解策略", "icon": "helpCircle" }
+    ]
+  },
   "executiveSummary": "围绕 C++ 赛道占位与信奥路径建设，联动课程、OJ、运营与供应链，构建长期竞争壁垒与品牌心智。",
   "objectives": [
     "抢占 C++ 核心赛道",
@@ -27,8 +54,9 @@
     "沉淀跨部门协同机制与经营复盘体系"
   ],
   "background": [
-    "业务进入战略窗口期，需要以产品线视角统筹课程、平台与运营方案，形成可持续迭代的增长飞轮。",
-    "跨团队文档与里程碑分散，需要统一指挥塔视图支撑决策与执行对齐。"
+    "A 线定位为小学高年级至初中的 C++ 赛考课程线，承接强升学与竞赛路径诉求；项目处于体系化落地阶段，需要以产品线视角统筹课程、OJ、运营与供应链，形成可持续迭代的增长飞轮。",
+    "产品侧已形成 A1–A8 与 A+ 等班型矩阵，配套纸质/电子手册、硬件与录播课；同步建设 OJ 平台与赛考配套服务，强化「专业信奥培训」品牌与长期竞赛升学能力储备。",
+    "本总览用于对齐跨团队里程碑与经营指标：背景与目标对应 Hero 叙事与执行摘要，成果与结构图（可隐藏）支撑指挥塔决策；若需替换为 PDF/石墨原文，可直接改写本字段。"
   ],
   "valueProps": [
     {
@@ -249,55 +277,79 @@
       "id": "d1",
       "title": "A线战略一页纸",
       "category": "project_doc",
-      "tags": ["战略", "高层"],
-      "updatedAt": "2025-10-02",
-      "owner": "张 PM",
-      "excerpt": "赛道机会、目标边界与关键胜负手。"
+      "updatedAt": "2026-03-08",
+      "department": "商业分析办公室"
     },
     {
       "id": "d2",
       "title": "课程体系蓝图 v1",
       "category": "syllabus",
-      "tags": ["教研", "课纲"],
-      "updatedAt": "2025-09-18",
-      "owner": "王教研",
-      "excerpt": "难度梯度、单元目标与评价对齐。"
+      "updatedAt": "2026-03-21",
+      "department": "教学中心"
     },
     {
       "id": "d3",
       "title": "OJ 平台需求清单",
       "category": "product",
-      "tags": ["OJ", "PRD"],
-      "updatedAt": "2025-11-05",
-      "owner": "李产品",
-      "excerpt": "评测、题库、稳定性与运营配置。"
+      "updatedAt": "2026-04-03",
+      "department": "产研中心",
+      "href": "https://my.feishu.cn/wiki/XrQnwNC26icHO6kvL3rcRhVknDg?from=from_copylink"
     },
     {
-      "id": "d4",
-      "title": "运营打法 Q4",
-      "category": "operations",
-      "tags": ["转化", "活动"],
-      "updatedAt": "2025-11-12",
-      "owner": "赵运营",
-      "excerpt": "漏斗结构、活动日历与班主任协同。"
-    },
-    {
-      "id": "d5",
-      "title": "甘特总览 2026",
+      "id": "d-al-gantt-feishu",
+      "title": "A线项目甘特",
       "category": "gantt",
-      "tags": ["计划"],
-      "updatedAt": "2025-11-20",
-      "owner": "张 PM",
-      "excerpt": "关键路径与跨团队依赖。"
+      "updatedAt": "2026-04-11",
+      "department": "项目管理",
+      "href": "https://my.feishu.cn/wiki/CUi4w4nn5itIrZkQ8wlccSDhnJB?from=from_copylink"
     },
     {
-      "id": "d6",
-      "title": "数据监控口径说明",
-      "category": "data",
-      "tags": ["指标", "DS"],
-      "updatedAt": "2025-10-30",
-      "owner": "陈经分",
-      "excerpt": "LTV、续报、活跃与转化定义。"
+      "id": "d-al-wiki-feishu",
+      "title": "A线项目文档",
+      "category": "project_doc",
+      "updatedAt": "2026-04-18",
+      "department": "项目管理",
+      "href": "https://my.feishu.cn/wiki/T74gwJfyciRxeikqkIMccNUinJd?from=from_copylink"
+    },
+    {
+      "id": "d-al-qa-shimo",
+      "title": "A线答疑Q&A",
+      "category": "qa",
+      "updatedAt": "2026-04-25",
+      "department": "运营策略",
+      "href": "https://shimo.zhenguanyu.com/docs/tXpxA6tAAdO0xNcV/"
+    },
+    {
+      "id": "d-al-comp-noi-2025",
+      "title": "《25年各家NOI获奖》",
+      "category": "product",
+      "updatedAt": "2026-05-02",
+      "department": "行研分析",
+      "href": "https://shimo.zhenguanyu.com/docs/kGEyX7Nlo7KMU4NB"
+    },
+    {
+      "id": "d-al-comp-hetao-class",
+      "title": "《核桃大课调研》",
+      "category": "product",
+      "updatedAt": "2026-05-06",
+      "department": "行研分析",
+      "href": "https://shimo.zhenguanyu.com/docs/kpOzBDljdzGlfbrb"
+    },
+    {
+      "id": "d-al-comp-hetao-layout",
+      "title": "《核桃布局调研》",
+      "category": "product",
+      "updatedAt": "2026-05-09",
+      "department": "行研分析",
+      "href": "https://shimo.zhenguanyu.com/docs/kvLQv5E6044YhJm6"
+    },
+    {
+      "id": "d-al-ux-cpp-interview",
+      "title": "《高年级用户C++需求 用户访谈报告》",
+      "category": "product",
+      "updatedAt": "2026-05-12",
+      "department": "用研分析",
+      "href": "https://shimo.zhenguanyu.com/docs/3al78EpYaEVNuMbd"
     }
   ],
   "risks": [
@@ -407,6 +459,11 @@
     "summary": "A线产品运营以「转化—履约—续报—口碑」为主轴，与课程节奏、OJ 内测与班主任链路对齐，按双周迭代表审视关键指标。",
     "sections": [
       {
+        "title": "课程体系规划",
+        "content": "",
+        "diagram": "courseSystem"
+      },
+      {
         "title": "目标与人群",
         "content": "核心人群：C++ 入门与信奥路径学员；主目标为完课、练习达成与续报结构优化。"
       },
@@ -436,5 +493,10 @@
       "lessons": ["依赖必须资产化", "风险预警需要 Owner"],
       "followUp": "模板纳入项目默认套件"
     }
-  ]
+  ],
+  "retrospectiveBoard": {
+    "title": "大课直售渠道 A1 第6期退费分析看板",
+    "href": "https://moxt.ai/w/1shmgbhl/5f2c447f-ab0a-46cf-9c5f-a27db6bbc98f",
+    "blurb": "Moxt 返回 X-Frame-Options: SAMEORIGIN，无法在 PM 门户内嵌 iframe；请点击按钮在 Moxt 全屏查看与编辑。"
+  }
 }

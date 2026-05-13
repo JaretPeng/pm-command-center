@@ -1,3 +1,7 @@
+# Netlify + Next.js App Router（Next 15）
+# 插件需保持较新版本，旧版在「部署预览 / Edge」阶段易出现构建失败或站点无法打开。
+# 文档：https://docs.netlify.com/build/frameworks/framework-setup-guides/next-js/overview/
+
 [build]
   command = "npm run build"
 
@@ -6,3 +10,9 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# 本地 `netlify dev`：代理在 8888，Next 监听 3000（与 `npm run dev` 一致）
+[dev]
+  command = "npm run dev"
+  port = 8888
+  targetPort = 3000

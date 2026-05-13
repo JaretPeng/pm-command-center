@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   FolderKanban,
@@ -15,6 +15,37 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { aLineSidebar, aLineNavHref } from "@/config/a-line-sidebar";
 import { cLineSidebar, cLineNavHref } from "@/config/c-line-sidebar";
+import { PM_SEARCH_SYNC_EVENT, readLocationSearchQuery } from "@/lib/url-search";
+
+function notifySearchSync() {
+  window.dispatchEvent(new Event(PM_SEARCH_SYNC_EVENT));
+}
+
+/** 同一路径仅 query 变化时 pathname 不变，需在点击后主动同步侧栏高亮 */
+function ProjectSidebarLink({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      prefetch={false}
+      href={href}
+      className={className}
+      onClick={() => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(notifySearchSync);
+        });
+      }}
+    >
+      {children}
+    </Link>
+  );
+}
 
 function navInGroup(
   nav: string | null,
@@ -26,8 +57,25 @@ function navInGroup(
 
 export function Sidebar() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const navActive = searchParams.get("nav");
+  const [navActive, setNavActive] = useState<string | null>(null);
+
+  useLayoutEffect(() => {
+    const q = new URLSearchParams(readLocationSearchQuery());
+    setNavActive(q.get("nav"));
+  }, [pathname]);
+
+  useEffect(() => {
+    const sync = () => {
+      const q = new URLSearchParams(readLocationSearchQuery());
+      setNavActive(q.get("nav"));
+    };
+    window.addEventListener("popstate", sync);
+    window.addEventListener(PM_SEARCH_SYNC_EVENT, sync);
+    return () => {
+      window.removeEventListener("popstate", sync);
+      window.removeEventListener(PM_SEARCH_SYNC_EVENT, sync);
+    };
+  }, []);
 
   const onALine =
     pathname === "/projects/a-line" || pathname?.startsWith("/projects/a-line/");
@@ -118,7 +166,7 @@ export function Sidebar() {
 
             {aLineOpen ? (
               <div className="mb-1 mt-1 space-y-3 border-l border-border/80 pb-1 pl-4 ml-2">
-                <Link
+                <ProjectSidebarLink
                   href={aLineSidebar.basePath}
                   className={cn(
                     "block rounded-md py-1.5 pl-2 text-xs transition-colors",
@@ -128,7 +176,7 @@ export function Sidebar() {
                   )}
                 >
                   项目总览
-                </Link>
+                </ProjectSidebarLink>
 
                 {aLineSidebar.groups.map((group) =>
                   group.id === "completed" ? (
@@ -155,7 +203,7 @@ export function Sidebar() {
                               onALine && navActive === item.id;
                             return (
                               <li key={item.id}>
-                                <Link
+                                <ProjectSidebarLink
                                   href={href}
                                   className={cn(
                                     "block rounded-md py-1.5 pl-2 text-xs leading-snug transition-colors",
@@ -165,7 +213,7 @@ export function Sidebar() {
                                   )}
                                 >
                                   {item.label}
-                                </Link>
+                                </ProjectSidebarLink>
                               </li>
                             );
                           })}
@@ -184,7 +232,7 @@ export function Sidebar() {
                             onALine && navActive === item.id;
                           return (
                             <li key={item.id}>
-                              <Link
+                              <ProjectSidebarLink
                                 href={href}
                                 className={cn(
                                   "block rounded-md py-1.5 pl-2 text-xs leading-snug transition-colors",
@@ -194,7 +242,7 @@ export function Sidebar() {
                                 )}
                               >
                                 {item.label}
-                              </Link>
+                                </ProjectSidebarLink>
                             </li>
                           );
                         })}
@@ -231,7 +279,7 @@ export function Sidebar() {
 
             {cLineOpen ? (
               <div className="mb-1 mt-1 space-y-3 border-l border-border/80 pb-1 pl-4 ml-2">
-                <Link
+                <ProjectSidebarLink
                   href={cLineSidebar.basePath}
                   className={cn(
                     "block rounded-md py-1.5 pl-2 text-xs transition-colors",
@@ -241,7 +289,7 @@ export function Sidebar() {
                   )}
                 >
                   项目总览
-                </Link>
+                </ProjectSidebarLink>
 
                 {cLineSidebar.groups.map((group) =>
                   group.id === "completed" ? (
@@ -268,7 +316,7 @@ export function Sidebar() {
                               onCLine && navActive === item.id;
                             return (
                               <li key={item.id}>
-                                <Link
+                                <ProjectSidebarLink
                                   href={href}
                                   className={cn(
                                     "block rounded-md py-1.5 pl-2 text-xs leading-snug transition-colors",
@@ -278,7 +326,7 @@ export function Sidebar() {
                                   )}
                                 >
                                   {item.label}
-                                </Link>
+                                </ProjectSidebarLink>
                               </li>
                             );
                           })}
@@ -297,7 +345,7 @@ export function Sidebar() {
                             onCLine && navActive === item.id;
                           return (
                             <li key={item.id}>
-                              <Link
+                              <ProjectSidebarLink
                                 href={href}
                                 className={cn(
                                   "block rounded-md py-1.5 pl-2 text-xs leading-snug transition-colors",
@@ -307,7 +355,7 @@ export function Sidebar() {
                                 )}
                               >
                                 {item.label}
-                              </Link>
+                                </ProjectSidebarLink>
                             </li>
                           );
                         })}

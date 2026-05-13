@@ -7,14 +7,22 @@ import { StructureDiagram } from "@/components/project/structure-diagram";
 import { OverviewVideoSection } from "@/components/project/overview-video";
 
 export function OverviewTab({ project }: { project: ProjectDetail }) {
+  const hideDiagram = project.overviewHideStructureDiagram === true;
+
   return (
     <div className="grid gap-4 lg:grid-cols-2">
-      <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
+      <motion.div
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="lg:col-span-2"
+      >
         <Card className="glass-card p-5">
           <h3 className="text-sm font-semibold">项目背景</h3>
-          <div className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
-            {project.background.map((b) => (
-              <p key={b}>{b}</p>
+          <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground sm:leading-7">
+            {project.background.map((b, i) => (
+              <p key={i} className="whitespace-pre-line">
+                {b}
+              </p>
             ))}
           </div>
         </Card>
@@ -22,17 +30,30 @@ export function OverviewTab({ project }: { project: ProjectDetail }) {
 
       <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
         <Card className="glass-card p-5">
-          <h3 className="text-sm font-semibold">战略目标可视化</h3>
+          <h3 className="text-sm font-semibold">项目目标</h3>
           <div className="mt-4 grid gap-3">
             {project.objectives.map((o, i) => (
               <div
-                key={o}
-                className="flex items-start gap-3 rounded-lg border bg-muted/15 p-3"
+                key={i}
+                className="rounded-lg border bg-muted/15 p-3 text-sm leading-relaxed"
               >
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
-                  {i + 1}
-                </span>
-                <p className="text-sm leading-relaxed">{o}</p>
+                <p className="whitespace-pre-line text-foreground/95">{o}</p>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </motion.div>
+
+      <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
+        <Card className="glass-card p-5">
+          <h3 className="text-sm font-semibold">项目成果</h3>
+          <div className="mt-4 grid gap-3">
+            {project.keyOutcomes.map((o, i) => (
+              <div
+                key={i}
+                className="rounded-lg border border-dashed border-primary/20 bg-primary/[0.04] p-3 text-sm leading-relaxed"
+              >
+                <p className="whitespace-pre-line text-foreground/95">{o}</p>
               </div>
             ))}
           </div>
@@ -49,37 +70,15 @@ export function OverviewTab({ project }: { project: ProjectDetail }) {
         </motion.div>
       ) : null}
 
-      <motion.div
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="lg:col-span-2"
-      >
-        <Card className="glass-card p-5">
-          <h3 className="text-sm font-semibold">ROI / 战略价值</h3>
-          <div className="mt-4 grid gap-3 md:grid-cols-3">
-            {project.valueProps.map((v) => (
-              <div
-                key={v.title}
-                className="rounded-xl border bg-gradient-to-br from-primary/10 via-transparent to-sky-500/10 p-4"
-              >
-                <p className="font-semibold">{v.title}</p>
-                <p className="mt-2 text-sm text-muted-foreground">{v.description}</p>
-                {v.metric ? (
-                  <p className="mt-3 text-xs font-medium text-primary">{v.metric}</p>
-                ) : null}
-              </div>
-            ))}
-          </div>
-        </Card>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="lg:col-span-2"
-      >
-        <StructureDiagram structure={project.structure} />
-      </motion.div>
+      {!hideDiagram ? (
+        <motion.div
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="lg:col-span-2"
+        >
+          <StructureDiagram structure={project.structure} />
+        </motion.div>
+      ) : null}
     </div>
   );
 }

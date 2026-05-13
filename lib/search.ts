@@ -23,7 +23,7 @@ export function searchEverything(
       });
     }
     for (const d of p.documents) {
-      const dblob = `${d.title} ${d.excerpt ?? ""} ${d.tags.join(" ")}`.toLowerCase();
+      const dblob = `${d.title} ${d.excerpt ?? ""} ${(d.tags ?? []).join(" ")} ${d.department ?? ""}`.toLowerCase();
       if (dblob.includes(q)) {
         hits.push({
           type: "doc",

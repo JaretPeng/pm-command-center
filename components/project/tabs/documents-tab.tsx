@@ -49,7 +49,7 @@ export function DocumentsTab({ project }: { project: ProjectDetail }) {
   const filtered = useMemo(() => {
     return project.documents.filter((d) => {
       if (cat !== "all" && d.category !== cat) return false;
-      const blob = `${d.title} ${d.tags.join(" ")} ${d.owner}`.toLowerCase();
+      const blob = `${d.title} ${(d.tags ?? []).join(" ")} ${d.owner ?? ""} ${d.department ?? ""}`.toLowerCase();
       return blob.includes(q.trim().toLowerCase());
     });
   }, [project.documents, cat, q]);
@@ -92,7 +92,7 @@ export function DocumentsTab({ project }: { project: ProjectDetail }) {
             <Input
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="搜索标题 / 标签 / Owner"
+              placeholder="搜索标题 / 部门"
               className="sm:w-[260px]"
             />
             <Select
@@ -131,54 +131,80 @@ export function DocumentsTab({ project }: { project: ProjectDetail }) {
         ) : null}
 
         <div className="mt-4 divide-y rounded-xl border">
-          {filtered.map((d, idx) => (
-            <motion.button
-              key={d.id}
-              type="button"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.03 }}
-              onClick={() => touchRecent(d.id)}
-              className="flex w-full items-start gap-3 px-4 py-3 text-left hover:bg-muted/30"
-            >
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="mt-0.5 h-8 w-8"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleFavorite(d.id);
-                }}
-                aria-label="收藏"
-              >
-                <Star
-                  className={cn(
-                    "h-4 w-4",
-                    favorites.includes(d.id)
-                      ? "fill-amber-400 text-amber-500"
-                      : "text-muted-foreground",
-                  )}
-                />
-              </Button>
+          {filtered.map((d, idx) => {
+            const rowShell =
+              "flex w-full items-start gap-3 px-4 py-3 hover:bg-muted/30";
+            const body = (
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <p className="font-medium leading-snug">{d.title}</p>
                   <Badge variant="outline">{d.category}</Badge>
+                  {d.href ? (
+                    <span className="text-xs text-muted-foreground">↗ 外链</span>
+                  ) : null}
                 </div>
-                <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
-                  {d.excerpt ?? ""}
-                </p>
                 <div className="mt-2 flex flex-wrap gap-2 text-xs text-muted-foreground">
                   <span>更新 {formatDate(d.updatedAt)}</span>
-                  <span>·</span>
-                  <span>{d.owner}</span>
-                  <span>·</span>
-                  <span>{d.tags.join(" · ")}</span>
+                  {(d.department ?? d.owner) ? (
+                    <>
+                      <span>·</span>
+                      <span>
+                        {d.department
+                          ? `部门 · ${d.department}`
+                          : (d.owner ?? "")}
+                      </span>
+                    </>
+                  ) : null}
                 </div>
               </div>
-            </motion.button>
-          ))}
+            );
+            return (
+              <motion.div
+                key={d.id}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.03 }}
+                className={rowShell}
+              >
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="mt-0.5 h-8 w-8 shrink-0"
+                  onClick={() => toggleFavorite(d.id)}
+                  aria-label="收藏"
+                >
+                  <Star
+                    className={cn(
+                      "h-4 w-4",
+                      favorites.includes(d.id)
+                        ? "fill-amber-400 text-amber-500"
+                        : "text-muted-foreground",
+                    )}
+                  />
+                </Button>
+                {d.href ? (
+                  <a
+                    href={d.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => touchRecent(d.id)}
+                    className="min-w-0 flex-1 text-left text-foreground no-underline outline-none ring-offset-background hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    {body}
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => touchRecent(d.id)}
+                    className="min-w-0 flex-1 text-left"
+                  >
+                    {body}
+                  </button>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </Card>
     </div>

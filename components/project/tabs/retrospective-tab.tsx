@@ -8,8 +8,40 @@ import { formatDate } from "@/lib/utils";
 import { FishboneDiagram } from "@/components/project/fishbone";
 
 export function RetrospectiveTab({ project }: { project: ProjectDetail }) {
+  const board = project.retrospectiveBoard;
+
   return (
     <div className="space-y-4">
+      {board ? (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <Card className="glass-card overflow-hidden p-0">
+            <div className="border-b border-border/80 bg-muted/20 px-5 py-4">
+              <p className="text-sm font-semibold text-foreground">{board.title}</p>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                {board.blurb ??
+                  "该看板托管在 Moxt；受浏览器安全策略（如 X-Frame-Options）限制，通常无法在门户内嵌，请在新标签页打开以查看完整交互与图表。"}
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="break-all font-mono text-[13px] text-muted-foreground sm:text-sm">
+                {board.href}
+              </p>
+              <a
+                href={board.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-9 shrink-0 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
+              >
+                在 Moxt 中打开看板
+              </a>
+            </div>
+          </Card>
+        </motion.div>
+      ) : null}
+
       <div className="grid gap-3">
         {project.retrospectives.map((r, idx) => (
           <motion.div

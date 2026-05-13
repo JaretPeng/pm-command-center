@@ -10,17 +10,25 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        /* Windows 上接近微软官网；macOS 回退到系统字体与 Geist */
+        /* 不依赖 Google Fonts，避免内网/国内网络下 next/font 拉取超时导致页面长时间空白 */
         sans: [
           '"Segoe UI Variable"',
           '"Segoe UI"',
           "system-ui",
           "-apple-system",
           "BlinkMacSystemFont",
-          "var(--font-geist-sans)",
+          '"PingFang SC"',
+          '"Microsoft YaHei"',
           "sans-serif",
         ],
-        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+        mono: [
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Monaco",
+          "Consolas",
+          "monospace",
+        ],
       },
       colors: {
         border: "hsl(var(--border))",

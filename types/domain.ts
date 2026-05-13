@@ -21,6 +21,29 @@ export type DocCategory =
 
 export type TeamStatus = "active" | "busy" | "blocked" | "offline";
 
+/** Hero 课程体系条卡片角标图标（映射 Lucide） */
+export type HeroCurriculumIcon =
+  | "terminal"
+  | "code"
+  | "trendingUp"
+  | "box"
+  | "fileText"
+  | "helpCircle";
+
+export interface HeroCurriculumModule {
+  code: string;
+  line1: string;
+  line2?: string;
+  icon: HeroCurriculumIcon;
+}
+
+export interface HeroCurriculumStrip {
+  title: string;
+  moreLabel?: string;
+  moreHref?: string;
+  modules: HeroCurriculumModule[];
+}
+
 export interface ProjectSummary {
   id: string;
   slug: string;
@@ -82,11 +105,17 @@ export interface DocumentItem {
   id: string;
   title: string;
   category: DocCategory;
-  tags: string[];
+  /** 可选；用于搜索等，列表不再展示 */
+  tags?: string[];
   updatedAt: string;
-  owner: string;
+  /** 兼容旧数据；无 department 时 UI 可回退显示 */
+  owner?: string;
+  /** 责任部门（优先于 owner 展示） */
+  department?: string;
   excerpt?: string;
   favorite?: boolean;
+  /** 外链（飞书/石墨等）；存在时列表行点击在新标签页打开 */
+  href?: string;
 }
 
 export interface RiskItem {
@@ -169,15 +198,39 @@ export interface RetrospectiveItem {
   followUp?: string;
 }
 
+/** Retrospective Tab 顶部：外链数据看板（如 Moxt）；多数站点禁止 iframe 嵌入，仅提供新窗口打开 */
+export interface RetrospectiveBoardLink {
+  title: string;
+  href: string;
+  /** 副文案，如嵌入限制说明 */
+  blurb?: string;
+}
+
 export interface FishboneBranch {
   category: string;
   causes: string[];
 }
 
+/** 运营方案 Tab 内置矢量图类型 */
+export type OperationSchemeDiagramId = "courseSystem";
+
+/** 运营方案 Tab：外联一行（石墨、飞书等） */
+export interface OperationSchemeLink {
+  label: string;
+  href: string;
+}
+
 /** 运营方案 Tab 内容 */
 export interface OperationSchemeSection {
   title: string;
+  /** 正文；可与 imageSrc / diagram 同时存在，或仅图时留空字符串 */
   content: string;
+  /** 可选：外联列表（如课程大纲文档） */
+  links?: OperationSchemeLink[];
+  /** 可选：配图 URL，须为站内路径（如 `/images/...` 指向 `public/`） */
+  imageSrc?: string;
+  /** 可选：内置矢量示意图（与 imageSrc 二选一即可，优先渲染 diagram） */
+  diagram?: OperationSchemeDiagramId;
 }
 
 export interface OperationSchemeBlock {
@@ -203,6 +256,19 @@ export interface RetrospectiveDeepDive {
 export interface ProjectDetail extends ProjectSummary {
   endDate?: string;
   version?: string;
+  /** 若填写，Hero 区用多段正文替代「摘要 + 项目目标/关键成果」两栏 */
+  heroNarrative?: string[];
+  /** 若填写，Hero 底部元信息行仅显示日历 + 该文案（不展示负责人 / 版本 / 风险） */
+  heroDateCaption?: string;
+  /** 若填写，Hero 右侧卡片显示「项目动态」及环形分布，替代完成度饼图 */
+  heroDynamics?: {
+    inProgress: number;
+    completed: number;
+    pending: number;
+    risk: number;
+  };
+  /** Hero 主卡内：横向课程体系条（如 A1–A8「高级算法」） */
+  heroCurriculumStrip?: HeroCurriculumStrip;
   executiveSummary: string;
   objectives: string[];
   background: string[];
@@ -221,6 +287,10 @@ export interface ProjectDetail extends ProjectSummary {
   overviewVideo?: OverviewVideoBlock;
   timelineEmbed?: TimelineEmbedBlock;
   operationScheme?: OperationSchemeBlock;
+  /** 为 true 时 Overview 不展示「项目结构图」（如 A 线以文档化背景/目标/成果为主） */
+  overviewHideStructureDiagram?: boolean;
+  /** Retrospective Tab 顶部外链看板（如 Moxt） */
+  retrospectiveBoard?: RetrospectiveBoardLink;
 }
 
 export interface ProjectIndexFile {

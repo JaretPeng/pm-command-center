@@ -6,6 +6,28 @@ import type { ProjectDetail, ProjectIndexFile, ProjectSummary } from "@/types/do
 
 const DATA_DIR = path.join(process.cwd(), "data", "projects");
 
+/** 路由与文件名中的 slug：禁止 `../` 等穿越路径 */
+const PROJECT_SLUG_RE = /^[a-zA-Z0-9_-]{1,128}$/;
+
+export function isSafeProjectSlug(slug: unknown): slug is string {
+  return typeof slug === "string" && PROJECT_SLUG_RE.test(slug);
+}
+
+function isProjectDetailRecord(
+  parsed: unknown,
+  expectedSlug: string,
+): parsed is ProjectDetail {
+  if (
+    parsed === null ||
+    typeof parsed !== "object" ||
+    Array.isArray(parsed)
+  ) {
+    return false;
+  }
+  const slug = (parsed as { slug?: unknown }).slug;
+  return typeof slug === "string" && slug === expectedSlug;
+}
+
 /** 开发模式下禁用缓存，避免改 JSON / 媒体后仍读到旧数据 */
 const isDev = process.env.NODE_ENV === "development";
 
@@ -28,6 +50,7 @@ export async function loadProjectSummaries(): Promise<ProjectSummary[]> {
 export async function loadProjectBySlug(
   slug: string,
 ): Promise<ProjectDetail | null> {
+  if (!isSafeProjectSlug(slug)) return null;
   if (!isDev && projectCache.has(slug)) {
     return projectCache.get(slug)!;
   }
@@ -36,9 +59,10 @@ export async function loadProjectBySlug(
       path.join(DATA_DIR, `${slug}.json`),
       "utf-8",
     );
-    const project = JSON.parse(raw) as ProjectDetail;
-    if (!isDev) projectCache.set(slug, project);
-    return project;
+    const parsed: unknown = JSON.parse(raw);
+    if (!isProjectDetailRecord(parsed, slug)) return null;
+    if (!isDev) projectCache.set(slug, parsed);
+    return parsed;
   } catch {
     return null;
   }

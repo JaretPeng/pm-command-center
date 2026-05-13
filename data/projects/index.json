@@ -15,7 +15,7 @@
       "riskLevel": "medium",
       "owner": "张 PM",
       "startDate": "2025-03-01",
-      "milestoneCount": 14,
+      "milestoneCount": 6,
       "blockerCount": 2,
       "tags": ["C++", "信奥", "OJ", "LTV", "跨部门"],
       "health": "good",

@@ -19,9 +19,9 @@ export function TeamTab({ project }: { project: ProjectDetail }) {
   return (
     <div className="space-y-4">
       <Card className="glass-card p-4">
-        <h3 className="text-sm font-semibold">组织协同结构</h3>
+        <h3 className="text-sm font-semibold">项目相关方</h3>
         <p className="text-xs text-muted-foreground">
-          角色分组 · 交付项 · 当前状态
+          部门 · 负责人 · 交付项 · 当前状态
         </p>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {Object.entries(grouped).map(([role, members], gi) => (
@@ -44,11 +44,13 @@ export function TeamTab({ project }: { project: ProjectDetail }) {
                         <p className="truncate font-medium">{m.name}</p>
                         <Badge variant="outline">{m.status}</Badge>
                       </div>
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        模块：{m.modules.join(" · ")}
-                      </p>
+                      {m.modules.length > 0 ? (
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          模块：{m.modules.join(" · ")}
+                        </p>
+                      ) : null}
                       <p className="mt-2 text-xs">
-                        交付：{m.deliverables.join(" · ")}
+                        交付项：{m.deliverables.join(" · ")}
                       </p>
                     </div>
                   </motion.div>
