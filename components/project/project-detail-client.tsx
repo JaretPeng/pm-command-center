@@ -166,7 +166,7 @@ export function ProjectDetailClient({
           ) : null}
           {tab === "documents" ? <DocumentsTab project={project} /> : null}
           {tab === "retrospective" ? (
-            <RetrospectiveTab project={project} />
+            <RetrospectiveTab project={project} lineNav={lineNav} />
           ) : null}
         </motion.div>
       </AnimatePresence>

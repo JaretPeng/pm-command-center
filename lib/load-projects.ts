@@ -121,6 +121,59 @@ function normalizeProjectDetail(raw: ProjectDetail): ProjectDetail {
       sections: asArray(p.operationScheme.sections),
     };
   }
+  if (
+    p.retrospectiveOverviewWikiEmbed != null &&
+    typeof p.retrospectiveOverviewWikiEmbed === "object"
+  ) {
+    const w = p.retrospectiveOverviewWikiEmbed;
+    const mode = w.displayMode;
+    p.retrospectiveOverviewWikiEmbed = {
+      ...w,
+      displayMode:
+        mode === "iframe" || mode === "link" ? mode : undefined,
+    };
+  }
+  if (
+    p.retrospectiveRefundReductionPlan != null &&
+    typeof p.retrospectiveRefundReductionPlan === "object"
+  ) {
+    const r = p.retrospectiveRefundReductionPlan;
+    const ctx =
+      r.context && typeof r.context === "object" && !Array.isArray(r.context)
+        ? r.context
+        : {};
+    p.retrospectiveRefundReductionPlan = {
+      ...r,
+      context: {
+        scenario:
+          typeof (ctx as { scenario?: unknown }).scenario === "string"
+            ? (ctx as { scenario: string }).scenario
+            : "",
+        conflict:
+          typeof (ctx as { conflict?: unknown }).conflict === "string"
+            ? (ctx as { conflict: string }).conflict
+            : "",
+        problems: asStringArray((ctx as { problems?: unknown }).problems),
+      },
+      phases: asArray(r.phases).map((ph) => {
+        const row = ph as {
+          name?: unknown;
+          schemePrefix?: unknown;
+          goal?: unknown;
+          forParents?: unknown;
+          forStudents?: unknown;
+        };
+        return {
+          name: typeof row.name === "string" ? row.name : "",
+          schemePrefix:
+            typeof row.schemePrefix === "string" ? row.schemePrefix : "方案-",
+          goal: typeof row.goal === "string" ? row.goal : "",
+          forParents: asStringArray(row.forParents),
+          forStudents: asStringArray(row.forStudents),
+        };
+      }),
+    };
+  }
   return p;
 }
 

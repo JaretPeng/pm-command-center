@@ -60,13 +60,6 @@ export function TeamTab({ project }: { project: ProjectDetail }) {
           ))}
         </div>
       </Card>
-
-      <Card className="glass-card p-4">
-        <h3 className="text-sm font-semibold">协作网络（示意）</h3>
-        <p className="mt-2 text-sm text-muted-foreground">
-          以角色分组呈现协同关系；后续可接入图谱组件深化连线。
-        </p>
-      </Card>
     </div>
   );
 }

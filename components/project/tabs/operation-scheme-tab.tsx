@@ -120,8 +120,7 @@ export function OperationSchemeTab({
     [sections],
   );
 
-  const hasConfiguredScheme =
-    Boolean(block?.summary) || Boolean(block?.sections?.length);
+  const hasConfiguredScheme = Boolean(block?.sections?.length);
 
   if (!showAlineExtras && !hasConfiguredScheme) {
     return (
@@ -199,20 +198,6 @@ export function OperationSchemeTab({
 
   return (
     <div className="space-y-4">
-      {block?.summary ? (
-        <motion.div
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <Card className="glass-card p-5">
-            <h3 className="text-sm font-semibold">概要</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {block.summary}
-            </p>
-          </Card>
-        </motion.div>
-      ) : null}
-
       {sections.length ? (
         <div className="grid gap-4 md:grid-cols-2">
           {sections.map((sec, idx) => (

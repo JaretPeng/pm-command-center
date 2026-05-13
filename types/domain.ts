@@ -208,6 +208,50 @@ export interface RetrospectiveLocalDashboard {
   minHeight?: number;
 }
 
+/**
+ * 仅 A 线「项目总览」（URL 无 `?nav=`）时，在 Retrospective Tab 顶部、退费看板上方展示的飞书/wiki 嵌入。
+ * 带 `?nav=` 的侧栏子项目不展示。
+ */
+export interface RetrospectiveOverviewWikiEmbed {
+  title: string;
+  /** 飞书知识库/wiki 等 HTTPS 链接（需在飞书侧允许嵌入或对外可读） */
+  embedUrl: string;
+  caption?: string;
+  /** iframe 最小高度（px），默认 640 */
+  heightPx?: number;
+  /**
+   * `iframe`：页内嵌入（外站域名下扫码登录可能被浏览器拦截第三方 Cookie，飞书接口偶发 `{"code":1,"msg":"Failed"}`）。
+   * `link`：不嵌入 iframe，仅展示说明与「在飞书中打开」——需登录或稳定查看时用此模式。
+   * @default "iframe"
+   */
+  displayMode?: "iframe" | "link";
+}
+
+/** 退费看板后的「降退费解决方案」等结构化文案 */
+export interface RetrospectiveRefundReductionPhase {
+  /** 阶段名，如「维稳期」「建联期」 */
+  name: string;
+  /** 展示为「方案-{name}」；可与 document 内章节标题一致 */
+  schemePrefix?: string;
+  /** 本阶段目标 */
+  goal: string;
+  /** 面向家长的动作要点 */
+  forParents: string[];
+  /** 面向学员的动作要点 */
+  forStudents: string[];
+}
+
+export interface RetrospectiveRefundReductionPlan {
+  /** 模块主标题，如「降退费解决方案」 */
+  documentTitle: string;
+  context: {
+    scenario: string;
+    conflict: string;
+    problems: string[];
+  };
+  phases: RetrospectiveRefundReductionPhase[];
+}
+
 export interface FishboneBranch {
   category: string;
   causes: string[];
@@ -293,6 +337,13 @@ export interface ProjectDetail extends ProjectSummary {
   overviewHideStructureDiagram?: boolean;
   /** Retrospective Tab：站内静态 HTML 看板（iframe 嵌入） */
   retrospectiveLocalDashboard?: RetrospectiveLocalDashboard;
+  /**
+   * 仅 A 线项目总览 Retrospective：飞书嵌入（见 `RetrospectiveOverviewWikiEmbed`），渲染在
+   * `retrospectiveLocalDashboard` 之上；其他 `nav` 下不展示。
+   */
+  retrospectiveOverviewWikiEmbed?: RetrospectiveOverviewWikiEmbed;
+  /** 有退费看板时，紧接在看板 iframe 之后展示的降退费策略模块 */
+  retrospectiveRefundReductionPlan?: RetrospectiveRefundReductionPlan;
 }
 
 export interface ProjectIndexFile {
