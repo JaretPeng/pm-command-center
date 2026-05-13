@@ -26,6 +26,13 @@ export function ProjectHero({ project }: { project: ProjectDetail }) {
   }, []);
 
   const dynamics = project.heroDynamics;
+  const dynCardTitle = project.heroDynamicsCardTitle ?? "项目动态";
+  const dynTotalLabel = project.heroDynamicsTotalLabel ?? "项目合计";
+  const dynStat = project.heroDynamicsStatLabels ?? {};
+  const statInProgress = dynStat.inProgress ?? "进行中项目";
+  const statCompleted = dynStat.completed ?? "已完结项目";
+  const statPending = dynStat.pending ?? "待启动项目";
+  const statRisk = dynStat.risk ?? "项目风险";
   const pie = [
     { name: "完成", value: project.progress },
     { name: "剩余", value: Math.max(0, 100 - project.progress) },
@@ -64,7 +71,14 @@ export function ProjectHero({ project }: { project: ProjectDetail }) {
               {project.name}
             </h1>
             <Badge>{project.status}</Badge>
-            <Badge variant="outline">{project.phase}</Badge>
+            {project.phase?.trim() ? (
+              <Badge variant="outline">{project.phase.trim()}</Badge>
+            ) : null}
+            {(project.heroTagBadges ?? []).map((t) => (
+              <Badge key={t} variant="outline">
+                {t}
+              </Badge>
+            ))}
             <Badge variant="outline" className={healthBadgeClass(project.health)}>
               {healthLabel(project.health)}
             </Badge>
@@ -145,7 +159,7 @@ export function ProjectHero({ project }: { project: ProjectDetail }) {
       <Card className="glass-card min-w-0 w-full p-4">
         {dynamics ? (
           <>
-            <p className="text-sm font-semibold">项目动态</p>
+            <p className="text-sm font-semibold">{dynCardTitle}</p>
             <div className="relative mt-2 h-[200px] w-full">
               {chartsMounted ? (
                 <ResponsiveContainer width="100%" height="100%">
@@ -175,7 +189,7 @@ export function ProjectHero({ project }: { project: ProjectDetail }) {
               {dynamicsTotal > 0 ? (
                 <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
                   <p className="text-2xl font-semibold tabular-nums leading-none">{dynamicsTotal}</p>
-                  <p className="mt-1 text-[11px] text-muted-foreground">项目合计</p>
+                  <p className="mt-1 text-[11px] text-muted-foreground">{dynTotalLabel}</p>
                 </div>
               ) : (
                 <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
@@ -208,28 +222,28 @@ export function ProjectHero({ project }: { project: ProjectDetail }) {
             </div>
             <div className="mt-3 grid grid-cols-2 gap-x-2 gap-y-3 border-t pt-3 text-center text-xs">
               <div>
-                <p className="text-muted-foreground">进行中项目</p>
+                <p className="text-muted-foreground">{statInProgress}</p>
                 <p className="text-lg font-semibold tabular-nums text-orange-600 dark:text-orange-400">
                   {dynamics.inProgress}
                   <span className="text-xs font-normal text-muted-foreground">个</span>
                 </p>
               </div>
               <div>
-                <p className="text-muted-foreground">已完结项目</p>
+                <p className="text-muted-foreground">{statCompleted}</p>
                 <p className="text-lg font-semibold tabular-nums text-muted-foreground">
                   {dynamics.completed}
                   <span className="text-xs font-normal text-muted-foreground">个</span>
                 </p>
               </div>
               <div>
-                <p className="text-muted-foreground">待启动项目</p>
+                <p className="text-muted-foreground">{statPending}</p>
                 <p className="text-lg font-semibold tabular-nums text-blue-600 dark:text-blue-400">
                   {dynamics.pending}
                   <span className="text-xs font-normal text-muted-foreground">个</span>
                 </p>
               </div>
               <div>
-                <p className="text-muted-foreground">项目风险</p>
+                <p className="text-muted-foreground">{statRisk}</p>
                 <p
                   className={cn(
                     "text-lg font-semibold tabular-nums",

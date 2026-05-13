@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { ProjectPageShell } from "@/components/project/project-page-shell";
-import { loadProjectBySlug } from "@/lib/load-projects";
+import { applyLineNavOverride, loadProjectBySlug } from "@/lib/load-projects";
 import { stringifySearchParams } from "@/lib/url-search";
 
 /** 始终拉取最新 JSON；避免路由缓存导致 Overview 视频配置不更新 */
@@ -46,21 +46,26 @@ export default async function ProjectPage({
     );
   }
 
-  const project = await loadProjectBySlug(slug);
+  let project = await loadProjectBySlug(slug);
 
   if (!project) notFound();
 
   let initialSearchQuery = "";
+  let navForMerge: string | null = null;
   try {
     const sp = searchParams != null ? await searchParams : {};
-    initialSearchQuery = stringifySearchParams(
-      sp && typeof sp === "object"
-        ? (sp as Record<string, string | string[] | undefined>)
-        : {},
-    );
+    const raw = sp && typeof sp === "object" ? sp : {};
+    const rec = raw as Record<string, string | string[] | undefined>;
+    initialSearchQuery = stringifySearchParams(rec);
+    const navRaw = rec.nav;
+    if (typeof navRaw === "string") navForMerge = navRaw;
+    else if (Array.isArray(navRaw) && typeof navRaw[0] === "string")
+      navForMerge = navRaw[0];
   } catch {
     initialSearchQuery = "";
   }
+
+  project = await applyLineNavOverride(project, navForMerge);
 
   return (
     <div className="mx-auto w-full max-w-[1600px] flex-1 px-4 py-6 sm:px-6">

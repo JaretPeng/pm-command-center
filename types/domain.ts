@@ -258,7 +258,7 @@ export interface FishboneBranch {
 }
 
 /** 运营方案 Tab 内置矢量图类型 */
-export type OperationSchemeDiagramId = "courseSystem";
+export type OperationSchemeDiagramId = "courseSystem" | "a1YbcProductPricing";
 
 /** 运营方案 Tab：外联一行（石墨、飞书等） */
 export interface OperationSchemeLink {
@@ -312,6 +312,19 @@ export interface ProjectDetail extends ProjectSummary {
     completed: number;
     pending: number;
     risk: number;
+  };
+  /** Hero 标题行：在 status / health 旁追加 outline 标签（如子项目「智能硬件」） */
+  heroTagBadges?: string[];
+  /** Hero 右侧动态卡片标题，默认「项目动态」 */
+  heroDynamicsCardTitle?: string;
+  /** 环形图中心第二行文案，默认「项目合计」 */
+  heroDynamicsTotalLabel?: string;
+  /** 动态卡片底部四宫格标题，未填则沿用「进行中项目」等 */
+  heroDynamicsStatLabels?: {
+    inProgress?: string;
+    completed?: string;
+    pending?: string;
+    risk?: string;
   };
   /** Hero 主卡内：横向课程体系条（如 A1–A8「高级算法」） */
   heroCurriculumStrip?: HeroCurriculumStrip;

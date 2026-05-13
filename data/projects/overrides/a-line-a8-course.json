@@ -1,0 +1,295 @@
+{
+  "name": "A8课程制作",
+  "phase": "",
+  "type": "直播课 · 建模与策略",
+  "status": "进行中",
+  "progress": 48,
+  "milestoneCount": 10,
+  "blockerCount": 1,
+  "owner": "A线产品",
+  "riskLevel": "medium",
+  "health": "good",
+  "collaborators": 16,
+  "heroDateCaption": "2026年Q2起 · A8 直播课产研",
+  "heroTagBadges": ["直播课"],
+  "heroNarrative": [
+    "A8 面向具备扎实 C++ 与算法基础的高年级学员，对标信息学奥赛中后期的综合建模与求解策略：从读题抽象、算法与证明取舍到实现调优。直播课以套题与限时模考为主线，配套讲评与复盘模板，强化抗压与失误归因，为冲高阶赛事及校队集训衔接做好沉淀。"
+  ],
+  "heroCurriculumStrip": null,
+  "heroDynamics": {
+    "inProgress": 8,
+    "completed": 7,
+    "pending": 4,
+    "risk": 2
+  },
+  "heroDynamicsCardTitle": "交付动态",
+  "heroDynamicsTotalLabel": "交付事项合计",
+  "heroDynamicsStatLabels": {
+    "inProgress": "进行中事项",
+    "completed": "已完结事项",
+    "pending": "待启动事项",
+    "risk": "风险事项"
+  },
+  "executiveSummary": "围绕 A8 综合建模与求解策略、套题模考与讲评体系，对齐高阶赛考目标与直播交付标准，保障教研产出与课堂体验闭环。",
+  "timelineEmbed": {
+    "title": "2026 系统班项目甘特（飞书）",
+    "caption": "A8 产研排期与依赖以甘特为准；嵌入受限时请新窗口打开。",
+    "embedUrl": "https://my.feishu.cn/wiki/CUi4w4nn5itIrZkQ8wlccSDhnJB?from=from_copylink",
+    "heightPx": 480,
+    "hideBuiltInGantt": false
+  },
+  "milestones": [
+    {
+      "id": "a8-ms-01",
+      "name": "A8 能力画像与 A7 衔接评审",
+      "owner": "教研 / 产品",
+      "dueDate": "2026-01-20",
+      "status": "done",
+      "risk": "low",
+      "modules": ["大纲"],
+      "description": "冻结「建模—策略—实现」能力轴与专题边界。"
+    },
+    {
+      "id": "a8-ms-02",
+      "name": "综合建模专题大纲 v1.0 签核",
+      "owner": "教研",
+      "dueDate": "2026-02-28",
+      "status": "done",
+      "risk": "low",
+      "modules": ["大纲"],
+      "description": "套题编排、复盘模板与评分维度对齐。"
+    },
+    {
+      "id": "a8-ms-03",
+      "name": "主讲课件与证明/伪代码规范冻结",
+      "owner": "主讲 / 课研",
+      "dueDate": "2026-04-20",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["直播课"],
+      "description": "板书、关键引理与代码骨架统一口径。"
+    },
+    {
+      "id": "a8-ms-04",
+      "name": "套题卷与限时模考包",
+      "owner": "教研",
+      "dueDate": "2026-05-05",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["测评"],
+      "description": "多题联动、部分分与讲评脚本。"
+    },
+    {
+      "id": "a8-ms-05",
+      "name": "OJ 高阶题单与部分分评测",
+      "owner": "研发 / 课研",
+      "dueDate": "2026-05-12",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["OJ"],
+      "description": "子任务分、checker 与课中演示对齐。"
+    },
+    {
+      "id": "a8-ms-06",
+      "name": "双师走台与高压内测班",
+      "owner": "教学中心",
+      "dueDate": "2026-05-22",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["质检"],
+      "description": "限时、互动与失误归因演练。"
+    },
+    {
+      "id": "a8-ms-07",
+      "name": "赛考冲刺话术与心理负荷 FAQ",
+      "owner": "运营",
+      "dueDate": "2026-05-10",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["运营"],
+      "description": "高压场景沟通与续报/转介绍口径。"
+    },
+    {
+      "id": "a8-ms-08",
+      "name": "排课与模考周次锁定",
+      "owner": "排课",
+      "dueDate": "2026-05-18",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["排课"],
+      "description": "与系统班大表及赛前集训窗口对齐。"
+    },
+    {
+      "id": "a8-ms-09",
+      "name": "榜单/提交与复盘报表验收",
+      "owner": "数据",
+      "dueDate": "2026-05-25",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["数据"],
+      "description": "限时提交、榜单刷新与错题归因看板。"
+    },
+    {
+      "id": "a8-ms-10",
+      "name": "正式发布与首模考复盘",
+      "owner": "A线产品",
+      "dueDate": "2026-06-01",
+      "status": "planned",
+      "risk": "high",
+      "modules": ["发布"],
+      "description": "首套模考问题清单与补丁周。"
+    }
+  ],
+  "gantt": [
+    {
+      "id": "a8-g1",
+      "name": "能力画像 & 大纲评审",
+      "lane": "教研",
+      "start": "2025-12-01",
+      "end": "2026-03-10",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "a8-g2",
+      "name": "主讲课件 / 证明规范",
+      "lane": "课研",
+      "start": "2026-02-01",
+      "end": "2026-05-15",
+      "progress": 45,
+      "phase": "phase2"
+    },
+    {
+      "id": "a8-g3",
+      "name": "套题模考与讲评",
+      "lane": "教研",
+      "start": "2026-03-15",
+      "end": "2026-05-28",
+      "progress": 38,
+      "phase": "phase2"
+    },
+    {
+      "id": "a8-g4",
+      "name": "OJ 高阶题单",
+      "lane": "研发",
+      "start": "2026-03-01",
+      "end": "2026-05-20",
+      "progress": 40,
+      "phase": "phase2"
+    },
+    {
+      "id": "a8-g5",
+      "name": "走台 / 内测",
+      "lane": "教学",
+      "start": "2026-04-20",
+      "end": "2026-05-30",
+      "progress": 22,
+      "phase": "ongoing"
+    },
+    {
+      "id": "a8-g6",
+      "name": "运营 FAQ",
+      "lane": "运营",
+      "start": "2026-04-01",
+      "end": "2026-05-25",
+      "progress": 30,
+      "phase": "ongoing"
+    },
+    {
+      "id": "a8-g7",
+      "name": "排课 / 模考周",
+      "lane": "排课",
+      "start": "2026-04-15",
+      "end": "2026-06-05",
+      "progress": 18,
+      "phase": "ongoing"
+    },
+    {
+      "id": "a8-g8",
+      "name": "发布与复盘",
+      "lane": "产品",
+      "start": "2026-05-15",
+      "end": "2026-06-15",
+      "progress": 10,
+      "phase": "ongoing"
+    }
+  ],
+  "team": [
+    {
+      "id": "a8-t1",
+      "name": "A线产品",
+      "role": "产品 / PM",
+      "modules": ["范围", "发布"],
+      "status": "busy",
+      "deliverables": ["里程碑评审", "甘特对齐", "模考复盘机制"]
+    },
+    {
+      "id": "a8-t2",
+      "name": "竞赛教研（高阶）",
+      "role": "教研",
+      "modules": ["建模", "套题"],
+      "status": "busy",
+      "deliverables": ["专题树", "讲评脚本", "复盘模板"]
+    },
+    {
+      "id": "a8-t3",
+      "name": "主讲团队",
+      "role": "教学",
+      "modules": ["直播课"],
+      "status": "busy",
+      "deliverables": ["课件与证明口径", "走台", "内测反馈"]
+    },
+    {
+      "id": "a8-t4",
+      "name": "课研制作",
+      "role": "课研",
+      "modules": ["课件", "模考"],
+      "status": "active",
+      "deliverables": ["套题卷", "评分维度"]
+    },
+    {
+      "id": "a8-t5",
+      "name": "OJ 研发",
+      "role": "研发",
+      "modules": ["题库"],
+      "status": "active",
+      "deliverables": ["子任务分", "checker", "数据"]
+    },
+    {
+      "id": "a8-t6",
+      "name": "运营",
+      "role": "运营",
+      "modules": ["FAQ"],
+      "status": "active",
+      "deliverables": ["高压场景话术", "开班物料"]
+    }
+  ],
+  "risks": [
+    {
+      "id": "a8-r1",
+      "title": "套题难度曲线失控影响模考可信度",
+      "severity": "high",
+      "status": "open",
+      "impact": "口碑与续报压力。",
+      "owner": "教研",
+      "mitigation": "分层套题 + 预发班级数据校准。",
+      "progress": "难度评审中"
+    },
+    {
+      "id": "a8-r2",
+      "title": "checker/子任务分实现复杂度导致延期",
+      "severity": "medium",
+      "status": "open",
+      "impact": "课中演示与作业链路风险。",
+      "owner": "研发",
+      "mitigation": "优先保证课中必演示路径，次要分阶段上线。",
+      "progress": "技术方案评审中"
+    }
+  ],
+  "retrospectives": [],
+  "operationScheme": null,
+  "retrospectiveLocalDashboard": null,
+  "retrospectiveOverviewWikiEmbed": null,
+  "retrospectiveRefundReductionPlan": null,
+  "deepDive": null
+}

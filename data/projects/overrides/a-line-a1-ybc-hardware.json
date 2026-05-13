@@ -1,0 +1,592 @@
+{
+  "name": "A1 YBC硬件课迭代",
+  "phase": "",
+  "type": "课程与硬件交付",
+  "status": "进行中",
+  "progress": 52,
+  "milestoneCount": 14,
+  "blockerCount": 1,
+  "owner": "彭凡力",
+  "riskLevel": "medium",
+  "health": "good",
+  "collaborators": 16,
+  "heroDateCaption": "2026年2月起 · 入门班转 A1 与硬件课并行推进",
+  "heroTagBadges": ["智能硬件", "课程制作"],
+  "heroNarrative": [
+    "本子项目承接《入门班转 A1》主线中的「A1（YBC 硬件版）」交付：在 A1 6 期及后续期次，将 YBC 硬件箱、自研学习手册与 4 个硬件案例教学合入直播课包，对标行业已将硬件作为标配的现状，补齐产品力与差异化卖点。",
+    "业务侧：2025 年 8 月大课直售启动 A1 售卖，9 月首期开课；规划自 2026 年 3 月起面向 C0-S / R0-S 入门班用户转化至 A1（两周一期节奏），并同步迭代售卖规则、物料、培训与运营 SOP。课程侧：在保持 17 次直播课结构下，增加硬件教学与随材权益，协同供应链完成硬件与手册履约。",
+    "当前重点：硬件与手册「交付中」、直播/录播课研「交付中」、入门班与系统班运营 SOP 及过程/结果数据监测「交付中」；售卖策略、培训与运营指标等模块已阶段性完结，持续对齐甘特与飞书项目空间。"
+  ],
+  "heroCurriculumStrip": null,
+  "heroDynamics": {
+    "inProgress": 10,
+    "completed": 9,
+    "pending": 5,
+    "risk": 2
+  },
+  "heroDynamicsCardTitle": "交付动态",
+  "heroDynamicsTotalLabel": "交付事项合计",
+  "heroDynamicsStatLabels": {
+    "inProgress": "进行中事项",
+    "completed": "已完结事项",
+    "pending": "待启动事项",
+    "risk": "风险事项"
+  },
+  "executiveSummary": "围绕 A1 YBC 硬件版课包、随材与课研量产，拉通售卖、运营、供应链与数据闭环，保障入门班转 A1 节奏下的按期开课与体验一致。",
+  "background": [
+    "入门班转 A1 的背景来自产品线升级：C 线聚焦人工智能，A 线聚焦信息学奥赛；仅靠大课直售单一渠道难以支撑 A 线长期规模，因此规划 C0-S / R0-S 入门班用户向 A1 转化，并取消单独 A0 产品线，以降低需求模糊带来的获客与转化成本。",
+    "A1（YBC 硬件版）在原 A1 基础上搭载 YBC 硬件箱与自研手册，新增 4 个硬件案例教学，售价与权益包同步调整；策略上对标竞品已将硬件作为标配的现状，缩短「无硬件」带来的竞争劣势窗口。",
+    "本子项目范围覆盖：硬件与手册随材、直播/录播课研合入、售卖与退费规则、营销物料、产品培训、入门班/系统班运营 SOP、过程与结果数据监测等；关键依赖项与排期以《2026 系统班项目甘特》飞书文档为单一事实来源（本页 Timeline 已嵌入）。"
+  ],
+  "objectives": [
+    "1. 硬件与随材按期量产与入库\n\n完成 YBC 硬件箱、学习手册的封样、质检与物流策略对齐，保障开课窗口前到仓与售后条款清晰。",
+    "2. 课研与内容合入「可教可练」\n\n在 17 次直播课框架内完成硬件案例、讲义、课件与录播资产的联调，确保课堂演示、课后练习与 OJ/题库入口体验一致。",
+    "3. 售卖与运营机制就绪\n\n迭代限购、退费（含硬件费项）、临调/跨期等规则说明；培训班主任与主讲，沉淀答疑 QA 与过程数据看板，支撑两周一期滚动开班。",
+    "4. 风险与依赖可视、可升级\n\n对供应链波动、录播合成排期、数据口径变更等建立周节奏复盘与升级路径，避免关键路径静默延期。"
+  ],
+  "keyOutcomes": [
+    "1. A1（YBC 硬件版）课包在目标期次上线\n\n完成对外售卖页、价格与权益结构、随材清单及课堂硬件演示脚本的对齐发布。",
+    "2. 培训与物料「可用、可找、可更新」\n\n两场关键培训（课程方案解读、A 线产品解读）材料归档；营销物料与《入门班-销售物料》表结构保持版本可追溯。",
+    "3. 运营与数据闭环初版\n\n入门班转化 SOP、系统班续报 SOP 与过程/结果指标监测报表上线，支撑转化漏斗与续报健康度周会。",
+    "4. 复盘资产沉淀\n\n关键进展、风险与决策记录在飞书/石墨空间可查，为后续 A2+ 硬件协同与多期滚动交付提供模板。"
+  ],
+  "valueProps": [
+    {
+      "title": "硬件补齐竞争力",
+      "description": "YBC 硬件箱 + 案例化教学与手册组合，缩短与竞品「硬件标配」的体验差距。",
+      "metric": "4 个硬件案例"
+    },
+    {
+      "title": "转化节奏可预期",
+      "description": "两周一期 A1 与入门班供量模型对齐，售卖、排课与供应链按甘特节拍拉齐。",
+      "metric": "滚动开班"
+    },
+    {
+      "title": "风险前置",
+      "description": "对随材、课研、数据三类关键路径设风险计数与周更机制，避免静默延期。",
+      "metric": "风险事项 2"
+    }
+  ],
+  "timelineEmbed": {
+    "title": "2026 系统班项目甘特（飞书）",
+    "caption": "与《入门班转 A1》项目文档引用一致；若页内嵌入受限，请使用飞书客户端打开同一链接。",
+    "embedUrl": "https://my.feishu.cn/wiki/CUi4w4nn5itIrZkQ8wlccSDhnJB?from=from_copylink",
+    "heightPx": 520,
+    "hideBuiltInGantt": false
+  },
+  "milestones": [
+    {
+      "id": "ybc-ms-01",
+      "name": "入门班转 A1 售卖策略与规则定稿",
+      "owner": "杜鹏霄 / 杨景飞",
+      "dueDate": "2026-03-13",
+      "status": "done",
+      "risk": "low",
+      "modules": ["售卖", "规则"],
+      "description": "对齐 A1（YBC 硬件版）限购、退费含硬件费项、临调/跨期等条款，并完成对内评审。"
+    },
+    {
+      "id": "ybc-ms-02",
+      "name": "营销物料齐套（入门班-销售物料）",
+      "owner": "李湘悦 / 张畅",
+      "dueDate": "2026-03-15",
+      "status": "done",
+      "risk": "low",
+      "modules": ["物料"],
+      "description": "完成主视觉、话术包、对比表等物料冻结，支持班主任点对点触达与后续家长会分流。"
+    },
+    {
+      "id": "ybc-ms-03",
+      "name": "「C0/R0-S 续 A1」首场培训",
+      "owner": "张尧",
+      "dueDate": "2026-03-10",
+      "status": "done",
+      "risk": "low",
+      "modules": ["培训"],
+      "description": "第三课项目体验、课后测评筛选工具等方案培训落地。"
+    },
+    {
+      "id": "ybc-ms-04",
+      "name": "「A 线课程产品解读」第二场培训",
+      "owner": "孙帅 / 张畅",
+      "dueDate": "2026-03-11",
+      "status": "done",
+      "risk": "low",
+      "modules": ["培训"],
+      "description": "覆盖 A 线体系、亮点与 A1（含硬件）内容解读。"
+    },
+    {
+      "id": "ybc-ms-05",
+      "name": "运营指标口径与看板 v1",
+      "owner": "杨淑珍 / 杜鹏霄",
+      "dueDate": "2026-03-13",
+      "status": "done",
+      "risk": "low",
+      "modules": ["数据"],
+      "description": "过程与结果指标定义、采集与周更节奏对齐经营分析。"
+    },
+    {
+      "id": "ybc-ms-06",
+      "name": "YBC 硬件封样与量产评审",
+      "owner": "张畅 / 段宇洋",
+      "dueDate": "2026-04-10",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["硬件", "供应链"],
+      "description": "完成结构、固件、包装与课堂演示脚本联调，锁定量产批次与到仓时间。"
+    },
+    {
+      "id": "ybc-ms-07",
+      "name": "YBC 自研学习手册付印",
+      "owner": "张畅 / 李飞燕",
+      "dueDate": "2026-04-12",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["随材"],
+      "description": "印次、质检与物流对齐开课窗口；与退费扣费规则说明一致。"
+    },
+    {
+      "id": "ybc-ms-08",
+      "name": "直播课大纲与硬件案例合入",
+      "owner": "张畅 / 唐晓宇",
+      "dueDate": "2026-04-20",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["课研", "直播"],
+      "description": "17 次直播课脚本、演示与练习衔接 4 个硬件案例，完成教研评审。"
+    },
+    {
+      "id": "ybc-ms-09",
+      "name": "录播资产合成与上架",
+      "owner": "张畅",
+      "dueDate": "2026-05-05",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["录播"],
+      "description": "赠课与算法思维类录播合成、转码与播放链路验收。"
+    },
+    {
+      "id": "ybc-ms-10",
+      "name": "A1 第 6 期（硬件版）开售窗口",
+      "owner": "李湘悦 / 班主任团队",
+      "dueDate": "2026-03-25",
+      "status": "done",
+      "risk": "low",
+      "modules": ["售卖"],
+      "description": "与 C0/R0-362 期起售卖策略对齐，完成排期与名额策略评审。"
+    },
+    {
+      "id": "ybc-ms-11",
+      "name": "入门班运营转化 SOP 调整",
+      "owner": "杜鹏霄",
+      "dueDate": "2026-04-30",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["运营"],
+      "description": "点对点触达 → 测评筛选 → 家长会分流路径在 SOP 中固化。"
+    },
+    {
+      "id": "ybc-ms-12",
+      "name": "系统班运营续报 SOP 调整",
+      "owner": "杨景飞",
+      "dueDate": "2026-04-30",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["运营"],
+      "description": "与硬件权益、考级与赛事权益展示口径一致，减少客服解释成本。"
+    },
+    {
+      "id": "ybc-ms-13",
+      "name": "过程/结果数据监测报表深化",
+      "owner": "杨淑珍 / 杜鹏霄",
+      "dueDate": "2026-05-15",
+      "status": "in_progress",
+      "risk": "low",
+      "modules": ["数据"],
+      "description": "漏斗、班期、渠道维度下钻与预警阈值配置。"
+    },
+    {
+      "id": "ybc-ms-14",
+      "name": "首课硬件开箱与课堂演练验收",
+      "owner": "唐晓宇 / 供应链",
+      "dueDate": "2026-05-01",
+      "status": "planned",
+      "risk": "high",
+      "modules": ["课堂", "硬件"],
+      "description": "首课前 7 天完成到校样本演练与应急替换流程。"
+    }
+  ],
+  "gantt": [
+    {
+      "id": "ybc-g-01",
+      "name": "售卖策略 / 退费规则评审",
+      "lane": "售卖",
+      "start": "2026-02-15",
+      "end": "2026-03-13",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "ybc-g-02",
+      "name": "营销物料制作与归档",
+      "lane": "售卖",
+      "start": "2026-02-20",
+      "end": "2026-03-15",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "ybc-g-03",
+      "name": "两场关键培训",
+      "lane": "培训",
+      "start": "2026-03-08",
+      "end": "2026-03-12",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "ybc-g-04",
+      "name": "硬件封样 / 试产",
+      "lane": "供应链",
+      "start": "2026-03-01",
+      "end": "2026-04-18",
+      "progress": 65,
+      "phase": "phase2"
+    },
+    {
+      "id": "ybc-g-05",
+      "name": "手册编写与付印",
+      "lane": "随材",
+      "start": "2026-03-05",
+      "end": "2026-04-12",
+      "progress": 70,
+      "phase": "phase2"
+    },
+    {
+      "id": "ybc-g-06",
+      "name": "直播课大纲与案例合入",
+      "lane": "课研",
+      "start": "2026-03-10",
+      "end": "2026-04-25",
+      "progress": 55,
+      "phase": "phase2"
+    },
+    {
+      "id": "ybc-g-07",
+      "name": "录播合成与上架",
+      "lane": "课研",
+      "start": "2026-04-01",
+      "end": "2026-05-08",
+      "progress": 40,
+      "phase": "phase2"
+    },
+    {
+      "id": "ybc-g-08",
+      "name": "入门班转化 SOP",
+      "lane": "运营",
+      "start": "2026-03-01",
+      "end": "2026-04-30",
+      "progress": 50,
+      "phase": "ongoing"
+    },
+    {
+      "id": "ybc-g-09",
+      "name": "系统班续报 SOP",
+      "lane": "运营",
+      "start": "2026-03-01",
+      "end": "2026-04-30",
+      "progress": 45,
+      "phase": "ongoing"
+    },
+    {
+      "id": "ybc-g-10",
+      "name": "过程数据监测",
+      "lane": "数据",
+      "start": "2026-02-25",
+      "end": "2026-05-20",
+      "progress": 55,
+      "phase": "ongoing"
+    },
+    {
+      "id": "ybc-g-11",
+      "name": "结果数据监测",
+      "lane": "数据",
+      "start": "2026-03-15",
+      "end": "2026-05-30",
+      "progress": 35,
+      "phase": "ongoing"
+    },
+    {
+      "id": "ybc-g-12",
+      "name": "首课硬件演练与应急流程",
+      "lane": "项目治理",
+      "start": "2026-04-15",
+      "end": "2026-05-05",
+      "progress": 20,
+      "phase": "ongoing"
+    }
+  ],
+  "team": [
+    {
+      "id": "ybc-t-01",
+      "name": "张畅",
+      "role": "课程与硬件产品",
+      "modules": ["大纲", "硬件案例", "手册"],
+      "status": "busy",
+      "deliverables": ["A1 YBC 课包定义", "硬件与课研接口人"]
+    },
+    {
+      "id": "ybc-t-02",
+      "name": "张尧",
+      "role": "课程与教研",
+      "modules": ["C0/R0-S 调整"],
+      "status": "active",
+      "deliverables": ["入门班课程方案", "首场培训"]
+    },
+    {
+      "id": "ybc-t-03",
+      "name": "唐晓宇",
+      "role": "课研与课堂",
+      "modules": ["直播课", "演练"],
+      "status": "busy",
+      "deliverables": ["硬件案例合入", "首课演练"]
+    },
+    {
+      "id": "ybc-t-04",
+      "name": "杜鹏霄",
+      "role": "运营与策略",
+      "modules": ["售卖", "SOP"],
+      "status": "active",
+      "deliverables": ["售卖策略", "入门班转化 SOP"]
+    },
+    {
+      "id": "ybc-t-05",
+      "name": "李湘悦",
+      "role": "营销与物料",
+      "modules": ["物料", "售卖支持"],
+      "status": "active",
+      "deliverables": ["销售物料", "开售窗口协同"]
+    },
+    {
+      "id": "ybc-t-06",
+      "name": "杨淑珍",
+      "role": "数据与经营",
+      "modules": ["指标", "看板"],
+      "status": "active",
+      "deliverables": ["过程/结果数据监测"]
+    },
+    {
+      "id": "ybc-t-07",
+      "name": "段宇洋",
+      "role": "供应链",
+      "modules": ["硬件量产"],
+      "status": "busy",
+      "deliverables": ["YBC 硬件封样与量产"]
+    },
+    {
+      "id": "ybc-t-08",
+      "name": "彭凡力",
+      "role": "项目管理",
+      "modules": ["节奏", "复盘"],
+      "status": "active",
+      "deliverables": ["甘特对齐", "关键进展记录"]
+    }
+  ],
+  "operationScheme": {
+    "summary": "本方案聚焦 A1（YBC 硬件版）在入门班转 A1 背景下的课程、随材、售卖与运营协同，执行细节以项目文档与甘特为准。",
+    "sections": [
+      {
+        "title": "产品构成与定价",
+        "content": "A1 无硬件版与 YBC 硬件版在期次、价格、课次、随材、赠课与赛考权益上的对照说明。",
+        "diagram": "a1YbcProductPricing"
+      },
+      {
+        "title": "课程与硬件",
+        "content": "在保持 17 次直播课与课时结构前提下，新增 YBC 硬件箱与 4 个硬件案例教学；配套 YBC 自研学习手册与 CCF 练习册组合，课堂需提供可复现的演示脚本与故障处理清单。录播侧完成赠课与算法思维类素材合成，保障首课开箱体验。"
+      },
+      {
+        "title": "售卖与价格权益",
+        "content": "A1 6 期及以后切换 YBC 硬件版定价与权益包（含考级、赛事权益与赠课外宣价值）；明确限购、退费（含硬件费项）、临调与跨期规则，降低班主任解释成本。售卖期次与入门班供量模型需与排课表《A线预排》对齐。"
+      },
+      {
+        "title": "培训与物料",
+        "content": "两场培训分别覆盖课程调整方案与 A 线/A1 产品解读；物料以《入门班-销售物料》为主索引，支持点对点触达与后续家长会分流。所有对外口径变更需同步客服与增长。"
+      },
+      {
+        "title": "运营与数据",
+        "content": "入门班转化与系统班续报 SOP 与硬件权益展示一致；过程数据支持筛选与分层运营，结果数据对齐 ROI 与续报健康度周会。风险项通过甘特与周会升级，避免静默延期。"
+      }
+    ]
+  },
+  "documents": [
+    {
+      "id": "ybc-d-01",
+      "title": "入门班转 A1 项目文档（主文档）",
+      "category": "project_doc",
+      "updatedAt": "2026-05-06",
+      "department": "A线产品",
+      "href": "https://confluence.zhenguanyu.com/x/E55qOQ",
+      "excerpt": "A 线总览与入门班转 A1 背景、目标与进度入口。"
+    },
+    {
+      "id": "ybc-d-02",
+      "title": "2026 系统班项目甘特（飞书）",
+      "category": "gantt",
+      "updatedAt": "2026-05-06",
+      "department": "项目管理",
+      "href": "https://my.feishu.cn/wiki/CUi4w4nn5itIrZkQ8wlccSDhnJB?from=from_copylink",
+      "excerpt": "交付事项排期与依赖单一事实来源（与 Timeline 嵌入一致）。"
+    },
+    {
+      "id": "ybc-d-03",
+      "title": "「C 入转 A1」项目关键进展记录",
+      "category": "project_doc",
+      "updatedAt": "2026-05-01",
+      "department": "项目管理",
+      "href": "https://shimo.zhenguanyu.com/docs/Aw65vQ7OjRB1toRD/",
+      "excerpt": "交付类别、责任方与状态跟踪。"
+    },
+    {
+      "id": "ybc-d-04",
+      "title": "C0/R0-S 课程调整方案",
+      "category": "syllabus",
+      "updatedAt": "2026-03-01",
+      "department": "课程中心",
+      "href": "https://shimo.zhenguanyu.com/docs/q7wyQnEGxNQOfg4J",
+      "excerpt": "第三课项目体验、课后测评等调整说明。"
+    },
+    {
+      "id": "ybc-d-05",
+      "title": "A1（含 YBC 硬件）课程大纲",
+      "category": "syllabus",
+      "updatedAt": "2026-04-01",
+      "department": "课程中心",
+      "href": "https://shimo.zhenguanyu.com/sheets/rn7JFWbOQwlhpemw/MODOC/",
+      "excerpt": "硬件案例与课次结构对齐。"
+    },
+    {
+      "id": "ybc-d-06",
+      "title": "《A+ 硬件课程方案整理》",
+      "category": "operations",
+      "updatedAt": "2026-04-01",
+      "department": "课程中心",
+      "href": "https://shimo.zhenguanyu.com/docs/kKZpKJN417DvhxVq/",
+      "excerpt": "硬件清单与版本记录。"
+    },
+    {
+      "id": "ybc-d-07",
+      "title": "入门班-销售物料",
+      "category": "operations",
+      "updatedAt": "2026-03-10",
+      "department": "营销",
+      "href": "https://shimo.zhenguanyu.com/sheets/3NmpY8r4565PudWJ/VVo7N/",
+      "excerpt": "主视觉、话术与对比物料索引。"
+    },
+    {
+      "id": "ybc-d-08",
+      "title": "A线预排（排课表）",
+      "category": "gantt",
+      "updatedAt": "2026-04-10",
+      "department": "排课",
+      "href": "https://shimo.zhenguanyu.com/sheets/AlOr0eYp8mbJFNr8/ATzL1/",
+      "excerpt": "两周一期 A1 与入门班供量对齐。"
+    },
+    {
+      "id": "ybc-d-09",
+      "title": "产品功能（Confluence）",
+      "category": "product",
+      "updatedAt": "2026-04-15",
+      "department": "产品",
+      "href": "https://confluence.zhenguanyu.com/x/WAOzNg",
+      "excerpt": "与硬件课相关的系统能力变更入口。"
+    },
+    {
+      "id": "ybc-d-10",
+      "title": "物料需求总表",
+      "category": "operations",
+      "updatedAt": "2026-03-05",
+      "department": "营销",
+      "href": "https://shimo.zhenguanyu.com/sheets/qeOJrZpNGwmaIemg/MODOC/",
+      "excerpt": "硬件课迭代配套物料需求。"
+    }
+  ],
+  "retrospectives": [
+    {
+      "id": "ybc-r-01",
+      "title": "硬件与课研并行下的依赖管理",
+      "date": "2026-04-01",
+      "context": "YBC 硬件封样与直播课案例合入存在双向依赖：课件需冻结硬件接口形态，硬件试产又需课堂演示反馈。",
+      "rootCause": [
+        "早期以「软件课」节奏排期，未单独拉出硬件封样-返工缓冲。",
+        "跨团队接口清单（尺寸、供电、驱动）未在单一文档锁定版本。"
+      ],
+      "impact": "若返工发生在开课窗口前 2 周内，将同时挤压录播合成与班主任培训。",
+      "actions": [
+        "建立硬件-课研联合评审周会，接口变更必须带版本号。",
+        "甘特中为封样后返工预留固定缓冲段，并显性标注在飞书甘特。",
+        "首课前完成「到校样本演练」检查表。"
+      ],
+      "lessons": [
+        "硬件类项目需把「课堂可演示」作为独立验收里程碑，而非仅供应链到货。",
+        "飞书甘特与关键进展表双链维护，减少信息碎片化。"
+      ],
+      "followUp": "持续跟踪风险事项计数，超过阈值升级至产品线双周会。"
+    },
+    {
+      "id": "ybc-r-02",
+      "title": "入门班转 A1 的售卖与运营口径",
+      "date": "2026-03-20",
+      "context": "硬件版定价与权益结构升级后，前端需统一解释退费、考级与赠课外宣价值，避免班主任口径漂移。",
+      "rootCause": [
+        "规则文档分散在多个石墨表，缺少单一「对外口径」页。",
+        "培训覆盖人群分层不足，新班主任上手周期长。"
+      ],
+      "impact": "口径不一致会放大客诉与无效咨询，影响转化与首课出勤。",
+      "actions": [
+        "沉淀一页「对外口径」并由产品/运营双签。",
+        "培训录像与 FAQ 进入文档库置顶；关键变更走版本号。",
+        "数据看板增加「咨询热点 TOP10」周更。"
+      ],
+      "lessons": [
+        "硬件与权益绑定时，退费示例需配 2~3 个计算样例。",
+        "运营 SOP 与数据监测应同事项编号，便于周会追踪。"
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "id": "ybc-risk-1",
+      "title": "硬件量产或物流波动导致到仓延误",
+      "severity": "high",
+      "status": "open",
+      "impact": "影响首课开箱与课堂演示，连带挤压录播与培训窗口。",
+      "owner": "段宇洋",
+      "mitigation": "双供应商打样、提前锁定安全库存与应急替换包。",
+      "progress": "试产中"
+    },
+    {
+      "id": "ybc-risk-2",
+      "title": "课研合入晚于封样导致课件返工",
+      "severity": "medium",
+      "status": "open",
+      "impact": "教研与主讲备课成本上升，可能影响内测课质量。",
+      "owner": "张畅",
+      "mitigation": "接口冻结日与课研评审门槛写进甘特关键路径。",
+      "progress": "评审闭环中"
+    },
+    {
+      "id": "ybc-risk-3",
+      "title": "数据口径变更导致周会指标抖动",
+      "severity": "low",
+      "status": "mitigating",
+      "impact": "经营判断噪声增大，影响转化策略微调时机。",
+      "owner": "杨淑珍",
+      "mitigation": "指标字典版本化，变更需提前一周公告。",
+      "progress": "字典 v1 已发布"
+    }
+  ],
+  "deepDive": null,
+  "retrospectiveLocalDashboard": null,
+  "retrospectiveOverviewWikiEmbed": null,
+  "retrospectiveRefundReductionPlan": null
+}

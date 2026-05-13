@@ -133,6 +133,27 @@ function normalizeProjectDetail(raw: ProjectDetail): ProjectDetail {
         mode === "iframe" || mode === "link" ? mode : undefined,
     };
   }
+  if ("heroTagBadges" in p && (p as { heroTagBadges?: unknown }).heroTagBadges !== undefined) {
+    const arr = asStringArray((p as { heroTagBadges?: unknown }).heroTagBadges);
+    if (arr.length) (p as { heroTagBadges: string[] }).heroTagBadges = arr;
+    else delete (p as { heroTagBadges?: string[] }).heroTagBadges;
+  }
+  if ("heroDynamicsStatLabels" in p) {
+    const hsl = (p as { heroDynamicsStatLabels?: unknown }).heroDynamicsStatLabels;
+    if (hsl != null && typeof hsl === "object" && !Array.isArray(hsl)) {
+      const o = hsl as Record<string, unknown>;
+      p.heroDynamicsStatLabels = {
+        inProgress:
+          typeof o.inProgress === "string" ? o.inProgress : undefined,
+        completed:
+          typeof o.completed === "string" ? o.completed : undefined,
+        pending: typeof o.pending === "string" ? o.pending : undefined,
+        risk: typeof o.risk === "string" ? o.risk : undefined,
+      };
+    } else {
+      delete (p as { heroDynamicsStatLabels?: unknown }).heroDynamicsStatLabels;
+    }
+  }
   if (
     p.retrospectiveRefundReductionPlan != null &&
     typeof p.retrospectiveRefundReductionPlan === "object"
@@ -175,6 +196,49 @@ function normalizeProjectDetail(raw: ProjectDetail): ProjectDetail {
     };
   }
   return p;
+}
+
+function applyPartialProjectOverride(
+  base: ProjectDetail,
+  partial: Record<string, unknown>,
+): ProjectDetail {
+  const out: Record<string, unknown> = { ...base };
+  for (const [k, val] of Object.entries(partial)) {
+    if (val === undefined) continue;
+    if (val === null) {
+      delete out[k];
+      continue;
+    }
+    out[k] = val;
+  }
+  return out as unknown as ProjectDetail;
+}
+
+/** 仅当 `slug=a-line` 且 URL 带 `nav` 时，尝试合并 `data/projects/overrides/a-line-{nav}.json` */
+export async function applyLineNavOverride(
+  project: ProjectDetail,
+  nav: string | null,
+): Promise<ProjectDetail> {
+  if (project.slug !== "a-line" || !nav || !isSafeProjectSlug(nav)) {
+    return project;
+  }
+  const filePath = path.join(DATA_DIR, "overrides", `a-line-${nav}.json`);
+  try {
+    const raw = await fs.readFile(filePath, "utf-8");
+    const partial = JSON.parse(raw) as Record<string, unknown>;
+    if (
+      partial == null ||
+      typeof partial !== "object" ||
+      Array.isArray(partial)
+    ) {
+      return project;
+    }
+    return normalizeProjectDetail(
+      applyPartialProjectOverride(project, partial),
+    );
+  } catch {
+    return project;
+  }
 }
 
 function normalizeProjectIndexFile(raw: ProjectIndexFile): ProjectIndexFile {

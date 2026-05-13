@@ -12,20 +12,39 @@ export const PROJECT_TAB_LIST = [
 
 export type ProjectTabId = (typeof PROJECT_TAB_LIST)[number]["id"];
 
-/**
- * A 线：仅在侧栏「项目总览」（URL 无 `?nav=`）时隐藏顶栏 Timeline；
- * 「现行项目 / 已完结项目」等带子 `nav` 的入口仍显示完整 Tab（含 Timeline）。
- */
-function hideTimelineTabOnALineOverview(slug: string, nav: string | null): boolean {
-  if (slug !== "a-line") return false;
-  return nav == null || nav === "";
+/** A 线「A线手册制作」子项目：不展示运营方案与复盘 Tab */
+function hideOperationAndRetrospectiveForALineManual(
+  slug: string,
+  nav: string | null,
+): boolean {
+  return slug === "a-line" && nav === "a-line-manual";
+}
+
+/** A 线「A4/A5/A8 课程制作」子项目：仅保留 Milestones / Timeline / Team */
+const A_LINE_COURSE_TRACK_NAVS = new Set(["a4-course", "a5-course", "a8-course"]);
+
+const A_LINE_COURSE_TRACK_HIDDEN_TABS = new Set<ProjectTabId>([
+  "overview",
+  "documents",
+  "operation-scheme",
+  "retrospective",
+]);
+
+function hideTabsForALineCourseTrackNav(slug: string, nav: string | null): boolean {
+  return slug === "a-line" && nav != null && A_LINE_COURSE_TRACK_NAVS.has(nav);
 }
 
 export function projectTabsForSlug(slug: string, nav: string | null) {
-  if (hideTimelineTabOnALineOverview(slug, nav)) {
-    return PROJECT_TAB_LIST.filter((t) => t.id !== "timeline");
+  let tabs = [...PROJECT_TAB_LIST];
+  if (hideOperationAndRetrospectiveForALineManual(slug, nav)) {
+    tabs = tabs.filter(
+      (t) => t.id !== "operation-scheme" && t.id !== "retrospective",
+    );
   }
-  return PROJECT_TAB_LIST;
+  if (hideTabsForALineCourseTrackNav(slug, nav)) {
+    tabs = tabs.filter((t) => !A_LINE_COURSE_TRACK_HIDDEN_TABS.has(t.id));
+  }
+  return tabs;
 }
 
 const TAB_IDS = new Set<string>(PROJECT_TAB_LIST.map((t) => t.id));
@@ -42,14 +61,22 @@ export function resolveProjectTabParam(raw: string | null): ProjectTabId {
   return isProjectTabId(v) ? v : "overview";
 }
 
-/** A 线项目总览（无 nav）下将 `?tab=timeline` 视为 Overview；带子 nav 时保留 Timeline */
+/** 解析 URL `tab=`；非法或本页已隐藏的 Tab 回落到可用 Tab */
 export function resolveProjectTabForSlug(
   slug: string,
   nav: string | null,
   raw: string | null,
 ): ProjectTabId {
   const t = resolveProjectTabParam(raw);
-  if (hideTimelineTabOnALineOverview(slug, nav) && t === "timeline") return "overview";
+  if (hideTabsForALineCourseTrackNav(slug, nav) && A_LINE_COURSE_TRACK_HIDDEN_TABS.has(t)) {
+    return "milestones";
+  }
+  if (
+    hideOperationAndRetrospectiveForALineManual(slug, nav) &&
+    (t === "operation-scheme" || t === "retrospective")
+  ) {
+    return "overview";
+  }
   return t;
 }
 

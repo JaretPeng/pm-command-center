@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import type { ProjectDetail } from "@/types/domain";
 import { CourseSystemPlanningDiagram } from "@/components/project/course-system-planning-diagram";
+import { A1YbcProductCompositionPricing } from "@/components/project/a1-ybc-product-composition-pricing";
 
 const AlineProductCompositionPricing = dynamic(
   () =>
@@ -150,7 +151,9 @@ export function OperationSchemeTab({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: delayIdx * 0.04 }}
         className={
-          sec.imageSrc || sec.diagram === "courseSystem"
+          sec.imageSrc ||
+          sec.diagram === "courseSystem" ||
+          sec.diagram === "a1YbcProductPricing"
             ? "md:col-span-2"
             : undefined
         }
@@ -173,10 +176,20 @@ export function OperationSchemeTab({
               ))}
             </ul>
           ) : null}
+          {sec.content?.trim() ? (
+            <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">
+              {sec.content}
+            </p>
+          ) : null}
           {sec.diagram === "courseSystem" ? (
             <CourseSystemPlanningDiagram />
           ) : null}
-          {sec.imageSrc && sec.diagram !== "courseSystem" ? (
+          {sec.diagram === "a1YbcProductPricing" ? (
+            <div className="mt-4">
+              <A1YbcProductCompositionPricing />
+            </div>
+          ) : null}
+          {sec.imageSrc && sec.diagram !== "courseSystem" && sec.diagram !== "a1YbcProductPricing" ? (
             <div className="mt-3 overflow-hidden rounded-lg border bg-muted/20 p-2">
               {/* eslint-disable-next-line @next/next/no-img-element -- 动态 public 路径 */}
               <img
@@ -185,11 +198,6 @@ export function OperationSchemeTab({
                 className="mx-auto max-h-[min(70vh,640px)] w-full object-contain"
               />
             </div>
-          ) : null}
-          {sec.content?.trim() ? (
-            <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">
-              {sec.content}
-            </p>
           ) : null}
         </Card>
       </motion.div>

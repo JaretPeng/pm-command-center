@@ -1,0 +1,402 @@
+{
+  "name": "A线手册迭代",
+  "phase": "",
+  "type": "随材与内容",
+  "status": "进行中",
+  "progress": 44,
+  "milestoneCount": 12,
+  "blockerCount": 1,
+  "owner": "A线产品",
+  "riskLevel": "medium",
+  "health": "good",
+  "collaborators": 14,
+  "heroDateCaption": "2025年6月起 · 系统班手册迭代",
+  "heroTagBadges": ["随材"],
+  "heroNarrative": [
+    "本子项目聚焦【系统班】纸质学习手册的迭代：当前 C1/C2 等课程持续小版本迭代，手册与课件不一致会增加讲师授课负担与班主任解释成本；同时手册迭代频繁、常在课件定稿后发现不适配，导致交付成本高。",
+    "迭代目标按优先级为：与课程设计解耦（以知识模块化呈现关键知识点，弱化与课次强绑定）、提升手册对学习者的实用价值与感知价值、以纸质随材增强粘性与续报辅助。整体方向为「纸质轻量化」交付，并在 A 线全阶段以知识模块承载，与课次解耦。",
+    "A 线侧：A1/A2 聚焦长效价值内容（体系、核心知识点、工具模板等）；A3–A5 为赛考专项练习册并与 CCF 强相关。过渡期内 A1、A3 外采 CCF 指定教材，A2 使用自研过渡手册，A4–A5 按正常节奏迭代上线；C3 维持 6.0，C4–C8 大版本前沿用 5.0。执行排期与依赖以飞书甘特为准。"
+  ],
+  "heroCurriculumStrip": null,
+  "heroDynamics": {
+    "inProgress": 8,
+    "completed": 7,
+    "pending": 4,
+    "risk": 1
+  },
+  "heroDynamicsCardTitle": "交付动态",
+  "heroDynamicsTotalLabel": "交付事项合计",
+  "heroDynamicsStatLabels": {
+    "inProgress": "进行中事项",
+    "completed": "已完结事项",
+    "pending": "待启动事项",
+    "risk": "风险事项"
+  },
+  "executiveSummary": "以「纸质轻量化 + 知识模块化」为主线，拉通教研、印务与运营，降低手册与课件错位带来的迭代浪费，并形成可培训、可运营的使用规范。",
+  "background": [
+    "手册在续报包装、预习复习与题目训练等场景被高频使用，但当前存在两类突出痛点：其一，手册内容与课件不一致，讲师需额外补充「手册有而课件无」的内容，班主任也需反复向用户解释；其二，手册产出早于课件定稿，课件定型后常触发二次迭代，抬高交付成本（以 C2 6.0 手册为例，上线后不久即收到教学侧再次迭代诉求）。",
+    "业务上，学习手册对续报与服务的正向价值已被一线感知，但缺乏量化验证；产研侧需配合手册使用说明、培训与常见问题沉淀，降低使用摩擦。",
+    "本迭代与《系统班》整体甘特对齐：在明确手册定位、生产流程与排期后，分阶段推进 A/C 线各阶段手册形态；A 线无历史版本包袱，需同时落地过渡采购与自研路线，并与赛考专项练习册规划衔接。"
+  ],
+  "objectives": [
+    "1. 内容与课次解耦\n\n以知识模块组织关键知识点与讲解要点，减少随课件小版本频繁改版的刚性依赖，稳定讲师授课节奏。",
+    "2. 控制迭代节拍与成本\n\n将「课件定稿后再锁手册」纳入关键路径，压缩无效返工；对印次、库存与改版策略做组合优化，落实纸质轻量化。",
+    "3. 提升可感知的用户价值\n\n强化预习/复习/练习路径上的可读性与可操作性，让手册成为「学得会、带得走」的纸质载体。",
+    "4. 运营与培训配套\n\n输出手册使用说明、模块-课次映射指引、FAQ 与培训材料，降低班主任与客服的解释成本。"
+  ],
+  "keyOutcomes": [
+    "1. A1/A2 长效价值内容手册方案与样张评审通过，明确与过渡教材的切换节点。",
+    "2. A3–A5 赛考专项练习册目录与样章冻结，可与 OJ/题库宣传口径联动。",
+    "3. 教研/运营共建《手册使用指导》与《常见问题》并在试点期次验证。",
+    "4. 试点数据回传：预习到达率、练习完成度与续报相关过程指标纳入周会看板。"
+  ],
+  "valueProps": [
+    {
+      "title": "解耦降本",
+      "description": "知识模块化 + 印务策略，减少「先印后改」带来的浪费。",
+      "metric": "返工率 ↓"
+    },
+    {
+      "title": "教学一致",
+      "description": "与课件接口清晰，减少课堂与服务的解释成本。",
+      "metric": "投诉类咨询 ↓"
+    },
+    {
+      "title": "续报辅助",
+      "description": "纸质载体强化价值感与练习闭环，服务续报话术与物料。",
+      "metric": "试点期次追踪"
+    }
+  ],
+  "timelineEmbed": {
+    "title": "2026 系统班项目甘特（飞书）",
+    "caption": "手册迭代排期与依赖以本甘特为对齐参考；若嵌入受限请新窗口打开。",
+    "embedUrl": "https://my.feishu.cn/wiki/CUi4w4nn5itIrZkQ8wlccSDhnJB?from=from_copylink",
+    "heightPx": 480,
+    "hideBuiltInGantt": false
+  },
+  "milestones": [
+    {
+      "id": "hm-01",
+      "name": "手册痛点与迭代目标对齐（评审）",
+      "owner": "A线产品 / 教研",
+      "dueDate": "2025-07-15",
+      "status": "done",
+      "risk": "low",
+      "modules": ["立项"],
+      "description": "固化两大痛点、目标优先级与「纸质轻量化」原则。"
+    },
+    {
+      "id": "hm-02",
+      "name": "C1/C2 知识点手册定位与目录 v1",
+      "owner": "教研",
+      "dueDate": "2025-09-30",
+      "status": "done",
+      "risk": "low",
+      "modules": ["C线"],
+      "description": "与课次解耦的知识点化结构评审。"
+    },
+    {
+      "id": "hm-03",
+      "name": "A1/A2 长效价值内容大纲与样张",
+      "owner": "教研 / 设计",
+      "dueDate": "2026-02-28",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["A线"],
+      "description": "体系、核心知识点与工具模板模块。"
+    },
+    {
+      "id": "hm-04",
+      "name": "A3–A5 赛考专项练习册目录冻结",
+      "owner": "教研",
+      "dueDate": "2026-04-15",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["A线", "赛考"],
+      "description": "与 CCF 相关章节映射及难度梯度。"
+    },
+    {
+      "id": "hm-05",
+      "name": "过渡方案：A1/A3 外采 CCF 教材批次与到货",
+      "owner": "供应链",
+      "dueDate": "2026-03-20",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["采购"],
+      "description": "成本与到货窗口对齐开课。"
+    },
+    {
+      "id": "hm-06",
+      "name": "A2 自研过渡手册 v0.9 印次",
+      "owner": "教研 / 印务",
+      "dueDate": "2026-03-30",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["A线"],
+      "description": "在正式迭代手册上线前覆盖关键知识点。"
+    },
+    {
+      "id": "hm-07",
+      "name": "纸质轻量化工艺与供应商入围",
+      "owner": "供应链 / 设计",
+      "dueDate": "2026-05-10",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["印务"],
+      "description": "纸张、装订与打样标准。"
+    },
+    {
+      "id": "hm-08",
+      "name": "《手册使用指导》与模块-课次映射 v1",
+      "owner": "教研 / 运营",
+      "dueDate": "2026-04-30",
+      "status": "in_progress",
+      "risk": "low",
+      "modules": ["运营"],
+      "description": "服务讲师与班主任的标准说明。"
+    },
+    {
+      "id": "hm-09",
+      "name": "班主任培训与 FAQ 定稿",
+      "owner": "运营",
+      "dueDate": "2026-05-15",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["培训"],
+      "description": "录播/直播培训与答疑清单。"
+    },
+    {
+      "id": "hm-10",
+      "name": "试点期次灰度与数据回传",
+      "owner": "数据 / 运营",
+      "dueDate": "2026-06-01",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["数据"],
+      "description": "预习、练习与咨询热点指标。"
+    },
+    {
+      "id": "hm-11",
+      "name": "C3 6.0 维持策略确认书",
+      "owner": "教研",
+      "dueDate": "2025-08-30",
+      "status": "done",
+      "risk": "low",
+      "modules": ["C线"],
+      "description": "迭代频次低，明确不改版前提与例外流程。"
+    },
+    {
+      "id": "hm-12",
+      "name": "C4–C8 大版本前手册 5.0 沿用清单",
+      "owner": "产品",
+      "dueDate": "2025-10-31",
+      "status": "done",
+      "risk": "low",
+      "modules": ["C线"],
+      "description": "与大版本启动条件挂钩。"
+    }
+  ],
+  "gantt": [
+    {
+      "id": "hm-g1",
+      "name": "痛点与目标评审",
+      "lane": "治理",
+      "start": "2025-06-01",
+      "end": "2025-07-20",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "hm-g2",
+      "name": "C1/C2 知识点手册",
+      "lane": "教研",
+      "start": "2025-07-01",
+      "end": "2025-10-15",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "hm-g3",
+      "name": "A1/A2 内容大纲与打样",
+      "lane": "教研",
+      "start": "2025-10-01",
+      "end": "2026-03-30",
+      "progress": 55,
+      "phase": "phase2"
+    },
+    {
+      "id": "hm-g4",
+      "name": "A3–A5 练习册",
+      "lane": "教研",
+      "start": "2025-11-01",
+      "end": "2026-05-20",
+      "progress": 45,
+      "phase": "phase2"
+    },
+    {
+      "id": "hm-g5",
+      "name": "外采 CCF 批次",
+      "lane": "供应链",
+      "start": "2025-12-01",
+      "end": "2026-04-10",
+      "progress": 50,
+      "phase": "phase2"
+    },
+    {
+      "id": "hm-g6",
+      "name": "印务工艺与招标",
+      "lane": "印务",
+      "start": "2026-01-10",
+      "end": "2026-05-25",
+      "progress": 40,
+      "phase": "phase2"
+    },
+    {
+      "id": "hm-g7",
+      "name": "使用说明 / FAQ / 培训",
+      "lane": "运营",
+      "start": "2026-02-01",
+      "end": "2026-05-30",
+      "progress": 35,
+      "phase": "ongoing"
+    },
+    {
+      "id": "hm-g8",
+      "name": "试点灰度与数据复盘",
+      "lane": "数据",
+      "start": "2026-04-15",
+      "end": "2026-06-30",
+      "progress": 15,
+      "phase": "ongoing"
+    }
+  ],
+  "team": [
+    {
+      "id": "hm-t1",
+      "name": "A线产品",
+      "role": "产品 / PM",
+      "modules": ["路线图", "评审"],
+      "status": "busy",
+      "deliverables": ["迭代范围", "甘特对齐", "风险升级"]
+    },
+    {
+      "id": "hm-t2",
+      "name": "教研（系统班）",
+      "role": "内容",
+      "modules": ["大纲", "样章"],
+      "status": "busy",
+      "deliverables": ["知识模块化结构", "赛考练习册目录"]
+    },
+    {
+      "id": "hm-t3",
+      "name": "设计印务",
+      "role": "供应链",
+      "modules": ["打样", "印次"],
+      "status": "active",
+      "deliverables": ["轻量化工艺", "供应商入围"]
+    },
+    {
+      "id": "hm-t4",
+      "name": "运营与班主任",
+      "role": "运营",
+      "modules": ["培训", "FAQ"],
+      "status": "active",
+      "deliverables": ["使用规范", "试点反馈"]
+    },
+    {
+      "id": "hm-t5",
+      "name": "数据与经营",
+      "role": "数据",
+      "modules": ["看板"],
+      "status": "active",
+      "deliverables": ["预习/练习指标", "咨询热点"]
+    }
+  ],
+  "documents": [
+    {
+      "id": "hm-d1",
+      "title": "手册迭代项目（主文档）",
+      "category": "project_doc",
+      "updatedAt": "2026-05-07",
+      "department": "A线产品",
+      "excerpt": "《系统班》手册迭代：背景痛点、目标、规划（纸质轻量化、A/C 线定位）、交付排期与复盘入口；以团队飞书/石墨为准。"
+    },
+    {
+      "id": "hm-d2",
+      "title": "2026 系统班项目甘特（飞书）",
+      "category": "gantt",
+      "updatedAt": "2026-05-07",
+      "department": "项目管理",
+      "href": "https://my.feishu.cn/wiki/CUi4w4nn5itIrZkQ8wlccSDhnJB?from=from_copylink",
+      "excerpt": "手册与系统班相关交付事项排期。"
+    },
+    {
+      "id": "hm-d3",
+      "title": "手册使用指导（模板）",
+      "category": "operations",
+      "updatedAt": "2026-04-01",
+      "department": "教研",
+      "excerpt": "知识模块与课次映射、辅导注意事项；定稿后挂飞书/石墨外链。"
+    },
+    {
+      "id": "hm-d4",
+      "title": "班主任手册 FAQ（草案）",
+      "category": "qa",
+      "updatedAt": "2026-04-10",
+      "department": "运营",
+      "excerpt": "常见不一致场景与标准应答，与培训材料同步迭代。"
+    },
+    {
+      "id": "hm-d5",
+      "title": "A1/A2 手册内容大纲评审纪要",
+      "category": "syllabus",
+      "updatedAt": "2026-03-15",
+      "department": "教研",
+      "excerpt": "长效价值内容与工具模板清单。"
+    },
+    {
+      "id": "hm-d6",
+      "title": "纸质轻量化打样标准",
+      "category": "operations",
+      "updatedAt": "2026-03-20",
+      "department": "印务",
+      "excerpt": "纸张、装订与质检抽检规则。"
+    },
+    {
+      "id": "hm-d7",
+      "title": "外采 CCF 教材采购与到货计划",
+      "category": "operations",
+      "updatedAt": "2026-03-01",
+      "department": "供应链",
+      "excerpt": "A1/A3 过渡期批次与成本评估。"
+    }
+  ],
+  "risks": [
+    {
+      "id": "hm-r1",
+      "title": "课件晚定稿导致手册二次改版",
+      "severity": "high",
+      "status": "open",
+      "impact": "印次浪费与开课窗口风险。",
+      "owner": "A线产品",
+      "mitigation": "锁「课件定稿→手册封版」门禁；预留加印缓冲。",
+      "progress": "流程写入甘特"
+    },
+    {
+      "id": "hm-r2",
+      "title": "外采教材供货波动",
+      "severity": "medium",
+      "status": "mitigating",
+      "impact": "A1/A3 过渡期缺货。",
+      "owner": "供应链",
+      "mitigation": "双供应商 + 安全库存。",
+      "progress": "备选供应商评估中"
+    }
+  ],
+  "retrospectives": [],
+  "operationScheme": null,
+  "retrospectiveLocalDashboard": null,
+  "retrospectiveOverviewWikiEmbed": null,
+  "retrospectiveRefundReductionPlan": null,
+  "deepDive": null
+}
