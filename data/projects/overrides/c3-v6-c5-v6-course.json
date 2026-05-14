@@ -1,0 +1,429 @@
+{
+  "name": "C5-v6.0课程迭代",
+  "type": "录播课 · v6.0",
+  "phase": "",
+  "health": "good",
+  "progress": 54,
+  "milestoneCount": 9,
+  "blockerCount": 1,
+  "owner": "C线产品",
+  "riskLevel": "medium",
+  "version": "v6.0",
+  "heroTagBadges": ["app商城", "录播课"],
+  "heroNarrative": [
+    "C5 在 C4「应用程序与数据」能力之上，进入 **应用产品化与分发** 视角：如何把练习作品打磨成可浏览、可配置、可「上架」的小应用，并与 **app 商城** 的商品模型（展示、分类、权益、订单/兑换记录）建立一致认知。v6.0 录播侧重 **多页面信息架构、列表与详情、状态与异常、与平台侧目录/素材的只读对接**，避免与 C4 重复同一套项目线。",
+    "与 **app商城** 协同的关键在于：商品 ID、封面与描述、上下架状态、价格/积分口径、以及家长端可见的合规文案；录播需在关键单元用同一套「假数据 → 预发接口 → 沙箱订单」递进，保证学员在 IDE 内看到的交互与真实商城字段对齐。",
+    "你当前提供的附件名为 **C4-V3.1-大纲.xlsx**（未见独立 C5 表格）；本页文案已按 **C5 学层 + app商城/录播** 目标做结构化提炼。若团队有《C5-Vx.x 大纲》Excel 或石墨定稿，请替换 Documents 中大纲条目并同步飞书甘特，本 JSON 中的单元命名可再对齐一次。"
+  ],
+  "heroCurriculumStrip": null,
+  "heroDynamics": {
+    "inProgress": 10,
+    "completed": 9,
+    "pending": 4,
+    "risk": 3
+  },
+  "heroDynamicsCardTitle": "交付动态",
+  "heroDynamicsTotalLabel": "交付事项合计",
+  "heroDynamicsValueUnit": "项",
+  "heroDynamicsStatLabels": {
+    "inProgress": "进行中事项",
+    "completed": "已完结事项",
+    "pending": "待启动事项",
+    "risk": "风险事项"
+  },
+  "executiveSummary": "交付 C5 v6.0 录播与配套：以应用商店场景为主线，串联列表/详情、购物车与订单草稿、权益校验与异常提示，并与 app 商城后台契约、埋点及班主任话术同版本发布；排期以飞书甘特为准。",
+  "background": [
+    "学员在 C4 已熟悉 ybc_app 与本地数据读写；C5 需要把「能做完项目」推进到「能按产品规范交付可上架体验」：信息架构、空态/错态、与平台商城字段一致，是后续赛事与创作课的前置能力。",
+    "业务侧 **app商城** 承担获客与续费中的「可逛、可兑、可感知权益」；课程迭代必须与商品中台、青少年合规展示、以及录播侧的演示账号/沙箱环境同步，否则易出现「课上演示与家长端不一致」的投诉。",
+    "v6.0 在工程上强调：只读目录接口、订单/兑换记录的本地缓存策略、以及弱网下的重试与提示；教研侧需把单元目标与商城 PM 的验收清单对齐，减少返录。"
+  ],
+  "objectives": [
+    "内容目标：完成 C5 v6.0 全册录播与课件（建议 14～16 单元，按最终大纲为准），覆盖商城浏览、商品详情、购物车/结算草稿、订单列表、权益说明与复盘单元。",
+    "体验目标：关键路径在主流分辨率与低配设备上可流畅跟练；所有涉及「支付/积分」的演示均在沙箱或 Mock 环境完成，并在片头片尾固定合规提示。",
+    "协同目标：与 app 商城产研冻结接口版本与错误码表；测试覆盖目录缓存、下架商品、权益过期、网络超时；运营侧更新 FAQ 与跟课脚本。"
+  ],
+  "keyOutcomes": [
+    "录播与资源：全单元脚本、示例工程与「易错点」附录发布；与商城相关的单元提供对照表（字段名、示例 JSON、截图规范）。",
+    "商城联调：完成预发环境走查记录与签字截图；埋点（曝光、点击、加购、结算失败原因）与数据组口径一致。",
+    "质量与运营：回归用例与首周问题清单归档；沉淀《C5 应用 × app商城 录播拍摄 checklist》供后续期次复用。"
+  ],
+  "overviewVideo": null,
+  "overviewHideStructureDiagram": true,
+  "timelineEmbed": {
+    "title": "C5 v6.0 交付甘特（飞书）",
+    "caption": "交付事项与依赖以飞书甘特为准；嵌入受限时请新窗口打开。",
+    "embedUrl": "https://my.feishu.cn/wiki/IGKHwUUb3idBtykT4OocohDdnef?from=from_copylink",
+    "heightPx": 520,
+    "hideBuiltInGantt": false
+  },
+  "milestones": [
+    {
+      "id": "c5v6-ms-01",
+      "name": "C5 v6.0 大纲签核与 app 商城依赖标注",
+      "owner": "产品 / 教研",
+      "dueDate": "2025-11-01",
+      "status": "done",
+      "risk": "low",
+      "modules": ["大纲"],
+      "description": "单元与商城接口/埋点依赖矩阵首版冻结。"
+    },
+    {
+      "id": "c5v6-ms-02",
+      "name": "商城目录与商品详情（录播 1–4 单元）封版",
+      "owner": "教研",
+      "dueDate": "2025-12-20",
+      "status": "done",
+      "risk": "low",
+      "modules": ["录播"],
+      "description": "列表、详情、分类 Tab、空态与下架态演示。"
+    },
+    {
+      "id": "c5v6-ms-03",
+      "name": "购物车 / 结算草稿与本地订单流水",
+      "owner": "教研 / 产研",
+      "dueDate": "2026-02-15",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["订单", "数据"],
+      "description": "与 DataManager 或等价存储策略对齐；沙箱订单号规则。"
+    },
+    {
+      "id": "c5v6-ms-04",
+      "name": "权益校验、错误码与家长可见文案联调",
+      "owner": "产研",
+      "dueDate": "2026-03-01",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["商城", "合规"],
+      "description": "积分不足、商品下架、权益过期等错态全覆盖。"
+    },
+    {
+      "id": "c5v6-ms-05",
+      "name": "埋点验收与看板联调",
+      "owner": "数据 / 产研",
+      "dueDate": "2026-03-18",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["埋点"],
+      "description": "关键漏斗与录播演示账号行为对齐。"
+    },
+    {
+      "id": "c5v6-ms-06",
+      "name": "弱网、重试与缓存策略专项测试",
+      "owner": "测试",
+      "dueDate": "2026-04-01",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["测试"],
+      "description": "目录拉取失败、结算中断、二次进入恢复。"
+    },
+    {
+      "id": "c5v6-ms-07",
+      "name": "全册回归与片头片尾合规提示定稿",
+      "owner": "教研 / 法务（如有）",
+      "dueDate": "2026-04-12",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["合规"],
+      "description": "沙箱演示声明、未成年人提示统一版本。"
+    },
+    {
+      "id": "c5v6-ms-08",
+      "name": "班主任培训、物料与 FAQ",
+      "owner": "运营",
+      "dueDate": "2026-04-18",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["运营"],
+      "description": "商城类报错与家长问询话术。"
+    },
+    {
+      "id": "c5v6-ms-09",
+      "name": "v6.0 正式发布与首周复盘",
+      "owner": "产品",
+      "dueDate": "2026-04-25",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["发布"],
+      "description": "发布说明、监控阈值与补丁窗口。"
+    }
+  ],
+  "gantt": [
+    {
+      "id": "c5v6-g1",
+      "name": "大纲 / 商城依赖矩阵",
+      "lane": "产品 / 教研",
+      "start": "2025-09-15",
+      "end": "2025-12-01",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "c5v6-g2",
+      "name": "录播量产（目录—订单链）",
+      "lane": "教研",
+      "start": "2025-10-01",
+      "end": "2026-04-15",
+      "progress": 58,
+      "phase": "phase2"
+    },
+    {
+      "id": "c5v6-g3",
+      "name": "app 商城接口与沙箱",
+      "lane": "产研",
+      "start": "2025-11-01",
+      "end": "2026-04-20",
+      "progress": 52,
+      "phase": "phase2",
+      "dependencies": [{ "from": "c5v6-g1", "to": "c5v6-g3" }]
+    },
+    {
+      "id": "c5v6-g4",
+      "name": "埋点与看板",
+      "lane": "数据",
+      "start": "2026-01-10",
+      "end": "2026-04-22",
+      "progress": 38,
+      "phase": "ongoing"
+    },
+    {
+      "id": "c5v6-g5",
+      "name": "测试与缺陷收敛",
+      "lane": "测试",
+      "start": "2026-02-01",
+      "end": "2026-04-28",
+      "progress": 42,
+      "phase": "ongoing"
+    },
+    {
+      "id": "c5v6-g6",
+      "name": "培训 / 发布 / 复盘",
+      "lane": "运营 / 产品",
+      "start": "2026-03-20",
+      "end": "2026-05-08",
+      "progress": 25,
+      "phase": "ongoing"
+    }
+  ],
+  "team": [
+    {
+      "id": "c5v6-t1",
+      "name": "C5 教研负责人",
+      "role": "教研",
+      "modules": ["大纲", "录播"],
+      "status": "busy",
+      "deliverables": ["单元脚本", "示例工程", "合规片头尾"]
+    },
+    {
+      "id": "c5v6-t2",
+      "name": "app 商城后端 / 中台",
+      "role": "产研",
+      "modules": ["目录", "订单"],
+      "status": "busy",
+      "deliverables": ["接口版本", "错误码", "沙箱环境"]
+    },
+    {
+      "id": "c5v6-t3",
+      "name": "客户端 / IDE 集成",
+      "role": "产研",
+      "modules": ["运行时", "重试"],
+      "status": "active",
+      "deliverables": ["SDK 补丁", "弱网策略", "演示账号"]
+    },
+    {
+      "id": "c5v6-t4",
+      "name": "测试负责人",
+      "role": "测试",
+      "modules": ["回归", "兼容"],
+      "status": "active",
+      "deliverables": ["用例集", "缺陷看板", "合规截图包"]
+    },
+    {
+      "id": "c5v6-t5",
+      "name": "数据分析师",
+      "role": "数据",
+      "modules": ["埋点", "看板"],
+      "status": "active",
+      "deliverables": ["漏斗口径", "首周日报模板"]
+    },
+    {
+      "id": "c5v6-t6",
+      "name": "班主任运营",
+      "role": "运营",
+      "modules": ["培训", "FAQ"],
+      "status": "active",
+      "deliverables": ["话术", "舆情关键词", "跟课表"]
+    }
+  ],
+  "documents": [
+    {
+      "id": "c5v6-d1",
+      "title": "课程大纲附件（当前文件名：C4-V3.1-大纲.xlsx）",
+      "category": "syllabus",
+      "tags": ["大纲", "C5"],
+      "updatedAt": "2026-05-07",
+      "department": "教研",
+      "excerpt": "本地路径：/Users/pengfanli/Downloads/C4-V3.1-大纲.xlsx。若为误附，请替换为 C5 专版大纲并更新石墨/飞书链接后改本条 href。"
+    },
+    {
+      "id": "c5v6-d2",
+      "title": "飞书：C5 v6.0 交付甘特（与 Timeline 同源）",
+      "category": "gantt",
+      "tags": ["飞书"],
+      "updatedAt": "2026-05-07",
+      "department": "项目管理",
+      "excerpt": "交付事项合计与四象限数字以甘特统计为准，本页为占位。",
+      "href": "https://my.feishu.cn/wiki/IGKHwUUb3idBtykT4OocohDdnef?from=from_copylink"
+    },
+    {
+      "id": "c5v6-d3",
+      "title": "app 商城 × C5 录播：接口与字段对照表（草案）",
+      "category": "product",
+      "tags": ["app商城"],
+      "updatedAt": "2026-03-01",
+      "department": "产研",
+      "excerpt": "商品 ID、封面、上下架、价格/积分、订单状态机与 IDE Mock 映射。"
+    },
+    {
+      "id": "c5v6-d4",
+      "title": "C5 v6.0 录播验收 checklist",
+      "category": "operations",
+      "tags": ["录播", "质检"],
+      "updatedAt": "2026-04-01",
+      "department": "教研",
+      "excerpt": "错态演示必录、沙箱声明位置、代码字号与关键点击特写。"
+    },
+    {
+      "id": "c5v6-d5",
+      "title": "弱网与订单中断：测试用例集",
+      "category": "qa",
+      "tags": ["测试"],
+      "updatedAt": "2026-04-05",
+      "department": "测试",
+      "excerpt": "重试次数、幂等、本地流水与二次进入恢复。"
+    }
+  ],
+  "operationScheme": {
+    "summary": "以「录播交付 + app 商城契约」为双轴：教研按单元拆解商城故事线，产研提供沙箱与错误码，数据验收埋点，运营包装家长沟通与 FAQ，发布前冻结接口版本。",
+    "sections": [
+      {
+        "title": "教学主线（应用 × 商城）",
+        "content": "建议单元递进：应用壳与导航 → 商品列表与筛选 → 详情与权益说明 → 购物车与结算草稿（沙箱）→ 订单列表与本地流水 → 下架/无货/积分不足等错态 → 全册复盘与「应用上架检查表」演示。具体单元名与知识点以大纲 Excel 定稿为准。"
+      },
+      {
+        "title": "app 商城协同",
+        "content": "与中台对齐：只读目录接口版本、商品主数据刷新间隔、演示账号权限边界；任何涉及真实计费的能力一律走沙箱，录播中固定口播与字幕提示。"
+      },
+      {
+        "title": "录播生产与质检",
+        "content": "分单元封版 + 错态专录；质检包含合规片头尾、示例工程可运行性、与商城 UI 截图一致性（避免家长端误解）。"
+      },
+      {
+        "title": "运营与班主任",
+        "content": "首周聚焦「为什么课上演示价格与家长端不同」「订单失败怎么办」等高频问题；跟课表与升级入口与商城活动日历对齐（占位）。"
+      }
+    ]
+  },
+  "retrospectives": [
+    {
+      "id": "c5v6-r1",
+      "title": "接口文档滞后于录播定稿",
+      "date": "2026-03-22",
+      "context": "购物车单元脚本已定稿，但错误码与文案表晚到一周，导致返录与剪辑空窗。",
+      "rootCause": ["依赖矩阵未强制双签日期", "沙箱环境排期未独立暴露"],
+      "impact": "里程碑被动后移，测试压缩。",
+      "actions": ["错误码表与教研封版同日签字", "沙箱环境里程碑提前两周"],
+      "lessons": ["商城类课程必须把「契约文档」当作交付物而非附件"],
+      "followUp": "写入 C6 大纲模板检查项。"
+    },
+    {
+      "id": "c5v6-r2",
+      "title": "埋点口径与录播演示账号行为不一致",
+      "date": "2026-04-10",
+      "context": "看板曝光数与预期偏差，排查为演示账号未打标过滤。",
+      "rootCause": ["账号标签规范未同步数据组", "预发配置遗漏"],
+      "impact": "首周数据解读争议。",
+      "actions": ["演示账号统一前缀与过滤规则", "发布前 checklist 增加埋点验收"],
+      "lessons": ["录播项目需把「数据」纳入同一发布火车"],
+      "followUp": "复盘会纪要归档至飞书甘特备注。"
+    }
+  ],
+  "deepDive": null,
+  "metrics": {
+    "kpis": [
+      {
+        "id": "c5k1",
+        "label": "录播单元封版率",
+        "value": "11/16",
+        "change": "+2",
+        "trend": "up"
+      },
+      {
+        "id": "c5k2",
+        "label": "商城接口用例通过",
+        "value": "89%",
+        "change": "+7pp",
+        "trend": "up"
+      },
+      {
+        "id": "c5k3",
+        "label": "错态演示覆盖率",
+        "value": "94%",
+        "change": "+5pp",
+        "trend": "up"
+      },
+      {
+        "id": "c5k4",
+        "label": "首周工单闭环时效",
+        "value": "4.2h",
+        "change": "-0.8h",
+        "trend": "up"
+      }
+    ],
+    "series": [
+      {
+        "id": "c5s1",
+        "name": "周均返录分钟数",
+        "data": [
+          { "period": "W1", "value": 210 },
+          { "period": "W2", "value": 165 },
+          { "period": "W3", "value": 140 },
+          { "period": "W4", "value": 95 },
+          { "period": "W5", "value": 80 }
+        ]
+      }
+    ]
+  },
+  "risks": [
+    {
+      "id": "c5v6-k1",
+      "title": "沙箱与生产配置漂移导致演示事故",
+      "severity": "high",
+      "status": "处理中",
+      "impact": "家长误以为真实扣费或价格不实。",
+      "owner": "产研",
+      "mitigation": "配置冻结标签 + 发布前双人复核 + 录播固定合规口播。",
+      "progress": "核对清单 v2 评审中"
+    },
+    {
+      "id": "c5v6-k2",
+      "title": "商品中台大促期间接口限流",
+      "severity": "medium",
+      "status": "观察",
+      "impact": "跟练阶段目录加载失败率升高。",
+      "owner": "产研",
+      "mitigation": "本地缓存 TTL 与退避重试；大促周切换静态 Mock 包。",
+      "progress": "与大促日历对齐中"
+    },
+    {
+      "id": "c5v6-k3",
+      "title": "合规文案滞后引发舆情",
+      "severity": "medium",
+      "status": "open",
+      "impact": "投诉与退费敏感。",
+      "owner": "运营",
+      "mitigation": "片头片尾与 FAQ 与法务/产品双签。",
+      "progress": "模板已定，全册替换进行中"
+    }
+  ]
+}

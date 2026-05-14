@@ -1,0 +1,430 @@
+{
+  "name": "AI新赠课制作",
+  "type": "AI赠课 · 8课时",
+  "phase": "",
+  "health": "good",
+  "progress": 48,
+  "milestoneCount": 10,
+  "blockerCount": 0,
+  "owner": "C线产品",
+  "riskLevel": "medium",
+  "version": "v1.0",
+  "heroTagBadges": ["AI课", "具身智能"],
+  "heroNarrative": [
+    "本交付包对应 **《AI 素养启蒙课 · 创意创作篇》**：**8 课时 / 8 次**、**AI 互动**行课，覆盖从「认识大模型与多模态助手」到「多 AI 工具协同完成一部微电影」的完整体验链。课表见 **《AI赠课-8课时.xlsx》**——每课均结构化呈现 **课程知识与亮点、拓展知识与应用、能力目标** 三列，便于教研、产品与测试同源验收。",
+    "八讲依次为：**Hello AI**（通用 AI vs 传统 AI、人设提示词、多模态识别）→ **AI 视觉设计师**（文生图、参考图与角色一致）→ **AI 作曲家**（情绪与 BPM、歌词到旋律）→ **AI 演示文稿**（文生文 + 文生图组合、排版配色）→ **AI 数字人**（形象制作、换脸/声纹风险与防诈）→ **AI 视频特效**（帧、首尾帧与提示词控镜）→ **AI 全栈导演（上）**（分镜与景别、多工具分工）→ **AI 全栈导演（下）**（进阶视频提示词、音效与剪辑节奏、微电影成片）。",
+    "产品文档（**Moxt** 导出 HTML）明确：系列上位名 **「AI 素养启蒙课」**；**创意创作篇** 与 **具身智能篇**（C2 赠课 / 硬件矩阵）为两分篇，体现 **C1→C2** 承接与「AI 从屏幕走进真实世界」的认知升级。本页标签中的 **「具身智能」** 用于强调系列叙事与后续硬件篇的衔接；当前制作主范围仍以 **8 课时创意篇** 为主，具身篇可并行预研接口与物料占位。"
+  ],
+  "heroCurriculumStrip": null,
+  "heroDynamics": {
+    "inProgress": 7,
+    "completed": 6,
+    "pending": 3,
+    "risk": 2
+  },
+  "heroDynamicsCardTitle": "交付动态",
+  "heroDynamicsTotalLabel": "交付事项合计",
+  "heroDynamicsValueUnit": "项",
+  "heroDynamicsStatLabels": {
+    "inProgress": "进行中事项",
+    "completed": "已完结事项",
+    "pending": "待启动事项",
+    "risk": "风险事项"
+  },
+  "executiveSummary": "交付 AI 新赠课（创意创作篇 8 讲）：统一「AI 素养启蒙课」品牌与 C1→C2 分篇叙事，完成互动课包、家长端价值话术、解锁与埋点方案，并为具身智能篇预留接口与转化触点。",
+  "background": [
+    "赠课是用户接触正课前的关键触点，需要在轻量体验中建立 **「AI 素养」** 心智：不是零散工具演示，而是可感知的创作闭环与安全意识（尤其数字人、声纹与防诈单元）。",
+    "大纲将每讲拆解为 **知识亮点 / 生活与行业拓展 / 思维能力与 AI 理解** 三层，适配 AI 互动课形态；与 Moxt 中「启蒙」「分篇名」策略一致，降低家长决策门槛并为系统班转化埋伏笔。",
+    "工程与运营侧需提前对齐：**解锁节奏**（结课后一次解锁 / 逐课解锁等）、多模态能力开关、生成类内容的 **版权与青少年合规** 展示，以及与 **具身智能篇** 的物料与落地页承接。"
+  ],
+  "objectives": [
+    "内容目标：8 讲全部达到可上线标准——脚本、交互、示例提示词、拓展阅读与家长导读一致；第 7–8 讲强化「结构化提示词 + 多工具协同」的综合能力。",
+    "产品目标：统一系列命名、分篇视觉与课包封面规范（参考大纲中「C1赠课 课程封面.zip」字段）；完成与正课/C2 具身篇的承接文案与入口配置。",
+    "安全与合规目标：数字人单元落实 **防 AI 诈骗** 教学目标的同时，产品侧提供年龄适配话术与能力边界说明；生成内容默认水印/使用声明（按公司规范执行）。"
+  ],
+  "keyOutcomes": [
+    "课包：8 讲 AI 互动课可全量发布，完课数据可追踪（到课、完课、关键互动节点）。",
+    "品牌与转化：「AI 素养启蒙课 · 创意创作篇」与「具身智能篇」叙事在官网/海报/班主任话术三端一致。",
+    "沉淀：提示词模板库、分镜与景别教学卡、家长 FAQ（含「AI 会取代孩子思考吗」类问题）首版归档。"
+  ],
+  "overviewVideo": null,
+  "overviewHideStructureDiagram": true,
+  "timelineEmbed": {
+    "title": "AI 新赠课 交付甘特（飞书）",
+    "caption": "交付事项与依赖以飞书甘特为准；嵌入受限时请新窗口打开。",
+    "embedUrl": "https://my.feishu.cn/wiki/IGKHwUUb3idBtykT4OocohDdnef?from=from_copylink",
+    "heightPx": 520,
+    "hideBuiltInGantt": false
+  },
+  "milestones": [
+    {
+      "id": "ai-gift-ms-01",
+      "name": "系列命名与分篇策略签核（AI 素养启蒙课）",
+      "owner": "产品",
+      "dueDate": "2025-11-10",
+      "status": "done",
+      "risk": "low",
+      "modules": ["品牌"],
+      "description": "对齐 Moxt：创意创作篇 × 具身智能篇承接逻辑。"
+    },
+    {
+      "id": "ai-gift-ms-02",
+      "name": "第 1–2 讲：Hello AI & AI 视觉设计师 定稿",
+      "owner": "教研",
+      "dueDate": "2025-12-08",
+      "status": "done",
+      "risk": "low",
+      "modules": ["内容"],
+      "description": "人设提示词、多模态体验、文生图与参考图链路。"
+    },
+    {
+      "id": "ai-gift-ms-03",
+      "name": "第 3–4 讲：AI 作曲家 & AI 演示文稿 定稿",
+      "owner": "教研",
+      "dueDate": "2026-01-15",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["内容"],
+      "description": "音乐情绪提示词；PPT 多能力组合与任务拆解。"
+    },
+    {
+      "id": "ai-gift-ms-04",
+      "name": "第 5 讲：AI 数字人（伦理与安全强化）评审",
+      "owner": "产品 / 教研",
+      "dueDate": "2026-02-01",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["合规"],
+      "description": "换脸/声纹演示边界与家长沟通材料双签。"
+    },
+    {
+      "id": "ai-gift-ms-05",
+      "name": "第 6 讲：AI 视频特效 互动与算力评估",
+      "owner": "产研",
+      "dueDate": "2026-02-20",
+      "status": "planned",
+      "risk": "high",
+      "modules": ["视频"],
+      "description": "首尾帧策略、生成时长与降级方案。"
+    },
+    {
+      "id": "ai-gift-ms-06",
+      "name": "第 7–8 讲：AI 全栈导演（上/下）联调封版",
+      "owner": "教研 / 产研",
+      "dueDate": "2026-03-25",
+      "status": "planned",
+      "risk": "high",
+      "modules": ["内容", "协同"],
+      "description": "分镜、景别、音效与剪辑节奏；微电影成片路径。"
+    },
+    {
+      "id": "ai-gift-ms-07",
+      "name": "解锁策略、埋点与家长端物料",
+      "owner": "运营 / 数据",
+      "dueDate": "2026-04-05",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["运营"],
+      "description": "对齐大纲「解锁节奏」最终口径与漏斗看板。"
+    },
+    {
+      "id": "ai-gift-ms-08",
+      "name": "具身智能篇：硬件 Demo 与转化触点预留",
+      "owner": "产品 / 硬件教研",
+      "dueDate": "2026-04-12",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["具身"],
+      "description": "创意篇结课页 CTA、星瀚/矩阵编程预告素材（占位）。"
+    },
+    {
+      "id": "ai-gift-ms-09",
+      "name": "全链路测试与内容安全抽检",
+      "owner": "测试",
+      "dueDate": "2026-04-18",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["测试"],
+      "description": "多模态输入、生成失败、敏感提示词拦截回归。"
+    },
+    {
+      "id": "ai-gift-ms-10",
+      "name": "正式发布与首周数据复盘",
+      "owner": "产品",
+      "dueDate": "2026-04-28",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["发布"],
+      "description": "发布说明、补丁窗口与 C2 篇排期公告。"
+    }
+  ],
+  "gantt": [
+    {
+      "id": "ai-gift-g1",
+      "name": "命名 / 分篇 / 课表冻结",
+      "lane": "产品",
+      "start": "2025-10-01",
+      "end": "2025-11-20",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "ai-gift-g2",
+      "name": "第 1–4 讲内容量产",
+      "lane": "教研",
+      "start": "2025-11-01",
+      "end": "2026-02-28",
+      "progress": 55,
+      "phase": "phase2"
+    },
+    {
+      "id": "ai-gift-g3",
+      "name": "第 5–8 讲 + 多模态/视频链路",
+      "lane": "教研 / 产研",
+      "start": "2026-01-01",
+      "end": "2026-04-10",
+      "progress": 38,
+      "phase": "phase2",
+      "dependencies": [{ "from": "ai-gift-g1", "to": "ai-gift-g3" }]
+    },
+    {
+      "id": "ai-gift-g4",
+      "name": "具身篇联动与转化物料",
+      "lane": "产品 / 硬件",
+      "start": "2026-02-15",
+      "end": "2026-04-20",
+      "progress": 25,
+      "phase": "ongoing"
+    },
+    {
+      "id": "ai-gift-g5",
+      "name": "测试 / 合规 / 发布",
+      "lane": "测试 / 运营",
+      "start": "2026-03-01",
+      "end": "2026-05-05",
+      "progress": 30,
+      "phase": "ongoing"
+    }
+  ],
+  "team": [
+    {
+      "id": "ai-gift-t1",
+      "name": "AI 课教研组",
+      "role": "教研",
+      "modules": ["8讲脚本", "提示词库"],
+      "status": "busy",
+      "deliverables": ["大纲三列对齐", "分镜与景别教案", "家长导读"]
+    },
+    {
+      "id": "ai-gift-t2",
+      "name": "AI 课产品",
+      "role": "产品",
+      "modules": ["系列命名", "解锁"],
+      "status": "busy",
+      "deliverables": ["分篇策略落地", "埋点需求", "转化路径"]
+    },
+    {
+      "id": "ai-gift-t3",
+      "name": "互动与多模态",
+      "role": "产研",
+      "modules": ["生图", "生视频", "数字人"],
+      "status": "active",
+      "deliverables": ["API 编排", "降级策略", "演示账号"]
+    },
+    {
+      "id": "ai-gift-t4",
+      "name": "C2 具身硬件教研",
+      "role": "教研（协同）",
+      "modules": ["具身智能篇"],
+      "status": "active",
+      "deliverables": ["承接话术", "硬件 Demo 脚本（占位）"]
+    },
+    {
+      "id": "ai-gift-t5",
+      "name": "测试负责人",
+      "role": "测试",
+      "modules": ["安全", "兼容"],
+      "status": "active",
+      "deliverables": ["敏感词与输出抽检", "多端回归"]
+    },
+    {
+      "id": "ai-gift-t6",
+      "name": "增长与运营",
+      "role": "运营",
+      "modules": ["物料", "FAQ"],
+      "status": "active",
+      "deliverables": ["海报与落地页", "班主任培训", "首周日报"]
+    }
+  ],
+  "documents": [
+    {
+      "id": "ai-gift-d1",
+      "title": "《AI赠课-8课时》课程大纲（Excel）",
+      "category": "syllabus",
+      "tags": ["大纲", "8课时"],
+      "updatedAt": "2026-05-07",
+      "department": "教研",
+      "excerpt": "课程总名：AI 素养启蒙课 · 创意创作篇；8 次 AI 互动；每课三列：知识亮点、拓展应用、能力目标。源文件：/Users/pengfanli/Downloads/AI赠课-8课时.xlsx（请同步至团队云盘后在此条补充 https 链接）。"
+    },
+    {
+      "id": "ai-gift-d2",
+      "title": "《Moxt》命名与分篇策略说明（HTML 导出）",
+      "category": "project_doc",
+      "tags": ["产品文档", "具身智能"],
+      "updatedAt": "2026-05-14",
+      "department": "产品",
+      "excerpt": "为何叫「AI 素养启蒙课」；创意创作篇 vs 具身智能篇；C1→C2 承接与不用「上下册」的原因。源文件：/Users/pengfanli/Downloads/Moxt (2026_5_14 16：44：31).html（体积较大，建议上传飞书/石墨后替换为外链）。"
+    },
+    {
+      "id": "ai-gift-d3",
+      "title": "飞书：AI 新赠课 交付甘特（与 Timeline 同源）",
+      "category": "gantt",
+      "tags": ["飞书"],
+      "updatedAt": "2026-05-14",
+      "department": "项目管理",
+      "excerpt": "交付事项合计与四象限数字以甘特为准，本页为占位。",
+      "href": "https://my.feishu.cn/wiki/IGKHwUUb3idBtykT4OocohDdnef?from=from_copylink"
+    },
+    {
+      "id": "ai-gift-d4",
+      "title": "数字人与深度伪造：教学侧合规清单（草案）",
+      "category": "operations",
+      "tags": ["合规", "第5讲"],
+      "updatedAt": "2026-03-01",
+      "department": "教研",
+      "excerpt": "演示边界、家长告知、举报与求助话术。"
+    },
+    {
+      "id": "ai-gift-d5",
+      "title": "提示词与分镜模板库（教研维护）",
+      "category": "product",
+      "tags": ["模板", "第7-8讲"],
+      "updatedAt": "2026-04-01",
+      "department": "教研",
+      "excerpt": "结构化提示词示例；远景/中景/特写讲解卡。"
+    }
+  ],
+  "operationScheme": {
+    "summary": "以「AI 素养启蒙课」为统一心智：创意创作篇 8 讲负责 **多模态创作闭环**；与 **具身智能篇** 在叙事与转化上接力。运营按「启蒙轻量」节奏配置解锁与触达，产研保障生成类能力降级与安全拦截，教研维护提示词与分镜资产。",
+    "sections": [
+      {
+        "title": "课包结构与行课方式",
+        "content": "固定 **8 课时 / 8 次、AI 互动**；每课按大纲三列验收。解锁节奏由运营在「结课后统一解锁 / 逐课解锁」等方案中择一并在发布前冻结，与埋点漏斗字段一致。"
+      },
+      {
+        "title": "创意篇 × 具身篇的产品叙事",
+        "content": "创意篇强调「AI 把想法变成作品」；具身篇强调「AI 驱动硬件走进真实世界」。结课物料中预埋 C2/硬件篇入口与 Demo 预告，避免用户认为两课无关联（依据 Moxt 分篇策略）。"
+      },
+      {
+        "title": "生成类能力运营与安全",
+        "content": "生图、生视频、音乐、数字人单元统一：默认声明、敏感输入拦截、失败可重试；班主任 FAQ 覆盖「作品版权」「是否依赖 AI 写作业」等家长高频质疑。"
+      },
+      {
+        "title": "数据与迭代",
+        "content": "核心指标：到课、完课、每讲关键互动完成率、第 8 讲成片提交率（若有）、向具身篇/正课的 **点击率**。首周后复盘提示词难度与生成失败 Top 原因，驱动补丁周。"
+      }
+    ]
+  },
+  "retrospectives": [
+    {
+      "id": "ai-gift-r1",
+      "title": "第 5 讲数字人：演示边界与家长舆情预演",
+      "date": "2026-03-05",
+      "context": "教学内容需展示「能力」与「风险」双面向，产品演示账号若与文案不一致易引发误解。",
+      "rootCause": ["演示素材未分级", "口播脚本与 UI 提示不同步"],
+      "impact": "投诉与退费敏感。",
+      "actions": ["建立「红/黄/绿」演示素材分级", "片头 10s 固定合规口播"],
+      "lessons": ["越「像人」的能力越要先讲边界"],
+      "followUp": "同步具身篇硬件安全叙事。"
+    },
+    {
+      "id": "ai-gift-r2",
+      "title": "第 6–8 讲：视频生成耗时与完课率",
+      "date": "2026-04-08",
+      "context": "长生成任务在弱网或低配终端上易导致中断，影响全栈导演单元完课。",
+      "rootCause": ["未预设超时与草稿恢复", "提示词过长导致失败率升高"],
+      "impact": "第 8 讲成片率低、转化数据波动。",
+      "actions": ["默认短提示词模板 + 高级折叠", "队列与重试可视化"],
+      "lessons": ["综合课要把「等待」设计成可学习片段"],
+      "followUp": "纳入下一期赠课容量规划。"
+    }
+  ],
+  "deepDive": null,
+  "metrics": {
+    "kpis": [
+      {
+        "id": "aig1",
+        "label": "8 讲脚本签核完成",
+        "value": "5/8",
+        "change": "+2",
+        "trend": "up"
+      },
+      {
+        "id": "aig2",
+        "label": "多模态互动成功率",
+        "value": "91%",
+        "change": "+4pp",
+        "trend": "up"
+      },
+      {
+        "id": "aig3",
+        "label": "家长 FAQ 覆盖问句",
+        "value": "38",
+        "change": "+6",
+        "trend": "up"
+      },
+      {
+        "id": "aig4",
+        "label": "具身篇预告点击率（结课页）",
+        "value": "12%",
+        "change": "观察中",
+        "trend": "flat"
+      }
+    ],
+    "series": [
+      {
+        "id": "aigs1",
+        "name": "每讲平均完课率",
+        "data": [
+          { "period": "L1", "value": 78 },
+          { "period": "L2", "value": 74 },
+          { "period": "L3", "value": 71 },
+          { "period": "L4", "value": 69 },
+          { "period": "L5", "value": 65 }
+        ]
+      }
+    ]
+  },
+  "risks": [
+    {
+      "id": "ai-gift-k1",
+      "title": "深度伪造相关舆情与合规",
+      "severity": "high",
+      "status": "处理中",
+      "impact": "数字人单元可能被媒体误读。",
+      "owner": "产品",
+      "mitigation": "分级演示 + 法务/教研双签 + 家长知情文案。",
+      "progress": "清单 v1 已发"
+    },
+    {
+      "id": "ai-gift-k2",
+      "title": "第三方生成 API 不稳定或涨价",
+      "severity": "medium",
+      "status": "观察",
+      "impact": "生图/生视频课体验波动。",
+      "owner": "产研",
+      "mitigation": "多供应商抽象层 + 缓存示例成片兜底。",
+      "progress": "备选路由评估中"
+    },
+    {
+      "id": "ai-gift-k3",
+      "title": "创意篇与具身篇物料口径漂移",
+      "severity": "medium",
+      "status": "open",
+      "impact": "用户认知分裂、转化下降。",
+      "owner": "产品",
+      "mitigation": "单一事实源：Moxt 策略 + 设计系统组件复用。",
+      "progress": "周会对齐中"
+    }
+  ]
+}

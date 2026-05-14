@@ -34,6 +34,12 @@ function hideTabsForALineCourseTrackNav(slug: string, nav: string | null): boole
   return slug === "a-line" && nav != null && A_LINE_COURSE_TRACK_NAVS.has(nav);
 }
 
+/** C 线「项目总览」：`/projects/c3-v6` 无 `nav` 时为总览态 */
+function isC3V6ProjectOverview(slug: string, nav: string | null): boolean {
+  if (slug !== "c3-v6") return false;
+  return (nav?.trim() ?? "").length === 0;
+}
+
 export function projectTabsForSlug(slug: string, nav: string | null) {
   let tabs = [...PROJECT_TAB_LIST];
   if (hideOperationAndRetrospectiveForALineManual(slug, nav)) {
@@ -43,6 +49,9 @@ export function projectTabsForSlug(slug: string, nav: string | null) {
   }
   if (hideTabsForALineCourseTrackNav(slug, nav)) {
     tabs = tabs.filter((t) => !A_LINE_COURSE_TRACK_HIDDEN_TABS.has(t.id));
+  }
+  if (isC3V6ProjectOverview(slug, nav)) {
+    tabs = tabs.filter((t) => t.id !== "timeline" && t.id !== "documents");
   }
   return tabs;
 }
@@ -70,6 +79,9 @@ export function resolveProjectTabForSlug(
   const t = resolveProjectTabParam(raw);
   if (hideTabsForALineCourseTrackNav(slug, nav) && A_LINE_COURSE_TRACK_HIDDEN_TABS.has(t)) {
     return "milestones";
+  }
+  if (isC3V6ProjectOverview(slug, nav) && (t === "timeline" || t === "documents")) {
+    return "overview";
   }
   if (
     hideOperationAndRetrospectiveForALineManual(slug, nav) &&

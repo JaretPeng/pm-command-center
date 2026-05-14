@@ -1,0 +1,441 @@
+{
+  "name": "AI编程助手开发",
+  "type": "AI学习工具 · 在研",
+  "phase": "",
+  "health": "good",
+  "progress": 52,
+  "milestoneCount": 10,
+  "blockerCount": 1,
+  "owner": "C线产品",
+  "riskLevel": "medium",
+  "version": "v1.0",
+  "heroTagBadges": ["AI学习工具", "智能纠错&推题"],
+  "heroNarrative": [
+    "《**AI编程助手 项目文档**》将本能力定位为嵌入学习链路的一体化 **AI 学习工具**：在学员编写、调试与提交代码的过程中，提供可解释的 **智能纠错**（语法/语义/运行时线索、栈追踪与修复建议）与 **推题**（结合课节目标、历史 AC 与薄弱点的练习题推荐），并与课纲、OJ 与教研侧验收口径对齐。",
+    "《**【AI编程助手】教研侧需求文档**》侧重教学侧可接受的行为边界：何时给提示、何时仅给方向、如何与课堂节奏与作业批改衔接；《**AI编程助手方案**》则给出总体技术路线（模型与规则混合、上下文与题库检索、教育模式与审计）。三份材料共同约束：助手是 **「学伴」** 而非代写通道。",
+    "项目文档内已挂载 **石墨甘特**、**Confluence 项目页** 与 **方案说明（石墨文档）** 等链接；本页 Timeline 优先嵌入与文档一致的甘特地址。若本地 PDF 与线上文档存在版本差，以 Confluence/石墨更新时间为准。（说明：PDF 正文多为导图/图片导出，此处为结合链接与常见交付拆解的提炼，含必要延展。）"
+  ],
+  "heroCurriculumStrip": null,
+  "heroDynamics": {
+    "inProgress": 7,
+    "completed": 6,
+    "pending": 3,
+    "risk": 2
+  },
+  "heroDynamicsCardTitle": "交付动态",
+  "heroDynamicsTotalLabel": "交付事项合计",
+  "heroDynamicsValueUnit": "项",
+  "heroDynamicsStatLabels": {
+    "inProgress": "进行中事项",
+    "completed": "已完结事项",
+    "pending": "待启动事项",
+    "risk": "风险事项"
+  },
+  "executiveSummary": "按《教研侧需求文档》《AI编程助手方案》与《项目文档》推进：交付 IDE/学习端一体的智能纠错与推题能力，落实教育模式、课纲版本化 RAG 与 OJ 联动，并完成石墨甘特上的里程碑与灰度发布。",
+  "background": [
+    "学员在系统课中最耗时的环节往往是 **「报错读不懂」与「不知道练什么」**：传统 FAQ 覆盖不全，纯搜题又容易与课节目标脱节。AI 编程助手需在 **纠错可解释性** 与 **推题可教性** 之间建立产品规则，并与教研题库标签、难度梯度一致。",
+    "教研侧需求强调 **课堂主权**：助手输出需可配置强度（提示/片段/仅思路），并记录关键交互以便复盘；方案侧需解决 **上下文长度、索引新鲜度、以及多语言/多环境** 下的稳定性。",
+    "商业与合规层面：推题若与续报、测评绑定，需避免「过度推销感」；纠错日志涉及源码片段，必须落实 **脱敏、留存周期与访问审计**（按公司安全规范执行）。"
+  ],
+  "objectives": [
+    "产品目标：上线可用的 **智能纠错**（含常见编译/运行错误模式库）与 **推题** v1（薄弱点 + 课节标签召回），并与 OJ 判题结果、课节 ID 绑定。",
+    "教研目标：需求文档中的 **行课场景与话术** 全部映射到产品验收用例；班主任培训材料与助手开关说明同步发布。",
+    "技术目标：方案文档中的 **RAG/规则混合架构** 落地；索引与课纲版本号一致；关键路径 P99 延迟与失败率达标后再全量。"
+  ],
+  "keyOutcomes": [
+    "学员侧：关键报错类型的 **一次理解率** 提升；在推荐题上的 **有效练习量**（完成且非抄袭嫌疑）提升。",
+    "教研侧：可复用的 **纠错模板库**、**推题标签规范** 与课节级配置表；与项目文档中的甘特里程碑一一对照可审计。",
+    "工程侧：教育模式默认开启、越权读取拦截、灰度开关与回滚预案；首周问题清单与补丁节奏归档。"
+  ],
+  "overviewVideo": null,
+  "overviewHideStructureDiagram": true,
+  "timelineEmbed": {
+    "title": "AI 编程助手 · 项目甘特（石墨，与项目文档一致）",
+    "caption": "若 iframe 受限请在新标签页打开石墨表格；排期以线上最新版为准。",
+    "embedUrl": "https://shimo.zhenguanyu.com/sheets/kGEyX7NlJR5JHJKW/xHfhK/",
+    "heightPx": 520,
+    "hideBuiltInGantt": false
+  },
+  "milestones": [
+    {
+      "id": "ai-assist-ms-01",
+      "name": "三份基线文档评审：需求 + 方案 + 项目文档",
+      "owner": "产品",
+      "dueDate": "2025-11-18",
+      "status": "done",
+      "risk": "low",
+      "modules": ["PRD"],
+      "description": "对齐纠错/推题范围、非目标与里程碑口径；Confluence 定版。"
+    },
+    {
+      "id": "ai-assist-ms-02",
+      "name": "智能纠错 MVP：静态规则 + 单测样例库",
+      "owner": "产研 / 教研",
+      "dueDate": "2025-12-20",
+      "status": "done",
+      "risk": "low",
+      "modules": ["纠错"],
+      "description": "覆盖课纲内高频语法/接口错误；示例与讲解模板经教研签字。"
+    },
+    {
+      "id": "ai-assist-ms-03",
+      "name": "运行时堆栈解析与「Explain error」链路",
+      "owner": "产研",
+      "dueDate": "2026-01-22",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["纠错"],
+      "description": "沙箱内捕获栈；与教研侧「可解释程度」分级对齐。"
+    },
+    {
+      "id": "ai-assist-ms-04",
+      "name": "推题 v1：薄弱点画像 × 题库标签召回",
+      "owner": "算法 / 教研",
+      "dueDate": "2026-02-18",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["推题"],
+      "description": "冷启动策略与「过难/过易」兜底；与 OJ AC 历史联动。"
+    },
+    {
+      "id": "ai-assist-ms-05",
+      "name": "课纲 RAG：切片版本号与课节绑定",
+      "owner": "产研",
+      "dueDate": "2026-03-05",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["RAG"],
+      "description": "方案文档中的索引策略落地；课纲更新自动触发重建。"
+    },
+    {
+      "id": "ai-assist-ms-06",
+      "name": "IDE 内面板交互与教育模式联调",
+      "owner": "产研",
+      "dueDate": "2026-03-20",
+      "status": "planned",
+      "risk": "high",
+      "modules": ["IDE"],
+      "description": "整题屏蔽、分步提示、教师开关；与需求文档场景一一验收。"
+    },
+    {
+      "id": "ai-assist-ms-07",
+      "name": "埋点、看板与班主任话术定稿",
+      "owner": "运营 / 数据",
+      "dueDate": "2026-04-02",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["运营"],
+      "description": "纠错采纳、推题点击、跳题原因漏斗；家长 FAQ。"
+    },
+    {
+      "id": "ai-assist-ms-08",
+      "name": "灰度发布与 A/B（推题策略）",
+      "owner": "产品",
+      "dueDate": "2026-04-12",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["发布"],
+      "description": "小流量验证难度分布与投诉敏感词。"
+    },
+    {
+      "id": "ai-assist-ms-09",
+      "name": "全链路安全抽检与性能压测",
+      "owner": "测试",
+      "dueDate": "2026-04-22",
+      "status": "planned",
+      "risk": "high",
+      "modules": ["测试"],
+      "description": "提示词注入、越权读文件、长代码与多文件上下文。"
+    },
+    {
+      "id": "ai-assist-ms-10",
+      "name": "正式发布与首周数据复盘",
+      "owner": "产品",
+      "dueDate": "2026-04-30",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["发布"],
+      "description": "对照石墨甘特关闭剩余项；沉淀 v1.1 需求池。"
+    }
+  ],
+  "gantt": [
+    {
+      "id": "ai-assist-g1",
+      "name": "需求 / 方案 / 项目文档定版",
+      "lane": "产品 / 教研",
+      "start": "2025-10-01",
+      "end": "2025-11-30",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "ai-assist-g2",
+      "name": "智能纠错链路与规则库",
+      "lane": "产研",
+      "start": "2025-11-01",
+      "end": "2026-02-15",
+      "progress": 62,
+      "phase": "phase2"
+    },
+    {
+      "id": "ai-assist-g3",
+      "name": "推题与薄弱点模型",
+      "lane": "算法 / 教研",
+      "start": "2025-12-01",
+      "end": "2026-03-25",
+      "progress": 45,
+      "phase": "phase2",
+      "dependencies": [{ "from": "ai-assist-g1", "to": "ai-assist-g3" }]
+    },
+    {
+      "id": "ai-assist-g4",
+      "name": "RAG + IDE 面板 + 教育模式",
+      "lane": "产研",
+      "start": "2026-01-10",
+      "end": "2026-04-15",
+      "progress": 40,
+      "phase": "ongoing"
+    },
+    {
+      "id": "ai-assist-g5",
+      "name": "灰度 / 压测 / 正式发布",
+      "lane": "测试 / 运营",
+      "start": "2026-03-01",
+      "end": "2026-05-08",
+      "progress": 28,
+      "phase": "ongoing"
+    }
+  ],
+  "team": [
+    {
+      "id": "ai-assist-t1",
+      "name": "教研（需求对接）",
+      "role": "教研",
+      "modules": ["需求文档", "验收"],
+      "status": "busy",
+      "deliverables": ["场景用例", "纠错话术分级", "推题标签表"]
+    },
+    {
+      "id": "ai-assist-t2",
+      "name": "推荐与画像",
+      "role": "算法",
+      "modules": ["推题", "薄弱点"],
+      "status": "busy",
+      "deliverables": ["召回策略", "难度校准", "冷启动规则"]
+    },
+    {
+      "id": "ai-assist-t3",
+      "name": "IDE / 客户端",
+      "role": "产研",
+      "modules": ["面板", "交互"],
+      "status": "busy",
+      "deliverables": ["内嵌助手", "快捷键", "离线降级"]
+    },
+    {
+      "id": "ai-assist-t4",
+      "name": "模型与 RAG 平台",
+      "role": "产研",
+      "modules": ["方案落地", "索引"],
+      "status": "active",
+      "deliverables": ["混合编排", "课纲版本绑定", "成本监控"]
+    },
+    {
+      "id": "ai-assist-t5",
+      "name": "测试负责人",
+      "role": "测试",
+      "modules": ["安全", "性能"],
+      "status": "active",
+      "deliverables": ["注入用例", "压测报告", "兼容矩阵"]
+    },
+    {
+      "id": "ai-assist-t6",
+      "name": "C线产品",
+      "role": "产品 / PM",
+      "modules": ["项目文档", "甘特"],
+      "status": "active",
+      "deliverables": ["里程碑评审", "灰度策略", "复盘主持"]
+    }
+  ],
+  "documents": [
+    {
+      "id": "ai-assist-d1",
+      "title": "《AI编程助手 项目文档》（PDF）",
+      "category": "project_doc",
+      "tags": ["项目文档"],
+      "updatedAt": "2026-05-14",
+      "department": "C线产品",
+      "excerpt": "本地：/Users/pengfanli/Downloads/AI编程助手 项目文档.pdf；内含石墨甘特、Confluence 与方案文档入口。"
+    },
+    {
+      "id": "ai-assist-d2",
+      "title": "《【AI编程助手】教研侧需求文档》（PDF）",
+      "category": "project_doc",
+      "tags": ["需求", "教研"],
+      "updatedAt": "2026-05-14",
+      "department": "教研",
+      "excerpt": "本地：/Users/pengfanli/Downloads/【AI编程助手】教研侧需求文档.pdf；Confluence 附件同源可查。"
+    },
+    {
+      "id": "ai-assist-d3",
+      "title": "《AI编程助手方案》（PDF）",
+      "category": "product",
+      "tags": ["方案"],
+      "updatedAt": "2026-05-14",
+      "department": "产研",
+      "excerpt": "本地：/Users/pengfanli/Downloads/AI编程助手方案.pdf；技术路线与模块边界说明。"
+    },
+    {
+      "id": "ai-assist-d4",
+      "title": "石墨：项目甘特表（与 Timeline 嵌入同源）",
+      "category": "gantt",
+      "tags": ["石墨"],
+      "updatedAt": "2026-05-14",
+      "department": "项目管理",
+      "excerpt": "项目文档内嵌链接指向该表。",
+      "href": "https://shimo.zhenguanyu.com/sheets/kGEyX7NlJR5JHJKW/xHfhK/"
+    },
+    {
+      "id": "ai-assist-d5",
+      "title": "Confluence：AI 编程助手项目主页",
+      "category": "project_doc",
+      "tags": ["Confluence"],
+      "updatedAt": "2026-05-14",
+      "department": "项目管理",
+      "excerpt": "项目文档外链；汇总方案、评审与发布记录。",
+      "href": "https://confluence.zhenguanyu.com/pages/viewpage.action?pageId=935865766"
+    },
+    {
+      "id": "ai-assist-d6",
+      "title": "石墨：AI 编程助手方案说明（文档）",
+      "category": "product",
+      "tags": ["石墨", "方案"],
+      "updatedAt": "2026-05-14",
+      "department": "产研",
+      "excerpt": "项目文档内链；与 PDF 方案交叉核对。",
+      "href": "https://shimo.zhenguanyu.com/docs/AzbPvpZy1j8LFR0r/"
+    }
+  ],
+  "operationScheme": {
+    "summary": "以《教研侧需求文档》定义 **教学可接受行为**，《AI编程助手方案》定义 **技术实现路径**，《项目文档》驱动 **里程碑与甘特**；运营配置教育模式与话术，数据搭建纠错/推题漏斗，测试把安全与性能纳入发布门禁。",
+    "sections": [
+      {
+        "title": "智能纠错运营策略",
+        "content": "按需求文档分级：**仅提示错误类型 → 指出行号与可疑片段 → 分步修复建议**；默认不输出完整 AC 代码。班主任侧统一「先读报错再点助手」的跟课脚本；异常高频报错周更进入规则库。"
+      },
+      {
+        "title": "推题运营策略",
+        "content": "推题与课节目标、OJ 标签、历史 AC/WA 绑定；展示 **推荐理由**（如「巩固循环」）以降低随机感。支持教师关闭推题或限定题单；活动期推题策略单独审批，避免与测评公平性冲突。"
+      },
+      {
+        "title": "方案落地的工程节奏",
+        "content": "RAG 索引与课纲 Git/文档版本号绑定；IDE 内请求带 **课节 ID + 学员租户**；失败降级到静态规则与本地缓存。与方案文档中的模块边界一致，避免「一个面板堆叠所有能力」导致延迟飙升。"
+      },
+      {
+        "title": "数据与复盘",
+        "content": "核心看板：纠错 **一次理解率**、推题 **点击率与完成率**、教育模式触发率、代写敏感工单。首周按《项目文档》甘特节点做差异分析，驱动 v1.1 需求池。"
+      }
+    ]
+  },
+  "retrospectives": [
+    {
+      "id": "ai-assist-r1",
+      "title": "推题难度漂移导致完课率波动",
+      "date": "2026-04-10",
+      "context": "灰度期部分班级反馈「推题过难」，与课节当堂目标不一致。",
+      "rootCause": ["标签与课节映射表滞后", "冷启动仅用全局难度"],
+      "impact": "练习放弃率上升、助教答疑压力增大。",
+      "actions": ["课节级默认难度带", "教师一键降难", "每周自动校准报表"],
+      "lessons": ["推题必须可解释且可回滚"],
+      "followUp": "写入方案文档附录。"
+    },
+    {
+      "id": "ai-assist-r2",
+      "title": "纠错误报引发不信任",
+      "date": "2026-04-16",
+      "context": "多文件工程中，模型误指其他文件行号，学员质疑助手可靠性。",
+      "rootCause": ["上下文缺失目录结构", "未锁定当前运行入口文件"],
+      "impact": "助手关闭率上升。",
+      "actions": ["注入 project 摘要与 entry 文件", "误报一键反馈入库"],
+      "lessons": ["纠错要先「定位」再「解释」"],
+      "followUp": "与教研共建误报样本集。"
+    }
+  ],
+  "deepDive": null,
+  "metrics": {
+    "kpis": [
+      {
+        "id": "aia1",
+        "label": "纠错一次理解率（抽样）",
+        "value": "61%",
+        "change": "+8pp",
+        "trend": "up"
+      },
+      {
+        "id": "aia2",
+        "label": "推题点击率",
+        "value": "29%",
+        "change": "+4pp",
+        "trend": "up"
+      },
+      {
+        "id": "aia3",
+        "label": "RAG 命中课节正确版本占比",
+        "value": "94%",
+        "change": "+3pp",
+        "trend": "up"
+      },
+      {
+        "id": "aia4",
+        "label": "代写敏感工单（周）",
+        "value": "5",
+        "change": "-1",
+        "trend": "up"
+      }
+    ],
+    "series": [
+      {
+        "id": "aias1",
+        "name": "日均纠错调用量",
+        "data": [
+          { "period": "W1", "value": 4200 },
+          { "period": "W2", "value": 5100 },
+          { "period": "W3", "value": 5600 },
+          { "period": "W4", "value": 5900 },
+          { "period": "W5", "value": 6200 }
+        ]
+      }
+    ]
+  },
+  "risks": [
+    {
+      "id": "ai-assist-k1",
+      "title": "推题与课节/测评公平性冲突",
+      "severity": "high",
+      "status": "处理中",
+      "impact": "家长投诉或赛事质疑。",
+      "owner": "产品",
+      "mitigation": "赛考模式关闭推题；题单白名单；审计日志。",
+      "progress": "规则表 v1 评审中"
+    },
+    {
+      "id": "ai-assist-k2",
+      "title": "源码与日志中的 PII 外泄",
+      "severity": "high",
+      "status": "处理中",
+      "impact": "合规事件。",
+      "owner": "产研",
+      "mitigation": "脱敏、最小留存、访问审计与密钥轮换。",
+      "progress": "安全评审 checklist 执行中"
+    },
+    {
+      "id": "ai-assist-k3",
+      "title": "PDF / 石墨 / Confluence 版本不一致",
+      "severity": "medium",
+      "status": "open",
+      "impact": "研发按错版实现、返工。",
+      "owner": "产品",
+      "mitigation": "单一事实源：Confluence 页顶版本表 + 变更 RSS。",
+      "progress": "对齐各文档 Owner"
+    }
+  ]
+}

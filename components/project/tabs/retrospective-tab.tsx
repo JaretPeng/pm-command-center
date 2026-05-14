@@ -114,9 +114,22 @@ export function RetrospectiveTab({
   const localDash = project.retrospectiveLocalDashboard;
   const refundPlan = project.retrospectiveRefundReductionPlan;
   const iframeMinH = localDash?.minHeight ?? 920;
-  const retrospectives = Array.isArray(project.retrospectives)
+  const isC3V6ProjectOverview =
+    project.slug === "c3-v6" && (lineNav == null || lineNav === "");
+
+  const retrospectivesRaw = Array.isArray(project.retrospectives)
     ? project.retrospectives
     : [];
+  /** C 线项目总览：仅隐藏用户点名的复盘卡片，其余条目保留 */
+  const retrospectives = isC3V6ProjectOverview
+    ? retrospectivesRaw.filter((r) => r.title !== "版本节奏与质量权衡")
+    : retrospectivesRaw;
+
+  const visibleDeepDive =
+    isC3V6ProjectOverview &&
+    project.deepDive?.title === "常规班与启航班并班问题"
+      ? undefined
+      : project.deepDive;
 
   return (
     <div className="space-y-4">
@@ -275,6 +288,55 @@ export function RetrospectiveTab({
                   </p>
                   <p className="mt-2 text-sm leading-relaxed">{r.impact}</p>
                 </div>
+                {r.supplementTables?.length ? (
+                  <div className="md:col-span-2 space-y-5">
+                    {r.supplementTables.map((tb, ti) => (
+                      <div key={`${r.id}-tbl-${ti}`}>
+                        <p className="text-xs font-semibold text-foreground/90">
+                          {tb.title}
+                        </p>
+                        <div className="mt-2 overflow-x-auto rounded-lg border border-border/80">
+                          <table className="w-full min-w-0 border-collapse text-left text-sm sm:min-w-[520px]">
+                            <thead>
+                              <tr className="border-b bg-muted/50">
+                                {tb.columns.map((c) => (
+                                  <th
+                                    key={c}
+                                    className="whitespace-normal px-3 py-2.5 text-xs font-semibold text-muted-foreground sm:whitespace-nowrap"
+                                  >
+                                    {c}
+                                  </th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {tb.rows.map((row, ri) => (
+                                <tr
+                                  key={ri}
+                                  className="border-b border-border/50 last:border-0 odd:bg-muted/[0.12]"
+                                >
+                                  {tb.columns.map((_, ci) => (
+                                    <td
+                                      key={ci}
+                                      className="max-w-[220px] px-3 py-2 align-top text-foreground/90 sm:max-w-none"
+                                    >
+                                      {row[ci] ?? "—"}
+                                    </td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                        {tb.footnote ? (
+                          <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                            {tb.footnote}
+                          </p>
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
                 <div>
                   <p className="text-xs font-semibold text-muted-foreground">
                     解决方案
@@ -308,7 +370,7 @@ export function RetrospectiveTab({
       </div>
       ) : null}
 
-      {project.deepDive ? (
+      {visibleDeepDive ? (
         <div className="space-y-4">
           <Card className="glass-card p-5">
             <p className="text-sm font-semibold">专业复盘案例 · RCA</p>
@@ -316,22 +378,22 @@ export function RetrospectiveTab({
               Timeline · 文本 · 鱼骨图
             </p>
             <div className="mt-4 space-y-3 text-sm leading-relaxed">
-              <p className="font-medium">{project.deepDive.title}</p>
+              <p className="font-medium">{visibleDeepDive.title}</p>
               <p className="text-muted-foreground">
-                {project.deepDive.problemBackground}
+                {visibleDeepDive.problemBackground}
               </p>
               <div className="rounded-lg border bg-muted/10 p-3">
                 <p className="text-xs font-semibold text-muted-foreground">
                   Root Cause 摘要
                 </p>
-                <p className="mt-2">{project.deepDive.rootCauseSummary}</p>
+                <p className="mt-2">{visibleDeepDive.rootCauseSummary}</p>
               </div>
               <div>
                 <p className="text-xs font-semibold text-muted-foreground">
                   Timeline
                 </p>
                 <div className="mt-2 space-y-2">
-                  {project.deepDive.timeline.map((t) => (
+                  {visibleDeepDive.timeline.map((t) => (
                     <div
                       key={t.date}
                       className="flex gap-3 rounded-lg border px-3 py-2"
@@ -349,14 +411,14 @@ export function RetrospectiveTab({
                   解决方案
                 </p>
                 <ul className="mt-2 list-disc space-y-1 pl-5">
-                  {project.deepDive.solution.map((s) => (
+                  {visibleDeepDive.solution.map((s) => (
                     <li key={s}>{s}</li>
                   ))}
                 </ul>
               </div>
-              {project.deepDive.metrics?.length ? (
+              {visibleDeepDive.metrics?.length ? (
                 <div className="flex flex-wrap gap-2">
-                  {project.deepDive.metrics.map((m) => (
+                  {visibleDeepDive.metrics.map((m) => (
                     <span
                       key={m}
                       className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
@@ -369,7 +431,7 @@ export function RetrospectiveTab({
             </div>
           </Card>
 
-          <FishboneDiagram dive={project.deepDive} />
+          <FishboneDiagram dive={visibleDeepDive} />
         </div>
       ) : null}
     </div>

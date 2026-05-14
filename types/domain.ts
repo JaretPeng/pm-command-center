@@ -175,15 +175,26 @@ export interface TimelineEmbedBlock {
   hideBuiltInGantt?: boolean;
 }
 
-/** Overview 页展示的视频（本地 public 文件或 YouTube 嵌入） */
+/** Overview 页展示的视频：本地 `public` 文件、YouTube 嵌入，或允许 iframe 的 HTTPS 页面（如飞书知识库） */
 export interface OverviewVideoBlock {
-  /** file：填写放在 `public/` 下的路径，如 `/videos/demo.mp4` */
-  mode: "file" | "youtube";
-  /** file 模式为 MP4/WebM 等 URL；youtube 模式可为 11 位视频 ID 或完整 watch/embed 链接 */
+  /** file：填写放在 `public/` 下的路径，如 `/videos/demo.mp4`；youtube / embed 见 `src` */
+  mode: "file" | "youtube" | "embed";
+  /** file 模式为 MP4/WebM 等 URL；youtube 为 11 位 ID 或完整链接；embed 为可 iframe 的 HTTPS 地址（如飞书 wiki） */
   src: string;
   poster?: string;
   title?: string;
   caption?: string;
+  /** embed 模式：iframe 最小高度（px），默认 480 */
+  embedHeightPx?: number;
+}
+
+/** 复盘卡片内可选表格（列标题 + 行数据，均为纯文本） */
+export interface RetrospectiveItemTable {
+  title: string;
+  columns: string[];
+  /** 每行列数应与 columns 一致 */
+  rows: string[][];
+  footnote?: string;
 }
 
 export interface RetrospectiveItem {
@@ -196,6 +207,8 @@ export interface RetrospectiveItem {
   actions: string[];
   lessons: string[];
   followUp?: string;
+  /** 置于「影响分析」与「解决方案」之间：分班衔接、损益测算等 */
+  supplementTables?: RetrospectiveItemTable[];
 }
 
 /** Retrospective Tab：同源 `public/` 下的静态 HTML 看板（可 iframe 完整保留 Chart.js 等交互） */
@@ -258,7 +271,15 @@ export interface FishboneBranch {
 }
 
 /** 运营方案 Tab 内置矢量图类型 */
-export type OperationSchemeDiagramId = "courseSystem" | "a1YbcProductPricing";
+export type OperationSchemeDiagramId =
+  | "courseSystem"
+  | "a1YbcProductPricing"
+  /** C 线项目总览：价值探索—待办—验证—指标闭环路径图 */
+  | "clineValueLoopOps"
+  /** 搭建 OJ 平台：猿编程 OJ 运营方案核心链路示意 */
+  | "ojPlatformOperations"
+  /** 搭建 OJ 平台：YBC OJ vs 核桃（HT）OJ 一、二期对比表 */
+  | "ojProductComparison";
 
 /** 运营方案 Tab：外联一行（石墨、飞书等） */
 export interface OperationSchemeLink {
@@ -306,6 +327,8 @@ export interface ProjectDetail extends ProjectSummary {
   heroNarrative?: string[];
   /** 若填写，Hero 底部元信息行仅显示日历 + 该文案（不展示负责人 / 版本 / 风险） */
   heroDateCaption?: string;
+  /** 为 true 时不渲染 Hero 主卡底部日期 / 负责人 / 版本 / 风险整行 */
+  heroHideBottomMeta?: boolean;
   /** 若填写，Hero 右侧卡片显示「项目动态」及环形分布，替代完成度饼图 */
   heroDynamics?: {
     inProgress: number;
@@ -326,8 +349,12 @@ export interface ProjectDetail extends ProjectSummary {
     pending?: string;
     risk?: string;
   };
+  /** 动态卡片四宫格数字后的单位，默认「个」 */
+  heroDynamicsValueUnit?: string;
   /** Hero 主卡内：横向课程体系条（如 A1–A8「高级算法」） */
   heroCurriculumStrip?: HeroCurriculumStrip;
+  /** 可选：Hero 叙事块末尾展示的外链（如 https://oj.example.com） */
+  heroFooterUrl?: string;
   executiveSummary: string;
   objectives: string[];
   background: string[];

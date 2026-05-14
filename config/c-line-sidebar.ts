@@ -15,6 +15,7 @@ export const cLineSidebar = {
         { id: "c4-v6-course", label: "C4-v6.0课程迭代" },
         { id: "c5-v6-course", label: "C5-v6.0课程迭代" },
         { id: "ai-new-course", label: "AI新赠课制作" },
+        { id: "ai-coding-assistant", label: "AI编程助手开发" },
       ] satisfies LineNavItem[],
     },
     {

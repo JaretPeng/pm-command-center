@@ -15,7 +15,13 @@ import { healthLabel, healthBadgeClass } from "@/lib/health";
 import { cn } from "@/lib/utils";
 import type { ProjectDetail } from "@/types/domain";
 import { formatDate } from "@/lib/utils";
-import { AlertTriangle, CalendarRange, Flag, Target } from "lucide-react";
+import {
+  AlertTriangle,
+  CalendarRange,
+  ExternalLink,
+  Flag,
+  Target,
+} from "lucide-react";
 import { HeroCurriculumStripBlock } from "@/components/project/hero-curriculum-strip";
 
 export function ProjectHero({ project }: { project: ProjectDetail }) {
@@ -33,6 +39,7 @@ export function ProjectHero({ project }: { project: ProjectDetail }) {
   const statCompleted = dynStat.completed ?? "已完结项目";
   const statPending = dynStat.pending ?? "待启动项目";
   const statRisk = dynStat.risk ?? "项目风险";
+  const dynValueUnit = project.heroDynamicsValueUnit ?? "个";
   const pie = [
     { name: "完成", value: project.progress },
     { name: "剩余", value: Math.max(0, 100 - project.progress) },
@@ -44,15 +51,31 @@ export function ProjectHero({ project }: { project: ProjectDetail }) {
     (r) => r.severity === "high" || r.severity === "critical",
   ).length;
 
-  const dynamicsPie =
+  const dynamicsPieRaw =
     dynamics != null
       ? [
           { name: "进行中", value: dynamics.inProgress, fill: "hsl(24 95% 48%)" },
           { name: "已完结", value: dynamics.completed, fill: "hsl(220 9% 46%)" },
           { name: "待启动", value: dynamics.pending, fill: "hsl(221 83% 53%)" },
+          ...(dynamics.risk > 0
+            ? [
+                {
+                  name: "风险",
+                  value: dynamics.risk,
+                  fill: "hsl(38 92% 50%)",
+                },
+              ]
+            : []),
         ]
       : [];
-  const dynamicsTotal = dynamicsPie.reduce((s, d) => s + d.value, 0);
+  const dynamicsPie = dynamicsPieRaw.filter((d) => d.value > 0);
+  const dynamicsTotal =
+    dynamics != null
+      ? dynamics.inProgress +
+        dynamics.completed +
+        dynamics.pending +
+        dynamics.risk
+      : 0;
   const dynamicsChartData =
     dynamicsTotal > 0
       ? dynamicsPie
@@ -88,6 +111,23 @@ export function ProjectHero({ project }: { project: ProjectDetail }) {
               {project.heroNarrative.map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
+              {project.heroFooterUrl?.trim() ? (
+                <p className="pt-0.5">
+                  <a
+                    href={
+                      /^https?:\/\//i.test(project.heroFooterUrl.trim())
+                        ? project.heroFooterUrl.trim()
+                        : `https://${project.heroFooterUrl.trim()}`
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 font-medium text-primary underline-offset-4 hover:underline"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+                    {project.heroFooterUrl.trim().replace(/^https?:\/\//i, "")}
+                  </a>
+                </p>
+              ) : null}
             </div>
           ) : null}
           {project.heroCurriculumStrip ? (
@@ -124,35 +164,38 @@ export function ProjectHero({ project }: { project: ProjectDetail }) {
               </div>
             </>
           ) : null}
-          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-muted-foreground">
-            {project.heroDateCaption?.trim() ? (
-              <span className="inline-flex items-center gap-1">
-                <CalendarRange className="h-3.5 w-3.5" />
-                {project.heroDateCaption.trim()}
-              </span>
-            ) : (
-              <>
+          {!project.heroHideBottomMeta ? (
+            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-muted-foreground">
+              {project.heroDateCaption?.trim() ? (
                 <span className="inline-flex items-center gap-1">
                   <CalendarRange className="h-3.5 w-3.5" />
-                  {formatDate(project.startDate)}
-                  {project.endDate ? ` — ${formatDate(project.endDate)}` : ""}
+                  {project.heroDateCaption.trim()}
                 </span>
-                <span>负责人 · {project.owner}</span>
-                {project.version ? <span>版本 · {project.version}</span> : null}
-                <span
-                  className={cn(
-                    "inline-flex items-center gap-1",
-                    project.riskLevel === "high" || project.riskLevel === "critical"
-                      ? "text-red-600"
-                      : "",
-                  )}
-                >
-                  <AlertTriangle className="h-3.5 w-3.5" />
-                  风险 · {project.riskLevel.toUpperCase()}
-                </span>
-              </>
-            )}
-          </div>
+              ) : (
+                <>
+                  <span className="inline-flex items-center gap-1">
+                    <CalendarRange className="h-3.5 w-3.5" />
+                    {formatDate(project.startDate)}
+                    {project.endDate ? ` — ${formatDate(project.endDate)}` : ""}
+                  </span>
+                  <span>负责人 · {project.owner}</span>
+                  {project.version ? <span>版本 · {project.version}</span> : null}
+                  <span
+                    className={cn(
+                      "inline-flex items-center gap-1",
+                      project.riskLevel === "high" ||
+                        project.riskLevel === "critical"
+                        ? "text-red-600"
+                        : "",
+                    )}
+                  >
+                    <AlertTriangle className="h-3.5 w-3.5" />
+                    风险 · {project.riskLevel.toUpperCase()}
+                  </span>
+                </>
+              )}
+            </div>
+          ) : null}
         </div>
       </Card>
 
@@ -219,27 +262,42 @@ export function ProjectHero({ project }: { project: ProjectDetail }) {
                 />
                 待启动
               </span>
+              {dynamics.risk > 0 ? (
+                <span className="inline-flex items-center gap-1.5">
+                  <span
+                    className="h-2 w-2 shrink-0 rounded-full"
+                    style={{ backgroundColor: "hsl(38 92% 50%)" }}
+                  />
+                  风险
+                </span>
+              ) : null}
             </div>
             <div className="mt-3 grid grid-cols-2 gap-x-2 gap-y-3 border-t pt-3 text-center text-xs">
               <div>
                 <p className="text-muted-foreground">{statInProgress}</p>
                 <p className="text-lg font-semibold tabular-nums text-orange-600 dark:text-orange-400">
                   {dynamics.inProgress}
-                  <span className="text-xs font-normal text-muted-foreground">个</span>
+                  <span className="text-xs font-normal text-muted-foreground">
+                    {dynValueUnit}
+                  </span>
                 </p>
               </div>
               <div>
                 <p className="text-muted-foreground">{statCompleted}</p>
                 <p className="text-lg font-semibold tabular-nums text-muted-foreground">
                   {dynamics.completed}
-                  <span className="text-xs font-normal text-muted-foreground">个</span>
+                  <span className="text-xs font-normal text-muted-foreground">
+                    {dynValueUnit}
+                  </span>
                 </p>
               </div>
               <div>
                 <p className="text-muted-foreground">{statPending}</p>
                 <p className="text-lg font-semibold tabular-nums text-blue-600 dark:text-blue-400">
                   {dynamics.pending}
-                  <span className="text-xs font-normal text-muted-foreground">个</span>
+                  <span className="text-xs font-normal text-muted-foreground">
+                    {dynValueUnit}
+                  </span>
                 </p>
               </div>
               <div>
@@ -251,6 +309,9 @@ export function ProjectHero({ project }: { project: ProjectDetail }) {
                   )}
                 >
                   {dynamics.risk}
+                  <span className="text-xs font-normal text-muted-foreground">
+                    {dynValueUnit}
+                  </span>
                 </p>
               </div>
             </div>

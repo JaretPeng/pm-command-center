@@ -11,6 +11,7 @@ export const aLineSidebar = {
       label: "现行项目",
       items: [
         { id: "a1-ybc-hardware", label: "A1 YBC硬件课迭代" },
+        { id: "oj-platform", label: "搭建OJ平台" },
         { id: "a-line-manual", label: "A线手册制作" },
         { id: "a4-course", label: "A4课程制作" },
         { id: "a5-course", label: "A5课程制作" },

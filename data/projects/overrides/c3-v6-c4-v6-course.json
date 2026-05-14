@@ -1,0 +1,429 @@
+{
+  "name": "C4-v6.0课程迭代",
+  "type": "录播课 · v6.0",
+  "phase": "",
+  "health": "good",
+  "progress": 58,
+  "milestoneCount": 9,
+  "blockerCount": 1,
+  "owner": "C线产品",
+  "riskLevel": "medium",
+  "version": "v6.0",
+  "heroTagBadges": ["数据商城", "录播课"],
+  "heroNarrative": [
+    "C4 在「应用程序编程」阶段以 **ybc_app** 为主线，将界面组件、事件交互、定时器、本地与持久化数据、表格统计与触摸绘画串成可感知的产品能力。依据《C4-V3.1 大纲》，全课共 **20 个单元**，按五大综合项目递进：谁是幸运星 → 智能批改器 → 番茄时钟 → 心情日记 → 创意画板，从「能做页面」走到「能存数据、能复盘、能创作」。",
+    "其中 **番茄时钟** 与 **心情日记** 两条线集中训练 **DataManager**、条件查询与周历展示，与 **数据商城** 侧的素材读取、成就/道具类数据落库形成自然衔接；录播课需在关键单元预埋埋点，便于验证完课、重播与练习跳转漏斗。",
+    "v6.0 迭代目标：在不大改课时的前提下完成大纲升级与录播重制、题库/OJ 与数据读写沙箱对齐，并通过灰度班级验证 **eval/replace、图片选择器、触摸事件** 等高风险 API 在主流终端上的稳定性。"
+  ],
+  "heroCurriculumStrip": null,
+  "heroDynamics": {
+    "inProgress": 9,
+    "completed": 8,
+    "pending": 5,
+    "risk": 2
+  },
+  "heroDynamicsCardTitle": "交付动态",
+  "heroDynamicsTotalLabel": "交付事项合计",
+  "heroDynamicsValueUnit": "项",
+  "heroDynamicsStatLabels": {
+    "inProgress": "进行中事项",
+    "completed": "已完结事项",
+    "pending": "待启动事项",
+    "risk": "风险事项"
+  },
+  "executiveSummary": "以《C4-V3.1 大纲》为单一内容源，交付 C4 v6.0 录播与配套资源：五大项目、二十单元闭环，重点攻坚数据持久化与数据商城联动、触摸绘画与回撤体验，并按飞书甘特对齐测试、培训与发布节奏。",
+  "background": [
+    "C4 学员已具备 Python 基础，本阶段需把「控制台思维」迁移到 **图形化应用**：页面、组件、事件与多页面跳转是后续项目与赛事拓展的底座。",
+    "V3.1 大纲将应用类知识点拆进真实小项目：抽奖、口算批改、番茄钟、日记与画板，既覆盖课纲要求的组件与数据能力，又便于在录播中做可视化演示与跟练。",
+    "业务上 v6.0 与 **数据商城**、成就与练习数据打通诉求增强：番茄钟的专注记录、日记持久化等单元，需要与平台侧数据契约、文件路径与安全策略（如 eval 使用边界）提前对齐，避免上线后批量返工。"
+  ],
+  "objectives": [
+    "内容目标：按 20 单元交付完整录播、课件与示例工程，五大项目的教学目标、知识点与「项目效果」与大纲逐条对齐并可审计。",
+    "体验目标：保障应用启动、图片选择、计时器/音频、DataManager 读写与触摸绘画在 Windows / macOS / 常见分辨率下的可用性；单单元录播时长与练习节奏符合 C4 学情基线。",
+    "协同目标：教研—产研—测试—运营在飞书甘特上共享依赖；数据商城相关接口与埋点验收列入发布门禁，班主任培训材料与 FAQ 与新版单元同步更新。"
+  ],
+  "keyOutcomes": [
+    "录播与资源：五大项目全部可跟练发布，示例代码与「课程核心代码」区块在大纲中可追溯；关键单元提供故障排查清单（定时器、音频路径、数据文件权限等）。",
+    "数据与商城：完成 DataManager 与商城/成就所需字段映射说明及联调记录；专注报告、日记列表等页面的读写在预发环境压测通过。",
+    "质量与运营：完成 C4 v6.0 回归用例（含触摸设备抽样）、发布说明与首周跟课脚本；沉淀一版「应用程序编程」录播制作规范供 C5+ 复用。"
+  ],
+  "overviewVideo": null,
+  "overviewHideStructureDiagram": true,
+  "timelineEmbed": {
+    "title": "C4 v6.0 交付甘特（飞书）",
+    "caption": "交付事项与依赖以飞书甘特为准；嵌入受限时请新窗口打开。",
+    "embedUrl": "https://my.feishu.cn/wiki/IGKHwUUb3idBtykT4OocohDdnef?from=from_copylink",
+    "heightPx": 520,
+    "hideBuiltInGantt": false
+  },
+  "milestones": [
+    {
+      "id": "c4v6-ms-01",
+      "name": "《C4-V3.1 大纲》签核与 v6.0 范围冻结",
+      "owner": "产品 / 教研",
+      "dueDate": "2025-10-20",
+      "status": "done",
+      "risk": "low",
+      "modules": ["大纲"],
+      "description": "锁定 20 单元与五大项目顺序；标注数据商城依赖单元。"
+    },
+    {
+      "id": "c4v6-ms-02",
+      "name": "项目一～二（单元 1–6）录播与脚本封版",
+      "owner": "教研",
+      "dueDate": "2025-12-15",
+      "status": "done",
+      "risk": "low",
+      "modules": ["录播"],
+      "description": "谁是幸运星、智能批改器：Image/Text/Button、定时器、图片选择器、eval/replace、Table 统计。"
+    },
+    {
+      "id": "c4v6-ms-03",
+      "name": "项目三（单元 7–10）DataManager 与数据商城联调",
+      "owner": "产研 / 教研",
+      "dueDate": "2026-02-28",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["数据", "商城"],
+      "description": "番茄时钟：Select、TimeMeter、Sound、持久化与专注报告页；接口与埋点验收。"
+    },
+    {
+      "id": "c4v6-ms-04",
+      "name": "项目四（单元 11–14）心情日记链路透测",
+      "owner": "教研 / 测试",
+      "dueDate": "2026-03-20",
+      "status": "in_progress",
+      "risk": "medium",
+      "modules": ["录播", "测试"],
+      "description": "Card、TextArea、数据更新、周历组件；文件写入与展示一致性。"
+    },
+    {
+      "id": "c4v6-ms-05",
+      "name": "项目五（单元 15–19）触摸绘画与回撤专项",
+      "owner": "产研",
+      "dueDate": "2026-04-05",
+      "status": "planned",
+      "risk": "high",
+      "modules": ["触摸", "画板"],
+      "description": "触摸事件、回撤算法、作品保存/删除；多终端手势差异收敛。"
+    },
+    {
+      "id": "c4v6-ms-06",
+      "name": "单元 20 总结与拓展 & 智勇大闯关验收",
+      "owner": "教研",
+      "dueDate": "2026-04-12",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["收尾"],
+      "description": "全册知识串联与期末闯关内容定稿。"
+    },
+    {
+      "id": "c4v6-ms-07",
+      "name": "C4 v6.0 全链路回归与性能测试",
+      "owner": "测试",
+      "dueDate": "2026-04-18",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["测试"],
+      "description": "覆盖音频并发、大图片、数据文件损坏降级、触摸采样率等场景。"
+    },
+    {
+      "id": "c4v6-ms-08",
+      "name": "班主任培训、物料与 FAQ",
+      "owner": "运营",
+      "dueDate": "2026-04-22",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["运营"],
+      "description": "新增数据与触摸相关答疑话术、常见报错截图。"
+    },
+    {
+      "id": "c4v6-ms-09",
+      "name": "v6.0 正式发布与首周复盘",
+      "owner": "产品",
+      "dueDate": "2026-04-28",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["发布"],
+      "description": "发布说明、监控看板与补丁排期冻结。"
+    }
+  ],
+  "gantt": [
+    {
+      "id": "c4v6-g1",
+      "name": "大纲 / 脚本",
+      "lane": "教研",
+      "start": "2025-09-01",
+      "end": "2026-01-20",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "c4v6-g2",
+      "name": "录播量产（1–14 单元）",
+      "lane": "教研",
+      "start": "2025-10-01",
+      "end": "2026-04-10",
+      "progress": 62,
+      "phase": "phase2"
+    },
+    {
+      "id": "c4v6-g3",
+      "name": "运行时 / 数据商城接口",
+      "lane": "产研",
+      "start": "2025-11-01",
+      "end": "2026-04-15",
+      "progress": 55,
+      "phase": "phase2",
+      "dependencies": [{ "from": "c4v6-g1", "to": "c4v6-g3" }]
+    },
+    {
+      "id": "c4v6-g4",
+      "name": "触摸与画板专项",
+      "lane": "产研",
+      "start": "2026-02-01",
+      "end": "2026-04-20",
+      "progress": 35,
+      "phase": "ongoing"
+    },
+    {
+      "id": "c4v6-g5",
+      "name": "测试与缺陷收敛",
+      "lane": "测试",
+      "start": "2026-01-15",
+      "end": "2026-04-25",
+      "progress": 40,
+      "phase": "ongoing"
+    },
+    {
+      "id": "c4v6-g6",
+      "name": "培训 / 发布 / 复盘",
+      "lane": "运营 / 产品",
+      "start": "2026-03-15",
+      "end": "2026-05-05",
+      "progress": 22,
+      "phase": "ongoing"
+    }
+  ],
+  "team": [
+    {
+      "id": "c4v6-t1",
+      "name": "C4 教研负责人",
+      "role": "教研",
+      "modules": ["大纲", "录播"],
+      "status": "busy",
+      "deliverables": ["20 单元脚本", "示例工程", "智勇大闯关"]
+    },
+    {
+      "id": "c4v6-t2",
+      "name": "应用程序运行时",
+      "role": "产研",
+      "modules": ["ybc_app", "触摸"],
+      "status": "busy",
+      "deliverables": ["API 兼容", "画板性能", "沙箱策略"]
+    },
+    {
+      "id": "c4v6-t3",
+      "name": "数据商城对接",
+      "role": "产研",
+      "modules": ["DataManager", "商城"],
+      "status": "active",
+      "deliverables": ["契约文档", "联调记录", "降级方案"]
+    },
+    {
+      "id": "c4v6-t4",
+      "name": "测试负责人",
+      "role": "测试",
+      "modules": ["回归", "性能"],
+      "status": "active",
+      "deliverables": ["用例集", "缺陷看板", "触摸设备矩阵"]
+    },
+    {
+      "id": "c4v6-t5",
+      "name": "班主任运营",
+      "role": "运营",
+      "modules": ["培训", "FAQ"],
+      "status": "active",
+      "deliverables": ["跟课脚本", "舆情关键词", "首周日报模板"]
+    },
+    {
+      "id": "c4v6-t6",
+      "name": "C线产品",
+      "role": "产品 / PM",
+      "modules": ["范围", "发布"],
+      "status": "active",
+      "deliverables": ["里程碑评审", "甘特对齐", "复盘主持"]
+    }
+  ],
+  "documents": [
+    {
+      "id": "c4v6-d1",
+      "title": "《C4-V3.1 大纲》（Excel 源文件）",
+      "category": "syllabus",
+      "tags": ["大纲", "C4"],
+      "updatedAt": "2026-05-01",
+      "department": "教研",
+      "excerpt": "20 单元、五大项目：幸运星、批改器、番茄钟、日记、画板；知识点/教学目标/项目效果与课程核心代码。请将团队云盘链接维护至飞书项目空间。"
+    },
+    {
+      "id": "c4v6-d2",
+      "title": "飞书：C4 v6.0 交付甘特（与 Timeline 同源）",
+      "category": "gantt",
+      "tags": ["飞书"],
+      "updatedAt": "2026-05-07",
+      "department": "项目管理",
+      "excerpt": "交付事项合计与进行中/已完结/待启动/风险拆分以甘特为准。",
+      "href": "https://my.feishu.cn/wiki/IGKHwUUb3idBtykT4OocohDdnef?from=from_copylink"
+    },
+    {
+      "id": "c4v6-d3",
+      "title": "《C4 v6.0 录播制作与验收规范》（草案）",
+      "category": "operations",
+      "tags": ["录播", "规范"],
+      "updatedAt": "2026-04-01",
+      "department": "教研",
+      "excerpt": "片头片尾、代码字号、关键交互特写与练习跳转约定。"
+    },
+    {
+      "id": "c4v6-d4",
+      "title": "DataManager × 数据商城 接口说明（联调版）",
+      "category": "product",
+      "tags": ["数据商城"],
+      "updatedAt": "2026-03-15",
+      "department": "产研",
+      "excerpt": "字段映射、错误码、本地 data.txt 与云端同步边界。"
+    },
+    {
+      "id": "c4v6-d5",
+      "title": "C4 v6.0 回归测试用例清单",
+      "category": "qa",
+      "tags": ["测试"],
+      "updatedAt": "2026-04-10",
+      "department": "测试",
+      "excerpt": "定时器、音频、图片选择、eval 边界、触摸采样与回撤栈深度。"
+    }
+  ],
+  "operationScheme": {
+    "summary": "C4 v6.0 以大纲驱动的「录播 + 跟练 + 数据」交付：先冻结单元与项目映射，再并行推进录播量产与运行时/商城联调，测试左移嵌入单元 4、8、10、14、19 等高风险点，最后集中培训与发布。",
+    "sections": [
+      {
+        "title": "教学主线与单元节奏",
+        "content": "按大纲顺序：① 谁是幸运星（单元 1–3）建立页面与组件、定时器与按钮状态；② 智能批改器（4–6）引入图片选择、暂存 get/set、eval/replace、Table 统计；③ 番茄时钟（7–10）Select、TimeMeter、Sound、DataManager 与专注报告；④ 心情日记（11–14）Card、TextArea、更新与周历；⑤ 创意画板（15–20）触摸绘画、回撤、保存/删除与总结闯关。录播每单元需对齐「知识点—教学目标—项目效果」三联表。"
+      },
+      {
+        "title": "数据商城与持久化合入",
+        "content": "在番茄钟与日记线明确哪些数据落本地文件、哪些字段需同步商城/成就服务；联调前冻结文件格式与 datetime 取日口径。对家长端可见的「专注报告」「周记」需配置隐私脱敏与导出策略（占位：按公司数据规范执行）。"
+      },
+      {
+        "title": "录播生产与质检",
+        "content": "建立分项目封版节点（见 Milestones）；质检包含：代码可运行性、音频资源路径、多分辨率布局、DataManager 异常文件恢复。触摸单元需在实机矩阵上签字确认。"
+      },
+      {
+        "title": "运营与班主任协同",
+        "content": "提前两周下发新版单元 FAQ：图片权限、杀毒误删 data.txt、耳机无声音等高频问题；首周安排「应用程序」专题答疑直播或异步答疑帖（可与实际运营形态对齐）。"
+      }
+    ]
+  },
+  "retrospectives": [
+    {
+      "id": "c4v6-r1",
+      "title": "DataManager 与商城联调窗口偏紧",
+      "date": "2026-03-25",
+      "context": "番茄钟单元依赖读写与查询，联调排期与录播剪辑并行，曾出现接口文档滞后于脚本定稿的情况。",
+      "rootCause": ["依赖识别晚于大纲冻结", "双周节奏下缓冲不足"],
+      "impact": "部分班级练习页短暂使用本地-only 方案，与商城展示不一致。",
+      "actions": ["大纲模板增加「平台依赖」列", "联调 DRI 与教研双签日期"],
+      "lessons": ["数据类单元应单独设硬里程碑，不与普通录播混排"],
+      "followUp": "纳入 C5 大纲评审检查项。"
+    },
+    {
+      "id": "c4v6-r2",
+      "title": "触摸绘画在低端触控板上的采样抖动",
+      "date": "2026-04-12",
+      "context": "创意画板单元在部分 Windows 触控板上出现线条毛刺，回撤栈内存占用需监控。",
+      "rootCause": ["事件频率高于预期", "回撤未设最大深度"],
+      "impact": "体验评分下降与退费敏感话题。",
+      "actions": ["运行时增加采样节流", "教学侧演示推荐外接鼠标路径"],
+      "lessons": ["硬件差异类能力需更早进测试矩阵"],
+      "followUp": "补丁版本写入发布说明与班主任话术。"
+    }
+  ],
+  "deepDive": null,
+  "metrics": {
+    "kpis": [
+      {
+        "id": "c4k1",
+        "label": "录播单元封版率",
+        "value": "14/20",
+        "change": "+3 单元",
+        "trend": "up"
+      },
+      {
+        "id": "c4k2",
+        "label": "数据商城联调用例通过",
+        "value": "92%",
+        "change": "+6pp",
+        "trend": "up"
+      },
+      {
+        "id": "c4k3",
+        "label": "触摸专项缺陷关闭",
+        "value": "87%",
+        "change": "冲刺中",
+        "trend": "flat"
+      },
+      {
+        "id": "c4k4",
+        "label": "班主任 FAQ 覆盖率",
+        "value": "96%",
+        "change": "+4pp",
+        "trend": "up"
+      }
+    ],
+    "series": [
+      {
+        "id": "c4s1",
+        "name": "周均缺陷关闭数",
+        "data": [
+          { "period": "W1", "value": 12 },
+          { "period": "W2", "value": 18 },
+          { "period": "W3", "value": 15 },
+          { "period": "W4", "value": 22 },
+          { "period": "W5", "value": 19 }
+        ]
+      }
+    ]
+  },
+  "risks": [
+    {
+      "id": "c4v6-k1",
+      "title": "eval 与字符串表达式在安全与兼容上的争议",
+      "severity": "high",
+      "status": "处理中",
+      "impact": "口算批改单元可能被安全策略拦截或家长质疑。",
+      "owner": "产研",
+      "mitigation": "白名单题型 + 运行时沙箱 + 教学侧解释脚本。",
+      "progress": "沙箱方案评审中"
+    },
+    {
+      "id": "c4v6-k2",
+      "title": "音频/定时器组合导致的偶现卡顿",
+      "severity": "medium",
+      "status": "观察",
+      "impact": "直播跟练时体验下降。",
+      "owner": "产研",
+      "mitigation": "资源预加载与结束回调串行化；降级关闭背景白噪音。",
+      "progress": "压测复现 3/5 场景已修复"
+    },
+    {
+      "id": "c4v6-k3",
+      "title": "触摸设备碎片化导致画板验收周期长",
+      "severity": "medium",
+      "status": "open",
+      "impact": "发布窗口被压缩。",
+      "owner": "测试",
+      "mitigation": "扩充设备矩阵 + 关键路径用鼠标替代方案写进大纲。",
+      "progress": "设备清单采集中"
+    }
+  ]
+}

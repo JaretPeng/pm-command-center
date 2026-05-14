@@ -8,6 +8,7 @@ import type {
   ProjectDetail,
   ProjectIndexFile,
   ProjectSummary,
+  RetrospectiveItem,
   TeamMember,
 } from "@/types/domain";
 
@@ -49,7 +50,35 @@ function asStringArray(v: unknown): string[] {
 function normalizeProjectDetail(raw: ProjectDetail): ProjectDetail {
   const p: ProjectDetail = { ...raw };
   p.tags = asStringArray(p.tags);
-  p.retrospectives = asArray(p.retrospectives);
+  p.retrospectives = asArray(p.retrospectives).map((raw) => {
+    const item = raw as Record<string, unknown>;
+    const st = item.supplementTables;
+    const tables = Array.isArray(st)
+      ? st
+          .filter((x) => x != null && typeof x === "object" && !Array.isArray(x))
+          .map((tb) => {
+            const t = tb as Record<string, unknown>;
+            const cols = asStringArray(t.columns);
+            const rowsRaw = t.rows;
+            const rows = Array.isArray(rowsRaw)
+              ? rowsRaw
+                  .filter((row) => Array.isArray(row))
+                  .map((row) => asStringArray(row as unknown[]))
+              : [];
+            return {
+              title: typeof t.title === "string" ? t.title : "",
+              columns: cols,
+              rows,
+              footnote:
+                typeof t.footnote === "string" ? t.footnote : undefined,
+            };
+          })
+      : undefined;
+    return {
+      ...(item as object),
+      supplementTables: tables?.length ? tables : undefined,
+    } as RetrospectiveItem;
+  });
   p.background = asStringArray(p.background);
   p.objectives = asStringArray(p.objectives);
   p.keyOutcomes = asStringArray(p.keyOutcomes);
@@ -223,6 +252,67 @@ export async function applyLineNavOverride(
     return project;
   }
   const filePath = path.join(DATA_DIR, "overrides", `a-line-${nav}.json`);
+  try {
+    const raw = await fs.readFile(filePath, "utf-8");
+    const partial = JSON.parse(raw) as Record<string, unknown>;
+    if (
+      partial == null ||
+      typeof partial !== "object" ||
+      Array.isArray(partial)
+    ) {
+      return project;
+    }
+    return normalizeProjectDetail(
+      applyPartialProjectOverride(project, partial),
+    );
+  } catch {
+    return project;
+  }
+}
+
+/**
+ * C 线「项目总览」：`/projects/c3-v6` 无 `?nav=` 时合并 `overrides/c3-v6-overview.json`。
+ * 带子路径 `?nav=` 时由 `applyC3V6NavChildOverride` 合并 `overrides/c3-v6-{nav}.json`。
+ */
+export async function applyC3V6OverviewOverride(
+  project: ProjectDetail,
+  nav: string | null,
+): Promise<ProjectDetail> {
+  if (project.slug !== "c3-v6") return project;
+  const trimmed = nav?.trim() ?? "";
+  if (trimmed.length > 0) return project;
+
+  const filePath = path.join(DATA_DIR, "overrides", "c3-v6-overview.json");
+  try {
+    const raw = await fs.readFile(filePath, "utf-8");
+    const partial = JSON.parse(raw) as Record<string, unknown>;
+    if (
+      partial == null ||
+      typeof partial !== "object" ||
+      Array.isArray(partial)
+    ) {
+      return project;
+    }
+    return normalizeProjectDetail(
+      applyPartialProjectOverride(project, partial),
+    );
+  } catch {
+    return project;
+  }
+}
+
+/**
+ * C 线侧栏子项目：`/projects/c3-v6?nav={id}` 时合并 `overrides/c3-v6-{nav}.json`（如 `c1-v7-course`）。
+ * 与 `c3-v6-overview.json`（仅无 `nav`）互斥。
+ */
+export async function applyC3V6NavChildOverride(
+  project: ProjectDetail,
+  nav: string | null,
+): Promise<ProjectDetail> {
+  if (project.slug !== "c3-v6") return project;
+  const trimmed = nav?.trim() ?? "";
+  if (!trimmed || !isSafeProjectSlug(trimmed)) return project;
+  const filePath = path.join(DATA_DIR, "overrides", `c3-v6-${trimmed}.json`);
   try {
     const raw = await fs.readFile(filePath, "utf-8");
     const partial = JSON.parse(raw) as Record<string, unknown>;

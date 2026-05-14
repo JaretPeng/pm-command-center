@@ -1,0 +1,414 @@
+{
+  "name": "C1-v7.0课程迭代",
+  "type": "AI课 · v7.0",
+  "phase": "",
+  "health": "good",
+  "progress": 52,
+  "milestoneCount": 9,
+  "blockerCount": 1,
+  "owner": "C线产品",
+  "riskLevel": "medium",
+  "heroTagBadges": ["AI课", "产品功能"],
+  "heroNarrative": [
+    "大班直播在「自主练、即时反馈」上存在天然边界；C1 v7.0 以 AI 互动课补足练习密度与成就感，借助动画与闯关化任务降低入门焦虑，让学生更愿意动手写代码。",
+    "行业侧家长对比多竞品的概率上升：在直播体系之上叠加 AI 课，可覆盖竞品常见的「练+反馈」形态，形成可感知的体验差异与传播点。",
+    "范围与节奏：J、S 两个学层各 6 讲、共 12 讲；用新版 AI 课替换原「计算思维」路径。直播前六次课后，每周三解锁对应 AI 课。上线后重点跟踪前 3 次课的行课数据，再决策是否在 C2 继续扩展 AI 课（C3–C8 暂延续既有计算思维课方案）。"
+  ],
+  "heroCurriculumStrip": null,
+  "heroDynamics": {
+    "inProgress": 8,
+    "completed": 7,
+    "pending": 5,
+    "risk": 2
+  },
+  "heroDynamicsCardTitle": "交付动态",
+  "heroDynamicsTotalLabel": "交付事项合计",
+  "heroDynamicsValueUnit": "项",
+  "heroDynamicsStatLabels": {
+    "inProgress": "进行中事项",
+    "completed": "已完结事项",
+    "pending": "待启动事项",
+    "risk": "风险事项"
+  },
+  "executiveSummary": "以「可观测、可迭代」为原则交付 C1 v7.0 AI 课：先跑通内容与 OJ/互动链路，再用前三次课的数据闭环评估难度、运营辅导压力与对后续直播课的牵引价值。",
+  "background": [
+    "直播大班在课堂形态上难以给每位学生稳定的自主思考与练习窗口，专注力与练习反馈也不易兼顾；AI 课可在课后/解锁节奏中提供分层练习、即时判题与成就感设计。",
+    "C1 作为入口学层，承担「兴趣—信心—基础编码习惯」的冷启动职责；v7.0 将原计算思维课替换为 AI 课，是产品线在「直播 + AI」双形态上的关键试验田，需要教研、产研、测试与班主任链路同频。"
+  ],
+  "objectives": [
+    "体验目标：提升编码练习量与反馈密度，优化到课、参课、完课、完参比、单题耗时、正确率及学习时长中位数（阈值示例：30min）等过程指标。",
+    "产品目标：完成 J/S 各 6 讲共 12 讲的课程与配套资源上线，形成可复制的「直播 + 周三解锁 AI 课」运营与排课模板。",
+    "决策目标：基于前 3 次 AI 课的真实行课数据，给出是否在 C2 继续推广 AI 课的明确结论与风险边界（C3+ 暂维持既有计算思维课路径）。"
+  ],
+  "keyOutcomes": [
+    "内容与互动：课程大纲、课件、题库与 OJ/判题策略对齐，首讲起可稳定开课并完成核心练习闭环。",
+    "测试与质量：完成《C1 7.0 测试方案》执行与回归，覆盖内容难度、班主任辅导压力、以及对后续直播课学习动量的影响评估。",
+    "运营与增长：续报物料、产品培训与 FAQ 同步更新；关键周次监控舆情、到课与退费敏感指标，沉淀一版可复用的沟通脚本。"
+  ],
+  "overviewVideo": null,
+  "overviewHideStructureDiagram": true,
+  "timelineEmbed": {
+    "title": "C1 v7.0 交付甘特（飞书）",
+    "caption": "交付事项与依赖以飞书甘特为准；嵌入受限时请新窗口打开。",
+    "embedUrl": "https://my.feishu.cn/wiki/IGKHwUUb3idBtykT4OocohDdnef?from=from_copylink",
+    "heightPx": 520,
+    "hideBuiltInGantt": false
+  },
+  "milestones": [
+    {
+      "id": "c1v7-ms-01",
+      "name": "立项与范围冻结（J/S 12 讲）",
+      "owner": "产品 / 教研",
+      "dueDate": "2025-11-15",
+      "status": "done",
+      "risk": "low",
+      "modules": ["范围"],
+      "description": "对齐替换计算思维课、周三解锁节奏与数据指标体系。"
+    },
+    {
+      "id": "c1v7-ms-02",
+      "name": "课程大纲与脚本 v1.0 签核",
+      "owner": "教研",
+      "dueDate": "2025-12-20",
+      "status": "done",
+      "risk": "low",
+      "modules": ["大纲"],
+      "description": "石墨大纲定稿，难度梯度与直播衔接点评审。"
+    },
+    {
+      "id": "c1v7-ms-03",
+      "name": "互动题 / OJ 判题与动画资源合入",
+      "owner": "产研",
+      "dueDate": "2026-02-10",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["OJ", "互动"],
+      "description": "判题、部分分与课中演示路径对齐；性能与埋点验收。"
+    },
+    {
+      "id": "c1v7-ms-04",
+      "name": "《C1 7.0 测试方案》执行与缺陷收敛",
+      "owner": "测试 / 教研",
+      "dueDate": "2026-03-05",
+      "status": "in_progress",
+      "risk": "high",
+      "modules": ["测试"],
+      "description": "覆盖内容难度、班主任辅导工作量与对直播课的牵引假设。"
+    },
+    {
+      "id": "c1v7-ms-05",
+      "name": "班主任培训与话术 / FAQ",
+      "owner": "运营",
+      "dueDate": "2026-03-12",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["运营"],
+      "description": "AI 课解锁节奏、催到课与情绪安抚话术演练。"
+    },
+    {
+      "id": "c1v7-ms-06",
+      "name": "续报物料与价格说明页",
+      "owner": "运营 / 设计",
+      "dueDate": "2026-03-18",
+      "status": "planned",
+      "risk": "low",
+      "modules": ["续报"],
+      "description": "与 C2 是否延续 AI 课的过渡话术预备稿。"
+    },
+    {
+      "id": "c1v7-ms-07",
+      "name": "灰度班级与数据看板验收",
+      "owner": "数据 / 产品",
+      "dueDate": "2026-03-25",
+      "status": "planned",
+      "risk": "medium",
+      "modules": ["数据"],
+      "description": "前 3 讲核心指标：到课、参课、完参比、时长中位数、正确率。"
+    },
+    {
+      "id": "c1v7-ms-08",
+      "name": "全量发布与首周复盘",
+      "owner": "产品",
+      "dueDate": "2026-04-02",
+      "status": "planned",
+      "risk": "high",
+      "modules": ["发布"],
+      "description": "首周问题清单、补丁排期与是否扩至 C2 的决策材料。"
+    },
+    {
+      "id": "c1v7-ms-09",
+      "name": "C2 是否延续 AI 课 — 决策会",
+      "owner": "产品 / 教研",
+      "dueDate": "2026-04-20",
+      "status": "planned",
+      "risk": "high",
+      "modules": ["决策"],
+      "description": "基于前 3 次课数据的 Go / No-Go 与资源预估。"
+    }
+  ],
+  "gantt": [
+    {
+      "id": "c1v7-g1",
+      "name": "立项 / 大纲",
+      "lane": "教研",
+      "start": "2025-10-01",
+      "end": "2026-01-15",
+      "progress": 100,
+      "phase": "phase1"
+    },
+    {
+      "id": "c1v7-g2",
+      "name": "内容制作 & 动画",
+      "lane": "教研",
+      "start": "2025-11-01",
+      "end": "2026-03-01",
+      "progress": 62,
+      "phase": "phase2"
+    },
+    {
+      "id": "c1v7-g3",
+      "name": "OJ / 互动 / 埋点",
+      "lane": "产研",
+      "start": "2025-12-01",
+      "end": "2026-03-15",
+      "progress": 48,
+      "phase": "phase2",
+      "dependencies": [{ "from": "c1v7-g1", "to": "c1v7-g3" }]
+    },
+    {
+      "id": "c1v7-g4",
+      "name": "测试执行",
+      "lane": "测试",
+      "start": "2026-01-10",
+      "end": "2026-03-20",
+      "progress": 35,
+      "phase": "ongoing"
+    },
+    {
+      "id": "c1v7-g5",
+      "name": "运营培训 & 物料",
+      "lane": "运营",
+      "start": "2026-02-15",
+      "end": "2026-04-05",
+      "progress": 28,
+      "phase": "ongoing"
+    },
+    {
+      "id": "c1v7-g6",
+      "name": "灰度 & 数据看板",
+      "lane": "数据",
+      "start": "2026-03-01",
+      "end": "2026-04-10",
+      "progress": 20,
+      "phase": "ongoing"
+    },
+    {
+      "id": "c1v7-g7",
+      "name": "发布 / 复盘 / C2 决策",
+      "lane": "产品",
+      "start": "2026-03-20",
+      "end": "2026-04-25",
+      "progress": 12,
+      "phase": "ongoing"
+    }
+  ],
+  "team": [
+    {
+      "id": "c1v7-t1",
+      "name": "C线产品",
+      "role": "产品 / PM",
+      "modules": ["范围", "发布"],
+      "status": "busy",
+      "deliverables": ["里程碑评审", "甘特对齐", "C2 Go/No-Go 材料"]
+    },
+    {
+      "id": "c1v7-t2",
+      "name": "C1 教研",
+      "role": "教研",
+      "modules": ["大纲", "内容"],
+      "status": "busy",
+      "deliverables": ["12 讲脚本", "难度标定", "与直播衔接说明"]
+    },
+    {
+      "id": "c1v7-t3",
+      "name": "互动 & OJ",
+      "role": "产研",
+      "modules": ["题库", "判题"],
+      "status": "active",
+      "deliverables": ["判题策略", "动画资源接入", "埋点"]
+    },
+    {
+      "id": "c1v7-t4",
+      "name": "测试负责人",
+      "role": "测试",
+      "modules": ["测试方案"],
+      "status": "active",
+      "deliverables": ["用例执行", "缺陷看板", "班主任压力测算"]
+    },
+    {
+      "id": "c1v7-t5",
+      "name": "班主任运营",
+      "role": "运营",
+      "modules": ["培训", "续报"],
+      "status": "active",
+      "deliverables": ["话术 FAQ", "首周跟课", "舆情反馈"]
+    },
+    {
+      "id": "c1v7-t6",
+      "name": "数据分析师",
+      "role": "数据",
+      "modules": ["看板"],
+      "status": "active",
+      "deliverables": ["核心指标看板", "前 3 讲对比报告"]
+    }
+  ],
+  "documents": [
+    {
+      "id": "c1v7-d1",
+      "title": "《AI课项目立项》（微信文档）",
+      "category": "project_doc",
+      "tags": ["立项"],
+      "updatedAt": "2025-09-01",
+      "department": "C线产品",
+      "excerpt": "立项背景与价值论证。",
+      "href": "https://doc.weixin.qq.com/doc/w3_AfIAewZkAO8yiQ1oKAYR2GD0Vie55?scode=AE8Ahge8AAYFRSi1CIAc4AUAbhAMc"
+    },
+    {
+      "id": "c1v7-d2",
+      "title": "《【C线】项目甘特（含5.0及6.0排期）》",
+      "category": "gantt",
+      "tags": ["甘特"],
+      "updatedAt": "2025-10-10",
+      "department": "项目管理",
+      "excerpt": "总排期与依赖（石墨）。",
+      "href": "https://shimo.zhenguanyu.com/sheets/AWRnlYXyrmVaSEEx/D0Rf6/"
+    },
+    {
+      "id": "c1v7-d3",
+      "title": "课程迭代计划 & 课程大纲（石墨）",
+      "category": "syllabus",
+      "tags": ["大纲", "C1"],
+      "updatedAt": "2025-12-01",
+      "department": "教研",
+      "excerpt": "J/S 各 6 讲、周三解锁节奏。",
+      "href": "https://shimo.zhenguanyu.com/sheets/kgOmKgvYwQd1Srev/MODOC"
+    },
+    {
+      "id": "c1v7-d4",
+      "title": "《【测试】C1 7.0 测试方案》",
+      "category": "qa",
+      "tags": ["测试"],
+      "updatedAt": "2026-05-14",
+      "department": "测试",
+      "excerpt": "内容难度、运营压力、长期价值三类验证目标。",
+      "href": "https://shimo.zhenguanyu.com/docs/AroGpYy6MrOOuD6W/"
+    },
+    {
+      "id": "c1v7-d5",
+      "title": "C1 7.0 测试关联文档（石墨）",
+      "category": "qa",
+      "tags": ["测试"],
+      "updatedAt": "2026-05-14",
+      "department": "测试",
+      "excerpt": "补充用例与记录。",
+      "href": "https://shimo.zhenguanyu.com/docs/kxYEvBP46JDnTogX"
+    },
+    {
+      "id": "c1v7-d6",
+      "title": "C1 7.0 测试补充说明（石墨）",
+      "category": "qa",
+      "tags": ["测试"],
+      "updatedAt": "2026-05-14",
+      "department": "测试",
+      "href": "https://shimo.zhenguanyu.com/docs/3Dzy5blGJPjlSREE"
+    },
+    {
+      "id": "c1v7-d7",
+      "title": "飞书：C1 v7.0 交付甘特（本页 Timeline 嵌入同源）",
+      "category": "gantt",
+      "tags": ["飞书"],
+      "updatedAt": "2026-05-14",
+      "department": "项目管理",
+      "excerpt": "与 Tab Timeline 嵌入一致，便于收藏。",
+      "href": "https://my.feishu.cn/wiki/IGKHwUUb3idBtykT4OocohDdnef?from=from_copylink"
+    }
+  ],
+  "operationScheme": {
+    "summary": "C1 v7.0 以「直播 + 周三解锁 AI 课」串起练习闭环：教研定义目标与大纲，产研保障互动/OJ 与埋点，测试验证难度与运营承载，班主任完成培训与首周护航，数据团队输出前 3 讲决策看板。",
+    "sections": [
+      {
+        "title": "教学与内容路径",
+        "content": "J/S 各 6 讲共 12 讲；每 6 次直播课后在周三解锁对应 AI 课，形成「课堂讲—课后练」节奏。大纲在石墨维护，迭代需同步到题库标签与 OJ 子任务分策略，避免「讲练考」不一致。"
+      },
+      {
+        "title": "测试与质量门禁",
+        "content": "依据《C1 7.0 测试方案》：① 内容难度与学生独立完成度；② 班主任辅导工作量与排班压力；③ AI 课后对后续直播课的参与动量。缺陷按严重度分级，阻塞项必须在灰度前清零。"
+      },
+      {
+        "title": "运营与增长协同",
+        "content": "解锁提醒、到课督促与情绪安抚话术需单独演练；续报物料需说明「AI 课为新增练习形态」而非替代全部服务。首周与关键讲次设舆情与退费敏感监控。"
+      },
+      {
+        "title": "数据与决策",
+        "content": "核心过程指标：到课率、参课率、完课率、完参比、单题耗时、正确率、学习时长中位数（阈值示例 30min）。前 3 次课后输出对标基线的对比报告，为「C2 是否延续 AI 课」决策会提供输入。"
+      }
+    ]
+  },
+  "retrospectives": [
+    {
+      "id": "c1v7-r1",
+      "title": "前 3 讲行课数据复盘（模板）",
+      "date": "2026-04-08",
+      "context": "首波全量或灰度班级完成前 3 讲后，集中复盘过程指标与主观反馈，检验难度曲线与运营假设。",
+      "rootCause": ["样本量不足过早下结论", "埋点口径与班级标签不一致"],
+      "impact": "若结论偏差，将误导 C2 Go/No-Go 与资源投入。",
+      "actions": ["统一看板口径", "分层抽样对照组", "班主任访谈纪要结构化"],
+      "lessons": ["过程指标需与「讲次目标」绑定解读", "前 3 讲应预留一次「难度回调」窗口"],
+      "followUp": "决策会前冻结看板版本并归档原始导出。"
+    },
+    {
+      "id": "c1v7-r2",
+      "title": "测试阶段跨团队协同纪要（占位）",
+      "date": "2026-03-08",
+      "context": "测试执行期围绕缺陷优先级、班主任陪练排班与内容微调节奏，建立每日 15 分钟站会机制（可根据实际调整）。",
+      "rootCause": ["信息在群聊碎片化", "缺陷复现环境不一致"],
+      "impact": "拖慢缺陷收敛与回归节奏。",
+      "actions": ["缺陷单统一模板", "主分支每日构建", "阻塞项升级路径"],
+      "lessons": ["测试左移：大纲评审即引入用例脑暴"],
+      "followUp": "沉淀为 C 线 AI 课通用测试清单。"
+    }
+  ],
+  "deepDive": null,
+  "risks": [
+    {
+      "id": "c1v7-k1",
+      "title": "OJ/互动性能或判题边界导致课堂演示风险",
+      "severity": "high",
+      "status": "处理中",
+      "impact": "首讲口碑与退款敏感。",
+      "owner": "产研",
+      "mitigation": "预发压测 + 降级策略（关键题本地缓存判题）。",
+      "progress": "压测方案评审中"
+    },
+    {
+      "id": "c1v7-k2",
+      "title": "班主任辅导量评估偏差",
+      "severity": "medium",
+      "status": "观察",
+      "impact": "加班与响应延迟，引发投诉。",
+      "owner": "运营",
+      "mitigation": "按测试方案抽样测算 + 弹性排班。",
+      "progress": "灰度周跟踪中"
+    },
+    {
+      "id": "c1v7-k3",
+      "title": "前 3 讲数据不足以支撑 C2 决策",
+      "severity": "medium",
+      "status": "open",
+      "impact": "决策摇摆影响排产与续报节奏。",
+      "owner": "产品",
+      "mitigation": "明确最小样本与对照口径；必要时延长观察 1 讲。",
+      "progress": "指标口径对齐中"
+    }
+  ]
+}

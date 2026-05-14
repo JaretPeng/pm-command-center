@@ -7,6 +7,9 @@ import { Card } from "@/components/ui/card";
 import type { ProjectDetail } from "@/types/domain";
 import { CourseSystemPlanningDiagram } from "@/components/project/course-system-planning-diagram";
 import { A1YbcProductCompositionPricing } from "@/components/project/a1-ybc-product-composition-pricing";
+import { ClineOverviewOperationSchemeDiagram } from "@/components/project/cline-overview-operation-scheme";
+import { OjPlatformOperationSchemeDiagram } from "@/components/project/oj-platform-operation-scheme-diagram";
+import { OjProductComparisonTables } from "@/components/project/oj-product-comparison-tables";
 
 const AlineProductCompositionPricing = dynamic(
   () =>
@@ -153,7 +156,10 @@ export function OperationSchemeTab({
         className={
           sec.imageSrc ||
           sec.diagram === "courseSystem" ||
-          sec.diagram === "a1YbcProductPricing"
+          sec.diagram === "a1YbcProductPricing" ||
+          sec.diagram === "clineValueLoopOps" ||
+          sec.diagram === "ojPlatformOperations" ||
+          sec.diagram === "ojProductComparison"
             ? "md:col-span-2"
             : undefined
         }
@@ -189,14 +195,50 @@ export function OperationSchemeTab({
               <A1YbcProductCompositionPricing />
             </div>
           ) : null}
-          {sec.imageSrc && sec.diagram !== "courseSystem" && sec.diagram !== "a1YbcProductPricing" ? (
+          {sec.diagram === "clineValueLoopOps" ? (
+            <div className="mt-4">
+              <ClineOverviewOperationSchemeDiagram />
+            </div>
+          ) : null}
+          {sec.diagram === "ojPlatformOperations" ? (
+            <div className="mt-4">
+              <OjPlatformOperationSchemeDiagram />
+            </div>
+          ) : null}
+          {sec.diagram === "ojProductComparison" ? (
+            <div className="mt-4">
+              <OjProductComparisonTables />
+            </div>
+          ) : null}
+          {sec.imageSrc &&
+          sec.diagram !== "courseSystem" &&
+          sec.diagram !== "a1YbcProductPricing" &&
+          sec.diagram !== "clineValueLoopOps" &&
+          sec.diagram !== "ojPlatformOperations" &&
+          sec.diagram !== "ojProductComparison" ? (
             <div className="mt-3 overflow-hidden rounded-lg border bg-muted/20 p-2">
-              {/* eslint-disable-next-line @next/next/no-img-element -- 动态 public 路径 */}
-              <img
-                src={sec.imageSrc}
-                alt={sec.title}
-                className="mx-auto max-h-[min(70vh,640px)] w-full object-contain"
-              />
+              {(() => {
+                const src = sec.imageSrc ?? "";
+                /** 与 `public/images/cline-operation-scheme-overview.png` 内联分辨率一致，避免放大发糊 */
+                const cLineOverviewScheme =
+                  src.includes("cline-operation-scheme-overview");
+                return (
+                  // eslint-disable-next-line @next/next/no-img-element -- 动态 public 路径
+                  <img
+                    src={sec.imageSrc}
+                    alt={sec.title}
+                    width={cLineOverviewScheme ? 1024 : undefined}
+                    height={cLineOverviewScheme ? 565 : undefined}
+                    className={
+                      cLineOverviewScheme
+                        ? "mx-auto h-auto w-full max-h-[min(92vh,900px)] max-w-[1024px] object-contain [image-rendering:high-quality]"
+                        : "mx-auto max-h-[min(70vh,640px)] w-full object-contain"
+                    }
+                    decoding="async"
+                    fetchPriority={cLineOverviewScheme ? "high" : undefined}
+                  />
+                );
+              })()}
             </div>
           ) : null}
         </Card>

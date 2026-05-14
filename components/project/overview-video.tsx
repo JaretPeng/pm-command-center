@@ -3,6 +3,18 @@
 import { useState } from "react";
 import type { OverviewVideoBlock } from "@/types/domain";
 
+function safeHttpsPageUrl(raw: string): string | null {
+  const t = raw.trim();
+  if (!t) return null;
+  try {
+    const u = new URL(t);
+    if (u.protocol !== "https:" && u.protocol !== "http:") return null;
+    return u.toString();
+  } catch {
+    return null;
+  }
+}
+
 function youtubeEmbedUrl(input: string): string | null {
   const trimmed = input.trim();
   if (/^[\w-]{11}$/.test(trimmed)) {
@@ -39,8 +51,10 @@ export function OverviewVideoSection({
   block: OverviewVideoBlock;
 }) {
   const [mediaError, setMediaError] = useState<string | null>(null);
-  const embed =
+  const youtubeEmbed =
     block.mode === "youtube" ? youtubeEmbedUrl(block.src) : null;
+  const pageEmbed =
+    block.mode === "embed" ? safeHttpsPageUrl(block.src) : null;
 
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-card shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
@@ -96,12 +110,47 @@ export function OverviewVideoSection({
               </p>
             )}
           </div>
-        ) : embed ? (
+        ) : block.mode === "embed" && pageEmbed ? (
+          <div className="space-y-2">
+            {/*
+              不设 sandbox：飞书/wiki 内视频与登录态在过严 sandbox 下易失败。
+              embed 的 src 来自项目数据，仅信任来源时使用。
+            */}
+            <div className="relative w-full overflow-hidden rounded-md bg-muted/30">
+              <iframe
+                title={block.title ?? "概览视频"}
+                src={pageEmbed}
+                className="block w-full border-0"
+                style={{ minHeight: block.embedHeightPx ?? 480 }}
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="clipboard-read; clipboard-write; fullscreen; autoplay"
+              />
+            </div>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-xs text-muted-foreground">
+                若内嵌为空白或未自动播放，多为飞书登录态或浏览器策略限制；可在飞书内打开或先登录后再试。
+              </p>
+              <a
+                href={pageEmbed}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex shrink-0 items-center justify-center rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium shadow-sm hover:bg-muted/50"
+              >
+                在飞书中打开
+              </a>
+            </div>
+          </div>
+        ) : block.mode === "embed" ? (
+          <p className="text-sm text-destructive">
+            无法解析嵌入地址，请填写以 https:// 开头的飞书/wiki 链接。
+          </p>
+        ) : youtubeEmbed ? (
           <div className="relative aspect-video w-full overflow-hidden rounded-md bg-muted">
             <iframe
               title={block.title ?? "YouTube"}
               className="absolute inset-0 h-full w-full"
-              src={embed}
+              src={youtubeEmbed}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />

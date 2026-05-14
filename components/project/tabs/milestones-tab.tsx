@@ -137,7 +137,7 @@ export function MilestonesTab({ project }: { project: ProjectDetail }) {
                     exit={{ height: 0, opacity: 0 }}
                     className="overflow-hidden"
                   >
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="mt-2 whitespace-pre-wrap text-sm text-muted-foreground">
                       {m.description ?? "暂无描述"}
                     </p>
                   </motion.div>

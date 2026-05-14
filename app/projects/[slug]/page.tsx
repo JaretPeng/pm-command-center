@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
 import { ProjectPageShell } from "@/components/project/project-page-shell";
-import { applyLineNavOverride, loadProjectBySlug } from "@/lib/load-projects";
+import {
+  applyC3V6NavChildOverride,
+  applyC3V6OverviewOverride,
+  applyLineNavOverride,
+  loadProjectBySlug,
+} from "@/lib/load-projects";
 import { stringifySearchParams } from "@/lib/url-search";
 
 /** 始终拉取最新 JSON；避免路由缓存导致 Overview 视频配置不更新 */
@@ -66,6 +71,8 @@ export default async function ProjectPage({
   }
 
   project = await applyLineNavOverride(project, navForMerge);
+  project = await applyC3V6OverviewOverride(project, navForMerge);
+  project = await applyC3V6NavChildOverride(project, navForMerge);
 
   return (
     <div className="mx-auto w-full max-w-[1600px] flex-1 px-4 py-6 sm:px-6">
