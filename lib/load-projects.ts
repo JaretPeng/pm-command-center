@@ -3,12 +3,14 @@ import "server-only";
 import { promises as fs } from "fs";
 import path from "path";
 import type {
+  DocumentItem,
   MetricSeries,
   Milestone,
   ProjectDetail,
   ProjectIndexFile,
   ProjectSummary,
   RetrospectiveItem,
+  RiskItem,
   TeamMember,
 } from "@/types/domain";
 
@@ -332,12 +334,38 @@ export async function applyC3V6NavChildOverride(
 }
 
 function normalizeProjectIndexFile(raw: ProjectIndexFile): ProjectIndexFile {
+  const top = raw.dashboardTopKpis;
+  let dashboardTopKpis: ProjectIndexFile["dashboardTopKpis"] = undefined;
+  if (top != null && typeof top === "object" && !Array.isArray(top)) {
+    const o = top as Record<string, unknown>;
+    const n = (x: unknown) =>
+      typeof x === "number" && Number.isFinite(x) ? x : undefined;
+    dashboardTopKpis = {
+      totalProjects: n(o.totalProjects),
+      inProgress: n(o.inProgress),
+      delayed: n(o.delayed),
+      highPriority: n(o.highPriority),
+    };
+    if (
+      dashboardTopKpis.totalProjects == null &&
+      dashboardTopKpis.inProgress == null &&
+      dashboardTopKpis.delayed == null &&
+      dashboardTopKpis.highPriority == null
+    ) {
+      dashboardTopKpis = undefined;
+    }
+  }
+
+  const delayedNotes = asStringArray(raw.dashboardDelayedNotes);
+
   return {
     ...raw,
     projects: raw.projects.map((s) => ({
       ...s,
       tags: asStringArray(s.tags),
     })),
+    dashboardTopKpis,
+    dashboardDelayedNotes: delayedNotes.length ? delayedNotes : undefined,
   };
 }
 
@@ -368,12 +396,109 @@ export async function loadProjectBySlug(
   }
 }
 
+/**
+ * 总控台 / API 列表用：对 A 线、C 线「产品线」slug，将 `overrides/{slug}-*.json` 中的
+ * milestones / risks / documents 与 blockerCount 合并进一份视图（不修改磁盘上的子项目文件）。
+ * 协同人数等仍沿用主 JSON，避免同一人在多子项目中重复累加。
+ */
+async function mergeLinePortfolioForDashboard(
+  base: ProjectDetail,
+): Promise<ProjectDetail> {
+  const slug = base.slug;
+  if (slug !== "a-line" && slug !== "c3-v6") return base;
+
+  const prefix = `${slug}-`;
+  const dir = path.join(DATA_DIR, "overrides");
+  let names: string[];
+  try {
+    names = await fs.readdir(dir);
+  } catch {
+    return base;
+  }
+
+  const milestones: Milestone[] = [...base.milestones];
+  const risks: RiskItem[] = [...base.risks];
+  const documents: DocumentItem[] = [...base.documents];
+  let blockerSum =
+    typeof base.blockerCount === "number" ? base.blockerCount : 0;
+
+  for (const fname of names) {
+    if (!fname.startsWith(prefix) || !fname.endsWith(".json")) continue;
+    const navKey = fname.slice(prefix.length, -5);
+    if (!isSafeProjectSlug(navKey)) continue;
+    let raw: string;
+    try {
+      raw = await fs.readFile(path.join(dir, fname), "utf-8");
+    } catch {
+      continue;
+    }
+    let partial: Record<string, unknown>;
+    try {
+      partial = JSON.parse(raw) as Record<string, unknown>;
+    } catch {
+      continue;
+    }
+    if (
+      partial == null ||
+      typeof partial !== "object" ||
+      Array.isArray(partial)
+    ) {
+      continue;
+    }
+
+    if (Array.isArray(partial.milestones)) {
+      const ms = partial.milestones as Milestone[];
+      milestones.push(
+        ...ms.map((m) => ({
+          ...m,
+          id: `${navKey}:${m.id}`,
+        })),
+      );
+    }
+    if (Array.isArray(partial.risks)) {
+      const rs = partial.risks as RiskItem[];
+      risks.push(
+        ...rs.map((r) => ({
+          ...r,
+          id: `${navKey}:${r.id}`,
+        })),
+      );
+    }
+    if (Array.isArray(partial.documents)) {
+      const ds = partial.documents as DocumentItem[];
+      documents.push(
+        ...ds.map((d) => ({
+          ...d,
+          id: `${navKey}:${d.id}`,
+        })),
+      );
+    }
+    if (typeof partial.blockerCount === "number") {
+      blockerSum += partial.blockerCount;
+    }
+  }
+
+  return normalizeProjectDetail({
+    ...base,
+    milestones,
+    risks,
+    documents,
+    milestoneCount: milestones.length,
+    blockerCount: blockerSum,
+  });
+}
+
 export async function loadAllProjectDetails(): Promise<ProjectDetail[]> {
   const summaries = await loadProjectSummaries();
   const out: ProjectDetail[] = [];
   for (const s of summaries) {
     const p = await loadProjectBySlug(s.slug);
-    if (p) out.push(p);
+    if (!p) continue;
+    if (s.slug === "a-line" || s.slug === "c3-v6") {
+      out.push(await mergeLinePortfolioForDashboard(p));
+    } else {
+      out.push(p);
+    }
   }
   return out;
 }

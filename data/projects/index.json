@@ -3,6 +3,15 @@
     "name": "项目管理驾驶舱",
     "title": "高级项目经理 · 多项目并行"
   },
+  "dashboardTopKpis": {
+    "totalProjects": 20,
+    "inProgress": 11,
+    "delayed": 1,
+    "highPriority": 6
+  },
+  "dashboardDelayedNotes": [
+    "C1-v7.0AI录播课未按照预期上线，上线时间待定。"
+  ],
   "projects": [
     {
       "id": "proj-a-line",
@@ -11,12 +20,12 @@
       "type": "战略级产品线",
       "status": "进行中",
       "phase": "体系化落地",
-      "progress": 62,
+      "progress": 52,
       "riskLevel": "medium",
-      "owner": "张 PM",
+      "owner": "彭凡力",
       "startDate": "2025-03-01",
-      "milestoneCount": 8,
-      "blockerCount": 2,
+      "milestoneCount": 68,
+      "blockerCount": 8,
       "tags": [
         "C++",
         "信奥",
@@ -35,12 +44,12 @@
       "type": "版本迭代",
       "status": "进行中",
       "phase": "二期能力收敛",
-      "progress": 74,
-      "riskLevel": "low",
-      "owner": "张 PM",
+      "progress": 58,
+      "riskLevel": "medium",
+      "owner": "彭凡力",
       "startDate": "2025-06-15",
-      "milestoneCount": 11,
-      "blockerCount": 1,
+      "milestoneCount": 61,
+      "blockerCount": 5,
       "tags": [
         "社区",
         "商城",
@@ -48,7 +57,7 @@
         "自动化",
         "素材库"
       ],
-      "health": "excellent",
+      "health": "good",
       "delayed": false,
       "highPriority": false
     }

@@ -8,6 +8,7 @@ import { CommandPalette } from "@/components/layout/command-palette";
 import { KpiGrid } from "@/components/dashboard/kpi-grid";
 import { ProjectCard } from "@/components/dashboard/project-card";
 import { GlobalTimeline } from "@/components/dashboard/global-timeline";
+import { SystemClassGanttOverview } from "@/components/dashboard/system-class-gantt-overview";
 import { RiskAlerts } from "@/components/dashboard/risk-alerts";
 import { ViewModeToggle } from "@/components/dashboard/view-mode-toggle";
 import { Card } from "@/components/ui/card";
@@ -24,17 +25,27 @@ import {
   type DashboardFilters,
 } from "@/lib/filters";
 import { flattenTags } from "@/lib/search";
-import type { ProjectDetail, ProjectSummary } from "@/types/domain";
+import type {
+  ProjectDetail,
+  ProjectIndexFile,
+  ProjectSummary,
+} from "@/types/domain";
 import { useViewMode } from "@/hooks/use-view-mode";
 
 export function DashboardClient({
   summaries,
   projects,
+  dashboardTopKpis,
+  dashboardDelayedNotes,
   pmName,
   pmTitle,
 }: {
   summaries: ProjectSummary[];
   projects: ProjectDetail[];
+  /** 来自 `index.json`：覆盖 KPI 首行四项展示值 */
+  dashboardTopKpis?: ProjectIndexFile["dashboardTopKpis"];
+  /** 来自 `index.json`：延迟项目区补充文案 */
+  dashboardDelayedNotes?: string[];
   pmName: string;
   pmTitle: string;
 }) {
@@ -72,8 +83,41 @@ export function DashboardClient({
     return projects.filter((p) => slugs.has(p.slug));
   }, [projects, filteredSummaries]);
 
-  const headerStats = computeHeaderStats(filteredSummaries);
-  const kpis = computeKpis(filteredSummaries, filteredProjects, filterState.horizon);
+  const headerStatsBase = computeHeaderStats(filteredSummaries);
+  const headerStats = dashboardTopKpis
+    ? {
+        ...headerStatsBase,
+        ...(dashboardTopKpis.totalProjects != null
+          ? { total: dashboardTopKpis.totalProjects }
+          : {}),
+        ...(dashboardTopKpis.inProgress != null
+          ? { active: dashboardTopKpis.inProgress }
+          : {}),
+      }
+    : headerStatsBase;
+
+  const kpisBase = computeKpis(
+    filteredSummaries,
+    filteredProjects,
+    filterState.horizon,
+  );
+  const kpis = dashboardTopKpis
+    ? {
+        ...kpisBase,
+        ...(dashboardTopKpis.totalProjects != null
+          ? { total: dashboardTopKpis.totalProjects }
+          : {}),
+        ...(dashboardTopKpis.inProgress != null
+          ? { active: dashboardTopKpis.inProgress }
+          : {}),
+        ...(dashboardTopKpis.delayed != null
+          ? { delayed: dashboardTopKpis.delayed }
+          : {}),
+        ...(dashboardTopKpis.highPriority != null
+          ? { highPriority: dashboardTopKpis.highPriority }
+          : {}),
+      }
+    : kpisBase;
   const ms = milestonesInHorizon(filteredProjects, filterState.horizon);
 
   const execSignals = collectExecutiveSignals(filteredProjects);
@@ -200,7 +244,7 @@ export function DashboardClient({
         <div>
           <div className="mb-3 flex items-end justify-between gap-2">
             <div>
-              <h3 className="text-sm font-semibold">项目总览</h3>
+              <h3 className="text-sm font-semibold">项目集总览</h3>
               <p className="text-xs text-muted-foreground">
                 卡片矩阵 · 点击进入项目详情
               </p>
@@ -216,9 +260,15 @@ export function DashboardClient({
 
         <GlobalTimeline milestones={ms} />
 
+        <SystemClassGanttOverview />
+
         <div>
           <h3 className="mb-3 text-sm font-semibold">风险预警</h3>
-          <RiskAlerts summaries={filteredSummaries} risks={riskBuckets} />
+          <RiskAlerts
+            summaries={filteredSummaries}
+            risks={riskBuckets}
+            delayedNotes={dashboardDelayedNotes}
+          />
         </div>
       </main>
     </>

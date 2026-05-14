@@ -393,4 +393,16 @@ export interface ProjectIndexFile {
     avatarUrl?: string;
   };
   projects: ProjectSummary[];
+  /**
+   * 总控台 KPI 首行四项（项目总数 / 进行中 / 延迟项目 / 高优先级）的展示值。
+   * 未设置时仍由 `summaries` 动态统计（产品线卡片数量等）。
+   */
+  dashboardTopKpis?: {
+    totalProjects?: number;
+    inProgress?: number;
+    delayed?: number;
+    highPriority?: number;
+  };
+  /** 总控台「风险预警 · 延迟项目」补充说明（不依赖 summaries.delayed） */
+  dashboardDelayedNotes?: string[];
 }

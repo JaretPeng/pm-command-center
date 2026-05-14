@@ -10,9 +10,12 @@ import type { ProjectSummary, RiskItem } from "@/types/domain";
 export function RiskAlerts({
   summaries,
   risks,
+  delayedNotes,
 }: {
   summaries: ProjectSummary[];
   risks: { slug: string; projectName: string; items: RiskItem[] }[];
+  /** 来自 `index.json`，与 `summaries.delayed` 并列展示 */
+  delayedNotes?: string[];
 }) {
   const delayed = summaries.filter((s) => s.delayed);
   const riskProjects = summaries.filter(
@@ -34,19 +37,26 @@ export function RiskAlerts({
           <h3 className="text-sm font-semibold">延迟项目</h3>
         </div>
         <div className="mt-3 space-y-2">
-          {delayed.length === 0 ? (
+          {(delayedNotes ?? []).map((text, i) => (
+            <p
+              key={`note-${i}`}
+              className="rounded-lg border border-amber-500/25 bg-amber-500/[0.06] px-3 py-2 text-sm leading-relaxed text-foreground/90"
+            >
+              {text}
+            </p>
+          ))}
+          {delayed.map((s) => (
+            <Link
+              key={s.slug}
+              href={projectDetailHref(s.slug)}
+              className="block rounded-lg border border-border/60 bg-muted/20 px-3 py-2 text-sm hover:bg-muted/40"
+            >
+              {s.name}
+            </Link>
+          ))}
+          {delayed.length === 0 && !(delayedNotes && delayedNotes.length) ? (
             <p className="text-xs text-muted-foreground">暂无标记延迟</p>
-          ) : (
-            delayed.map((s) => (
-              <Link
-                key={s.slug}
-                href={projectDetailHref(s.slug)}
-                className="block rounded-lg border border-border/60 bg-muted/20 px-3 py-2 text-sm hover:bg-muted/40"
-              >
-                {s.name}
-              </Link>
-            ))
-          )}
+          ) : null}
         </div>
       </Card>
 

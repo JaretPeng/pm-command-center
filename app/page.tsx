@@ -15,6 +15,8 @@ export default async function HomePage() {
       <DashboardClient
         summaries={index.projects}
         projects={projects}
+        dashboardTopKpis={index.dashboardTopKpis}
+        dashboardDelayedNotes={index.dashboardDelayedNotes}
         pmName={pmName}
         pmTitle={pmTitle}
       />
