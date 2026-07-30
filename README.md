@@ -17,7 +17,7 @@ npm install
 npm run dev
 ```
 
-浏览器打开 `http://localhost:3000`。
+浏览器打开 `http://localhost:3000`（推荐用 `localhost`，不要用 `127.0.0.1`，否则 Next 开发模式可能拦截 `/_next` 资源导致点击无响应；若必须用 IP，已在 `next.config.ts` 配置 `allowedDevOrigins`）。
 
 生产构建与本地预览生产包：
 

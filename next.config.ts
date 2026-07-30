@@ -3,6 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   /**
+   * 开发时若用 127.0.0.1 打开（而 dev 绑定 0.0.0.0 / localhost），
+   * Next 15+ 会拦截跨源 _next 资源，导致 hydration 失败、链接/Tab 点击无效。
+   */
+  allowedDevOrigins: ["127.0.0.1"],
+  /**
    * framer-motion / Radix：纳入 Next 编译，减少服务端 vendor-chunks 引用缺失
    *（如 motion-dom.js、@radix-ui.js 等 ENOENT）。
    */

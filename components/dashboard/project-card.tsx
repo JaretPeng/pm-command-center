@@ -27,12 +27,12 @@ export function ProjectCard({
   index: number;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.06 }}
-    >
-      <Link href={projectDetailHref(project.slug)}>
+    <Link href={projectDetailHref(project.slug)} className="block">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.06 }}
+      >
         <Card className="glass-card group h-full overflow-hidden p-4 transition-all hover:-translate-y-1 hover:shadow-lg">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
@@ -99,7 +99,7 @@ export function ProjectCard({
             </div>
           </div>
         </Card>
-      </Link>
-    </motion.div>
+      </motion.div>
+    </Link>
   );
 }
